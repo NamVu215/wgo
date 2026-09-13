@@ -4,6 +4,13 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-13 · Web lên mạng: https://wgo-auc.pages.dev
+
+- **Đã làm:** lưu code bằng Git (tên tác giả **NamVu215**, email `nnamvu01@gmail.com`); đăng nhập Cloudflare bằng Wrangler; tạo dự án Pages `wgo` (tên `wgo.pages.dev` đã có người dùng nên thành `wgo-auc.pages.dev`); tải thẳng web lên bằng `npm run deploy`.
+- **Sự cố đã xử lý:** Wrangler 4.131 mặc định chuyển dự án Pages sang Cloudflare Workers, tự thêm adapter máy chủ và sửa cấu hình. Việc này không cần cho web tĩnh và làm build lỗi. Đã hoàn tác và tạo dự án Pages cổ điển (`--force`, chỉ một lần).
+- **Đã kiểm tra trên link thật:** các trang trả về 200, trang không tồn tại trả 404; luật bảo mật (CSP, chặn nhúng khung) đã bật; font chữ tải được; đổi quán, tìm kiếm, trạng thái mở cửa chạy đúng, không có lỗi.
+- **Còn lại:** nối GitHub khi hết bị chặn; tạo Google Sheet; kiểm chứng dữ liệu và chấm điểm WGo.
+
 ### 2026-09-13 · Code xong giai đoạn 1 (chạy trên máy)
 
 - **Kỹ thuật đã chọn:** Astro 7 (web tĩnh) + TypeScript; không dùng thư viện giao diện, chỉ có 1 thư viện (Astro). Dữ liệu đọc lúc build: Google Sheets nếu đã điền `src/config.ts`, nếu chưa thì dùng CSV mẫu.

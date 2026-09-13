@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://wgo.pages.dev',
+  site: 'https://wgo-auc.pages.dev',
   trailingSlash: 'always',
   build: { format: 'directory' },
 });

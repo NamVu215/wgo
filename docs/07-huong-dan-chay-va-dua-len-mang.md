@@ -10,8 +10,8 @@ _Cập nhật: 2026-09-13 · Giai đoạn 1_
 | Ngôn ngữ | TypeScript + CSS | TypeScript giúp bắt lỗi sớm |
 | Dữ liệu | Google Sheets (hiện tạm dùng file CSV mẫu trong `data/hue/`) | Bạn sửa dữ liệu như Excel, không đụng code |
 | Lưu "Đã lưu", sáng/tối | Bộ nhớ trình duyệt của từng máy | Không cần tài khoản, không cần máy chủ |
-| Đưa lên mạng | **Cloudflare Pages** | Miễn phí, nhanh ở Việt Nam, cho phép chạy quảng cáo sau này |
-| Lưu mã nguồn | **GitHub** | Mỗi lần cập nhật code, Cloudflare tự đưa bản mới lên |
+| Đưa lên mạng | **Cloudflare Pages** (https://wgo-auc.pages.dev) | Miễn phí, nhanh ở Việt Nam, cho phép chạy quảng cáo sau này |
+| Lưu mã nguồn | **Git** trên máy (GitHub: sắp nối) | Lưu lại lịch sử mọi thay đổi |
 
 ### Cấu trúc thư mục
 
@@ -48,31 +48,34 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 | `npm run dev` | Chạy web thử, sửa code thì web tự cập nhật |
 | `npm run kiem-tra` | **Kiểm tra dữ liệu**: báo dòng nào lỗi (bị ẩn khỏi web) và dòng nào có cảnh báo |
 | `npm test` | Chạy kiểm thử tự động (giờ mở cửa, đọc dữ liệu…) |
-| `npm run build` | Tạo bản web hoàn chỉnh vào thư mục `dist/` (Cloudflare sẽ tự chạy lệnh này) |
+| `npm run build` | Tạo bản web hoàn chỉnh vào thư mục `dist/` |
+| `npm run deploy` | **Build + đưa lên mạng** (https://wgo-auc.pages.dev) |
 
-## 3. Đưa lên GitHub (bạn làm phần tài khoản, mình làm phần còn lại)
+## 3. Web đang chạy ở đâu
 
-1. Tạo tài khoản tại [github.com/signup](https://github.com/signup) (miễn phí). Nên dùng email `nnamvu01@gmail.com`.
-2. Báo mình **tên tài khoản GitHub** và **tên hiển thị** muốn ghi trong lịch sử code.
-3. Mình sẽ:
-   - cài công cụ GitHub (`gh`) và mở trang đăng nhập, bạn chỉ cần **bấm xác nhận** trên trình duyệt;
-   - tạo kho mã công khai tên `wgo` và đẩy code lên.
+**Link chính thức: https://wgo-auc.pages.dev**. Tên `wgo` đã có người dùng nên Cloudflare thêm đuôi `-auc`. Có thể đổi sang tên miền riêng sau.
 
-## 4. Đưa lên mạng bằng Cloudflare Pages (làm một lần)
+- Tài khoản Cloudflare: `nnamvu01@gmail.com`, dự án Pages tên **`wgo`**.
+- Cách đưa lên hiện tại: **tải thẳng từ máy lên** (chưa nối GitHub, vì GitHub đang tạm chặn mạng của bạn).
 
-> Giao diện Cloudflare có thể thay đổi theo thời gian, tên nút có thể hơi khác.
+### Cập nhật web sau khi sửa code hoặc dữ liệu
 
-1. Tạo tài khoản tại [dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up) (miễn phí).
-2. Vào **Workers & Pages** → **Create** → tab **Pages** → **Connect to Git**.
-3. Cho phép Cloudflare đọc GitHub, chọn kho `wgo`.
-4. Cấu hình build:
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Environment variables:** thêm `NODE_VERSION` = `22`
-5. Bấm **Save and Deploy**. Sau 1–2 phút sẽ có link dạng **`https://wgo.pages.dev`**.
-   - Nếu tên `wgo` đã có người dùng, Cloudflare sẽ đặt tên khác. Hãy báo mình link thật để mình sửa `SITE_URL` trong `src/config.ts` (link này dùng khi chia sẻ quán).
-6. Từ đó về sau, **mỗi lần code được đẩy lên GitHub, Cloudflare tự cập nhật web**.
+```bash
+cd ~/Desktop/WGo
+npm run deploy
+```
+
+Lệnh này tự build và tải lên, xong trong khoảng 1 phút. Lần đầu trên máy mới, cần chạy `npx wrangler login` và bấm **Allow** trên trình duyệt.
+
+> ⚠️ Không chạy `wrangler deploy` hay `wrangler pages project create` không kèm tùy chọn: bản Wrangler mới sẽ tự đổi web tĩnh sang dạng Worker có máy chủ và sửa file cấu hình. Chỉ dùng `npm run deploy`.
+
+## 4. Nối GitHub (khi GitHub hết chặn)
+
+1. Tạo tài khoản tại [github.com/signup](https://github.com/signup). Nếu bị chặn "unusual activity", thử bằng 4G hoặc chờ vài giờ.
+2. Báo mình tên tài khoản. Mình sẽ đẩy code lên kho công khai `wgo`, và có thể đổi email trong lịch sử code sang email ẩn danh của GitHub.
+3. Sau đó có 2 lựa chọn:
+   - Giữ cách **tải thẳng** (`npm run deploy`) và dùng GitHub Actions để tự chạy lệnh này mỗi ngày hoặc mỗi lần đẩy code.
+   - Hoặc tạo dự án Cloudflare **nối Git** để tự build mỗi lần đẩy code. Cloudflare không cho đổi dự án tải thẳng sang nối Git, nên sẽ phải tạo dự án mới và link có thể đổi.
 
 ## 5. Kết nối Google Sheets (khi bạn sẵn sàng)
 
@@ -83,7 +86,7 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 4. Mình điền vào `src/config.ts`. Từ đó web đọc thẳng từ Sheet mỗi lần build.
 
 **Sau khi sửa Sheet, làm sao để web cập nhật?**
-- Hiện tại: vào Cloudflare → dự án `wgo` → **Deployments** → **Retry deployment** (hoặc báo mình).
+- Hiện tại: chạy `npm run deploy` (hoặc báo mình).
 - Sắp tới: mình sẽ cài **tự động cập nhật mỗi ngày** (GitHub Actions + Cloudflare Deploy Hook), miễn phí.
 - Nếu Sheet có dòng lỗi, dòng đó bị **ẩn khỏi web** chứ không làm hỏng web. Nếu không đọc được Sheet (ví dụ quên chia sẻ), lần build đó **thất bại** và web **giữ nguyên bản cũ**.
 

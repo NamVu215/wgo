@@ -18,4 +18,4 @@ export const CITY = { id: 'hue', name: 'Huế' };
 
 // Public address of the site, used for share previews. Change after the
 // Cloudflare Pages project is created if the name differs.
-export const SITE_URL = 'https://wgo.pages.dev';
+export const SITE_URL = 'https://wgo-auc.pages.dev';

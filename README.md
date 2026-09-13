@@ -3,7 +3,7 @@
 Web gợi ý **ăn gì, uống gì, đi đâu** khi đi chơi ở Việt Nam, dựa trên kinh nghiệm thật của người đi.
 Bắt đầu với **Huế**, sau đó mở rộng ra Đà Nẵng, Nha Trang, Vũng Tàu, TP. Hồ Chí Minh và Thủ Đức.
 
-> Trạng thái: **Giai đoạn 1 – Lõi** · code xong, chạy được trên máy · chưa đưa lên mạng
+> Trạng thái: **Giai đoạn 1 – Lõi** · đang chạy tại **https://wgo-auc.pages.dev** · dữ liệu mẫu chưa kiểm chứng
 
 ## Chạy thử
 
@@ -12,6 +12,7 @@ npm install
 npm run dev        # mở http://localhost:4321
 npm run kiem-tra   # kiểm tra dữ liệu
 npm test           # kiểm thử tự động
+npm run deploy     # đưa bản mới lên mạng
 ```
 
 Chi tiết (đưa lên GitHub, Cloudflare Pages, nối Google Sheets, bảo mật): [docs/07-huong-dan-chay-va-dua-len-mang.md](docs/07-huong-dan-chay-va-dua-len-mang.md)
