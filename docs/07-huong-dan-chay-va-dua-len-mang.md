@@ -11,7 +11,7 @@ _Cập nhật: 2026-09-13 · Giai đoạn 1_
 | Dữ liệu | Google Sheets (hiện tạm dùng file CSV mẫu trong `data/hue/`) | Bạn sửa dữ liệu như Excel, không đụng code |
 | Lưu "Đã lưu", sáng/tối | Bộ nhớ trình duyệt của từng máy | Không cần tài khoản, không cần máy chủ |
 | Đưa lên mạng | **Cloudflare Pages** (https://wgo-auc.pages.dev) | Miễn phí, nhanh ở Việt Nam, cho phép chạy quảng cáo sau này |
-| Lưu mã nguồn | **Git** trên máy (GitHub: sắp nối) | Lưu lại lịch sử mọi thay đổi |
+| Lưu mã nguồn | **GitHub** (https://github.com/NamVu215/wgo) | Lưu lại lịch sử mọi thay đổi |
 
 ### Cấu trúc thư mục
 
@@ -50,13 +50,14 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 | `npm test` | Chạy kiểm thử tự động (giờ mở cửa, đọc dữ liệu…) |
 | `npm run build` | Tạo bản web hoàn chỉnh vào thư mục `dist/` |
 | `npm run deploy` | **Build + đưa lên mạng** (https://wgo-auc.pages.dev) |
+| `npm run noi-sheet -- "<link>"` | Nối Google Sheet: tự tìm các tab và ghi vào `src/config.ts` |
 
 ## 3. Web đang chạy ở đâu
 
 **Link chính thức: https://wgo-auc.pages.dev**. Tên `wgo` đã có người dùng nên Cloudflare thêm đuôi `-auc`. Có thể đổi sang tên miền riêng sau.
 
 - Tài khoản Cloudflare: `nnamvu01@gmail.com`, dự án Pages tên **`wgo`**.
-- Cách đưa lên hiện tại: **tải thẳng từ máy lên** (chưa nối GitHub, vì GitHub đang tạm chặn mạng của bạn).
+- Cách đưa lên hiện tại: **tải thẳng từ máy lên** bằng `npm run deploy`.
 
 ### Cập nhật web sau khi sửa code hoặc dữ liệu
 
@@ -69,13 +70,12 @@ Lệnh này tự build và tải lên, xong trong khoảng 1 phút. Lần đầu
 
 > ⚠️ Không chạy `wrangler deploy` hay `wrangler pages project create` không kèm tùy chọn: bản Wrangler mới sẽ tự đổi web tĩnh sang dạng Worker có máy chủ và sửa file cấu hình. Chỉ dùng `npm run deploy`.
 
-## 4. Nối GitHub (khi GitHub hết chặn)
+## 4. Mã nguồn trên GitHub
 
-1. Tạo tài khoản tại [github.com/signup](https://github.com/signup). Nếu bị chặn "unusual activity", thử bằng 4G hoặc chờ vài giờ.
-2. Báo mình tên tài khoản. Mình sẽ đẩy code lên kho công khai `wgo`, và có thể đổi email trong lịch sử code sang email ẩn danh của GitHub.
-3. Sau đó có 2 lựa chọn:
-   - Giữ cách **tải thẳng** (`npm run deploy`) và dùng GitHub Actions để tự chạy lệnh này mỗi ngày hoặc mỗi lần đẩy code.
-   - Hoặc tạo dự án Cloudflare **nối Git** để tự build mỗi lần đẩy code. Cloudflare không cho đổi dự án tải thẳng sang nối Git, nên sẽ phải tạo dự án mới và link có thể đổi.
+- Kho mã công khai: **https://github.com/NamVu215/wgo**. Máy này đã đăng nhập GitHub bằng công cụ `gh`.
+- Lịch sử code ghi tên **NamVu215** với email ẩn danh `182730968+NamVu215@users.noreply.github.com`, không lộ Gmail.
+- Đẩy thay đổi lên GitHub: `git push`.
+- **Chưa tự động:** đẩy code lên GitHub **chưa** tự cập nhật web, vẫn cần `npm run deploy`. Sắp tới sẽ cài GitHub Actions để tự đưa web lên mỗi lần đẩy code và mỗi ngày (lấy dữ liệu mới từ Sheet). Việc này cần tạo một **API token Cloudflare** và lưu bí mật trong GitHub.
 
 ## 5. Kết nối Google Sheets (khi bạn sẵn sàng)
 

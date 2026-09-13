@@ -72,13 +72,14 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 
 ## 4. Đưa dữ liệu mẫu lên Google Sheets (làm một lần)
 
-1. Vào [sheets.google.com](https://sheets.google.com) → tạo bảng tính trống, đặt tên **WGo – Dữ liệu**.
-2. Đổi tên tab đầu tiên thành `dia-diem`.
-3. Chọn **Tệp → Nhập → Tải lên** → chọn file `data/hue/dia-diem.csv` → ở "Vị trí nhập" chọn **Thay thế trang tính hiện tại** → **Nhập dữ liệu**.
-4. Bấm dấu **+** ở góc dưới để tạo tab mới tên `mon`. Nhập `mon.csv` như bước 3. Làm tương tự với `loai` và `tags`.
-5. Tạm thời **không cần chia sẻ** file. Bước kết nối web với Sheet mình sẽ hướng dẫn khi bắt đầu code.
+Có sẵn file **`WGo-du-lieu.xlsx`** (tạo từ các CSV mẫu), gồm 5 tab `dia-diem`, `mon`, `loai`, `tags`, `huong-dan`. Ô tiêu đề có ghi chú giải thích, một số cột có danh sách chọn sẵn, các ô để dạng văn bản để Sheets không tự đổi giờ, số điện thoại, ngày.
 
-> 💡 Mẹo: bấm **Xem → Cố định → 1 hàng** để dòng tiêu đề luôn hiện khi cuộn xuống.
+1. Vào [sheets.new](https://sheets.new), đặt tên **WGo – Dữ liệu**.
+2. **Tệp → Nhập → Tải lên** → chọn `WGo-du-lieu.xlsx` → **Thay thế bảng tính** → **Nhập dữ liệu**.
+3. **Chia sẻ** → **Bất kỳ ai có đường liên kết** → **Người xem** → sao chép link.
+4. Nối vào web: `npm run noi-sheet -- "<link>"`, rồi `npm run kiem-tra`, rồi `npm run deploy`.
+
+> ⚠️ Không đổi tên 4 tab `dia-diem`, `mon`, `loai`, `tags` và dòng tiêu đề.
 
 ## 5. Quy trình góp ý (giai đoạn 3, ghi lại để không quên)
 

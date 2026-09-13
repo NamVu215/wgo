@@ -4,6 +4,13 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-13 · Nối GitHub, chuẩn bị Google Sheet
+
+- **GitHub:** kho công khai https://github.com/NamVu215/wgo. Trước khi đẩy lần đầu, đã đổi email trong toàn bộ lịch sử code sang email ẩn danh của GitHub để không lộ Gmail trên kho công khai.
+- **Google Sheet:** Claude không có quyền vào Google Drive nên tạo sẵn file `WGo-du-lieu.xlsx` (đặt trên Desktop, không nằm trong kho mã) để chủ dự án nhập vào Sheets. Thêm lệnh `npm run noi-sheet` tự tìm gid từng tab.
+- **Nhận thêm ngày dạng 13/09/2026** ở cột cap_nhat (21 kiểm thử đạt).
+- **Tiếp theo:** chủ dự án nhập file và gửi link Sheet → nối và kiểm tra → deploy → kiểm chứng 22 quán.
+
 ### 2026-09-13 · Web lên mạng: https://wgo-auc.pages.dev
 
 - **Đã làm:** lưu code bằng Git (tên tác giả **NamVu215**, email `nnamvu01@gmail.com`); đăng nhập Cloudflare bằng Wrangler; tạo dự án Pages `wgo` (tên `wgo.pages.dev` đã có người dùng nên thành `wgo-auc.pages.dev`); tải thẳng web lên bằng `npm run deploy`.
