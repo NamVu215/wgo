@@ -11,7 +11,9 @@ Dữ liệu WGo nằm trong **một file Google Sheets** gồm 4 trang tính (ta
 | `loai` | [loai.csv](../data/hue/loai.csv) | **Loại địa điểm** · 6 loại |
 | `tags` | [tags.csv](../data/hue/tags.csv) | **Tag** dùng để lọc · 17 tag |
 
-> ⚠️ **Toàn bộ 22 địa điểm mẫu đều ở trạng thái `kiem_chung = chua`.** Mình tra từ các bài viết trên mạng (cột `nguon`), nhưng các nguồn **có chỗ mâu thuẫn nhau**, ví dụ giờ bán Cơm hến Hoa Đông hay giá vé Lăng Khải Định. **Tọa độ chỉ là ước lượng** theo tên đường. Cột `wgo_cham` và `nhan_xet` để trống vì đó là phần **bạn** tự điền sau khi đi thử.
+> ⚠️ **Cập nhật 2026-09-13:** đã đối chiếu online cả 22 địa điểm, xem [08-kiem-chung-du-lieu.md](08-kiem-chung-du-lieu.md). Nội dung dưới đây là ghi chú ban đầu.
+>
+> **Ban đầu toàn bộ 22 địa điểm mẫu đều ở trạng thái `kiem_chung = chua`.** Mình tra từ các bài viết trên mạng (cột `nguon`), nhưng các nguồn **có chỗ mâu thuẫn nhau**, ví dụ giờ bán Cơm hến Hoa Đông hay giá vé Lăng Khải Định. **Tọa độ chỉ là ước lượng** theo tên đường. Cột `wgo_cham` và `nhan_xet` để trống vì đó là phần **bạn** tự điền sau khi đi thử.
 
 ---
 
@@ -42,7 +44,7 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 | `tags` | Tag để lọc | `id` trong tab `tags`, cách nhau bằng `\|` | `local\|hen-ho` |
 | `dien_thoai`, `facebook`, `tiktok` | Liên hệ | | |
 | `anh` | Tên file ảnh | nhiều ảnh cách nhau bằng `\|` | `me-keo-1.jpg` |
-| `kiem_chung` | Bạn đã đi và xác nhận thông tin chưa | `roi` / `chua` | `chua` |
+| `kiem_chung` | Mức kiểm chứng | `roi` (bạn đã đi thử) / `online` (đã đối chiếu nhiều nguồn) / `chua` | `online` |
 | `nguon` | Thông tin lấy từ đâu | | `vnexpress.net` |
 | `cap_nhat` | Ngày cập nhật gần nhất | `YYYY-MM-DD` | `2026-09-13` |
 

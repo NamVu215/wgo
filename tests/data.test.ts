@@ -33,7 +33,7 @@ test('valid row becomes a place', () => {
   assert.equal(places[0].diaChi, '1 Lê Lợi, Huế');
   assert.equal(places[0].noiBat, true);
   assert.equal(places[0].wgoCham, 4.5);
-  assert.equal(places[0].kiemChung, true);
+  assert.equal(places[0].kiemChung, 'roi');
 });
 
 test('rows with errors are skipped and reported with the sheet row number', () => {
@@ -49,6 +49,12 @@ test('rows with errors are skipped and reported with the sheet row number', () =
   assert.ok(errors.some((i) => i.dong === 3 && i.noiDung.includes('ngoài Việt Nam')));
   assert.ok(errors.some((i) => i.dong === 4 && i.noiDung.includes('trùng')));
   assert.ok(errors.some((i) => i.dong === 5 && i.noiDung.includes('nha-hang')));
+});
+
+test('verification levels', () => {
+  const { places, issues } = parse(row({ id: 'a', kiem_chung: 'online' }), row({ id: 'b', kiem_chung: '' }), row({ id: 'c', kiem_chung: 'da di' }));
+  assert.deepEqual(places.map((p) => p.kiemChung), ['online', 'chua', 'chua']);
+  assert.equal(issues.length, 1);
 });
 
 test('hidden rows are ignored silently', () => {

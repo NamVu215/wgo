@@ -18,6 +18,7 @@ interface Props {
 }
 
 const { place } = Astro.props;
+const VERIFY_LABEL = { roi: 'WGo đã đi thử', online: 'Đã đối chiếu online', chua: 'Chưa kiểm chứng' };
 const data = await loadSiteData();
 const kind = data.kinds.find((k) => k.id === place.loai)?.ten ?? '';
 const tags = place.tags.map((t) => data.tags.find((x) => x.id === t)?.ten ?? t);
@@ -45,7 +46,7 @@ const description = [
 
     <div class="photo detail-photo">
       {place.anh[0] && <img src={photoUrl(place.anh[0])} alt={`Ảnh ${place.ten}`} />}
-      {!place.kiemChung && <span class="sticker sticker--plain">Chưa kiểm chứng</span>}
+      {place.kiemChung !== 'roi' && <span class="sticker sticker--plain">{VERIFY_LABEL[place.kiemChung]}</span>}
     </div>
 
     <h1 class="display detail-name">{place.ten}</h1>
@@ -138,7 +139,7 @@ const description = [
     </div>
 
     <p class="source">
-      {place.kiemChung ? 'WGo đã đi thử' : 'Chưa kiểm chứng'}
+      {VERIFY_LABEL[place.kiemChung]}
       {place.nguon && ` · Nguồn: ${place.nguon}`}
       {place.capNhat && ` · Cập nhật ${formatDateVi(place.capNhat)}`}
     </p>

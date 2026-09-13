@@ -3,7 +3,7 @@
 Web gợi ý **ăn gì, uống gì, đi đâu** khi đi chơi ở Việt Nam, dựa trên kinh nghiệm thật của người đi.
 Bắt đầu với **Huế**, sau đó mở rộng ra Đà Nẵng, Nha Trang, Vũng Tàu, TP. Hồ Chí Minh và Thủ Đức.
 
-> Trạng thái: **Giai đoạn 1 – Lõi** · đang chạy tại **https://wgo-auc.pages.dev** · dữ liệu mẫu chưa kiểm chứng
+> Trạng thái: **Giai đoạn 1 – Lõi** · đang chạy tại **https://wgo-auc.pages.dev** · dữ liệu đọc từ Google Sheet · 22 địa điểm đã đối chiếu online
 
 ## Chạy thử
 
@@ -29,5 +29,6 @@ Chi tiết (đưa lên GitHub, Cloudflare Pages, nối Google Sheets, bảo mậ
 | [docs/05-cau-truc-du-lieu.md](docs/05-cau-truc-du-lieu.md) | Các cột dữ liệu, quy tắc ghi giờ, cách đưa dữ liệu lên Google Sheets |
 | [docs/06-thiet-ke-giao-dien.md](docs/06-thiet-ke-giao-dien.md) | Thiết kế đã chốt (hướng B): các màn hình, màu, chữ, quy chuẩn |
 | [docs/07-huong-dan-chay-va-dua-len-mang.md](docs/07-huong-dan-chay-va-dua-len-mang.md) | Cách chạy web, đưa lên mạng, nối Google Sheets, bảo mật, những gì đã có |
+| [docs/08-kiem-chung-du-lieu.md](docs/08-kiem-chung-du-lieu.md) | Kết quả kiểm chứng 22 địa điểm: đã sửa gì, còn cần xác nhận gì |
 | [data/hue/](data/hue/) | Dữ liệu mẫu Huế (CSV): 22 địa điểm, 14 món, 6 loại, 17 tag |
 | [design/phac-thao/](design/phac-thao/) | Bản vẽ giao diện · [xem online](https://claude.ai/code/artifact/f79a492f-27d2-4d7e-8fcc-194da82b169d) |

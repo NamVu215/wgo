@@ -30,7 +30,8 @@ export type Place = {
   facebook: string;
   tiktok: string;
   anh: string[];
-  kiemChung: boolean;
+  // roi = WGo đã đi thử · online = đã đối chiếu nhiều nguồn trên mạng · chua = chưa kiểm chứng
+  kiemChung: 'roi' | 'online' | 'chua';
   nguon: string;
   capNhat: string;
 };
@@ -131,6 +132,10 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       else links[key] = url;
     }
 
+    const kiemChungRaw = (r.kiem_chung ?? '').trim().toLowerCase();
+    const kiemChung = kiemChungRaw === 'roi' || kiemChungRaw === 'online' ? kiemChungRaw : 'chua';
+    if (kiemChungRaw && kiemChungRaw !== kiemChung) warn(`kiem_chung "${r.kiem_chung}" phải là roi, online hoặc chua`);
+
     const capNhat = normalizeDate(r.cap_nhat ?? '');
     if (r.cap_nhat && !capNhat) warn('cap_nhat nên ghi dạng 2026-09-13 hoặc 13/09/2026');
 
@@ -163,7 +168,7 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       facebook: links.facebook,
       tiktok: links.tiktok,
       anh: splitList(r.anh ?? '').filter((f) => /^[\w.-]+\.(jpe?g|png|webp|avif)$/i.test(f)),
-      kiemChung: (r.kiem_chung ?? '').toLowerCase() === 'roi',
+      kiemChung,
       nguon: r.nguon ?? '',
       capNhat: capNhat ?? '',
     });

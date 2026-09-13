@@ -4,6 +4,14 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-13 · Nối Google Sheet & kiểm chứng online 22 địa điểm
+
+- **Google Sheet "WGo – Dữ liệu"** đã nối vào web (`npm run noi-sheet`). Dữ liệu đọc về khớp 100% từng ô với file gốc. Web trên mạng đã đọc từ Sheet.
+- **Thêm mức kiểm chứng `online`** (đối chiếu nhiều nguồn) bên cạnh `roi` (đã đi thử) và `chua`.
+- **Nguyên tắc khi nguồn mâu thuẫn:** giờ lấy khoảng chung (để "Đang mở" đáng tin), giá lấy khoảng rộng.
+- **Kết quả:** 19 `online`, 3 `chua`. Sửa địa chỉ sai của Quán Tài Phú, 7 tọa độ lệch 200 m – 2,3 km, giờ mở cửa của 14 địa điểm. Chi tiết: [08-kiem-chung-du-lieu.md](08-kiem-chung-du-lieu.md).
+- **Cách áp dụng vào Sheet:** Claude không ghi được vào Google Sheet, và Sheet chưa bị ai sửa (đã so từng ô). Vì vậy tạo lại `WGo-du-lieu.xlsx` để chủ dự án nhập đè ("Thay thế bảng tính"), sau đó chạy lại `npm run noi-sheet` vì số gid của các tab sẽ đổi.
+
 ### 2026-09-13 · Nối GitHub, chuẩn bị Google Sheet
 
 - **GitHub:** kho công khai https://github.com/NamVu215/wgo. Trước khi đẩy lần đầu, đã đổi email trong toàn bộ lịch sử code sang email ẩn danh của GitHub để không lộ Gmail trên kho công khai.
