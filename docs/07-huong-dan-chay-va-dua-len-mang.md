@@ -57,7 +57,7 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 **Link chính thức: https://wgo-auc.pages.dev**. Tên `wgo` đã có người dùng nên Cloudflare thêm đuôi `-auc`. Có thể đổi sang tên miền riêng sau.
 
 - Tài khoản Cloudflare: `nnamvu01@gmail.com`, dự án Pages tên **`wgo`**.
-- Cách đưa lên hiện tại: **tải thẳng từ máy lên** bằng `npm run deploy`.
+- Cách đưa lên: **tự động bằng GitHub Actions** (mục 5), hoặc từ máy bằng `npm run deploy`.
 
 ### Cập nhật web sau khi sửa code hoặc dữ liệu
 
@@ -75,20 +75,50 @@ Lệnh này tự build và tải lên, xong trong khoảng 1 phút. Lần đầu
 - Kho mã công khai: **https://github.com/NamVu215/wgo**. Máy này đã đăng nhập GitHub bằng công cụ `gh`.
 - Lịch sử code ghi tên **NamVu215** với email ẩn danh `182730968+NamVu215@users.noreply.github.com`, không lộ Gmail.
 - Đẩy thay đổi lên GitHub: `git push`.
-- **Chưa tự động:** đẩy code lên GitHub **chưa** tự cập nhật web, vẫn cần `npm run deploy`. Sắp tới sẽ cài GitHub Actions để tự đưa web lên mỗi lần đẩy code và mỗi ngày (lấy dữ liệu mới từ Sheet). Việc này cần tạo một **API token Cloudflare** và lưu bí mật trong GitHub.
+- Mỗi lần đẩy code lên nhánh `main`, GitHub Actions tự kiểm tra và đưa web lên (cần mã Cloudflare, xem mục 5).
 
-## 5. Kết nối Google Sheets (khi bạn sẵn sàng)
+## 5. Google Sheet & tự động cập nhật web
 
-1. Tạo Google Sheet theo [05-cau-truc-du-lieu.md](05-cau-truc-du-lieu.md), mục 4 (nhập 4 file CSV thành 4 tab).
-2. Bấm **Chia sẻ** → **Quyền truy cập chung** → **Bất kỳ ai có đường liên kết** → vai trò **Người xem**.
-   - Ai có link cũng xem được bảng. Dữ liệu này vốn công khai trên web nên không sao, nhưng **đừng ghi thông tin riêng tư** vào bảng.
-3. Gửi mình **link của từng tab**. Link có dạng `.../d/<mã-sheet>/edit#gid=<số>`, số `gid` mỗi tab khác nhau.
-4. Mình điền vào `src/config.ts`. Từ đó web đọc thẳng từ Sheet mỗi lần build.
+**Sheet:** [WGo – Dữ liệu](https://docs.google.com/spreadsheets/d/1ricr-8XcL58OSaPFGEcQccu2pV1QMT8fLpOOU7IWeGo/edit) (đã nối, `src/config.ts`).
 
-**Sau khi sửa Sheet, làm sao để web cập nhật?**
-- Hiện tại: chạy `npm run deploy` (hoặc báo mình).
-- Sắp tới: mình sẽ cài **tự động cập nhật mỗi ngày** (GitHub Actions + Cloudflare Deploy Hook), miễn phí.
-- Nếu Sheet có dòng lỗi, dòng đó bị **ẩn khỏi web** chứ không làm hỏng web. Nếu không đọc được Sheet (ví dụ quên chia sẻ), lần build đó **thất bại** và web **giữ nguyên bản cũ**.
+### Luồng hằng ngày của bạn
+
+```
+Bạn sửa Google Sheet  ──►  GitHub Actions tự chạy (06:00 và 17:00 giờ VN)
+                              1. kiểm thử
+                              2. đọc Sheet, kiểm tra lỗi dữ liệu
+                              3. build web
+                              4. đưa lên https://wgo-auc.pages.dev
+```
+
+- **Muốn web cập nhật ngay** (không chờ 06:00/17:00): vào [github.com/NamVu215/wgo/actions](https://github.com/NamVu215/wgo/actions) → **Cập nhật web** → **Run workflow** → **Run workflow**. Khoảng 1–2 phút là xong, làm được cả trên điện thoại.
+- **Xem dữ liệu có lỗi không:** bấm vào lần chạy gần nhất trong trang Actions. Phần **Summary** có bảng lỗi và cảnh báo theo **số dòng** trong Sheet.
+- **Dòng lỗi** bị ẩn khỏi web, không làm hỏng web.
+- **Lưới an toàn:** nếu Sheet chỉ còn **dưới 5 địa điểm hợp lệ** (lỡ tay xóa hoặc bị phá), hệ thống **không cập nhật** và giữ nguyên web cũ. Lần chạy đó hiện dấu ❌ đỏ.
+- Muốn tự cập nhật từ máy tính thì vẫn dùng được `npm run deploy`.
+
+### ⚠️ Cài một lần: mã Cloudflare cho GitHub
+
+Không có mã này thì GitHub Actions vẫn chạy kiểm tra nhưng **không đưa web lên** (có dòng nhắc màu vàng).
+
+1. Vào [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) → **Create Token** → kéo xuống **Create Custom Token** → **Get started**.
+2. Điền:
+   - **Token name:** `wgo-github`
+   - **Permissions:** chọn `Account` → `Cloudflare Pages` → `Edit`
+   - **Account Resources:** `Include` → tài khoản của bạn
+3. **Continue to summary** → **Create Token** → bấm **Copy**. Mã chỉ hiện **một lần**.
+4. Vào [github.com/NamVu215/wgo/settings/secrets/actions](https://github.com/NamVu215/wgo/settings/secrets/actions) → **New repository secret**:
+   - **Name:** `CLOUDFLARE_API_TOKEN`
+   - **Secret:** dán mã vừa copy → **Add secret**
+5. Vào tab **Actions** → **Cập nhật web** → **Run workflow** để thử.
+
+> Mã này chỉ có quyền sửa Cloudflare Pages. **Không gửi mã qua tin nhắn**, chỉ dán vào GitHub Secrets. GitHub tự che mã trong mọi nhật ký.
+
+### Quyền trên Google Sheet
+
+- **Quyền truy cập chung phải là "Người xem"**. Mã Sheet nằm công khai trong kho GitHub, nên nếu để "Người chỉnh sửa" thì **ai cũng sửa được dữ liệu và thay đổi sẽ tự lên web**.
+- Bạn là chủ Sheet nên luôn sửa được khi đăng nhập Google. Muốn cho người khác cùng sửa thì bấm **Chia sẻ** → nhập **email** của họ → **Người chỉnh sửa**.
+- Lỡ tay sửa sai: **Tệp → Nhật ký phiên bản** để khôi phục bản cũ.
 
 ## 6. Bảo mật: mình đã làm gì
 

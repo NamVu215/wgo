@@ -4,6 +4,15 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-13 · Dữ liệu đã sửa vào Sheet, cài tự động cập nhật
+
+- **Sửa Sheet:** chủ dự án bật quyền chỉnh sửa qua link. Claude dùng Chrome chạy ẩn dán dữ liệu đã kiểm chứng vào tab `dia-diem`, rồi tải về so từng ô: **khớp 644/644 ô**. Tab `huong-dan` cũng được cập nhật theo quy trình mới. Web đã đưa lên với dữ liệu mới.
+- **Phân công từ nay:** chủ dự án tự thêm, sửa, xóa và kiểm chứng dữ liệu trên Sheet. Phần kỹ thuật tích hợp chạy tự động.
+- **Tự động:** GitHub Actions `Cập nhật web` chạy khi đẩy code, lúc 06:00 và 17:00 giờ VN, hoặc bấm tay. Các bước: kiểm thử → kiểm tra dữ liệu (bảng lỗi trong Summary) → build → đưa lên Cloudflare Pages.
+- **Lưới an toàn:** Sheet còn dưới 5 địa điểm hợp lệ thì không cập nhật, giữ web cũ.
+- **Lỗi đã sửa:** `node --test tests/` chạy được trên Node 26 nhưng lỗi trên Node 24 (GitHub). Đổi sang `node --test "tests/*.test.ts"`.
+- **Chờ chủ dự án:** (1) **đổi quyền link Sheet về "Người xem"** (mã Sheet công khai trên GitHub, để quyền sửa thì ai cũng phá được); (2) tạo mã Cloudflare và lưu vào GitHub Secrets; (3) (không bắt buộc) thêm `online` vào ô chọn cột kiem_chung.
+
 ### 2026-09-13 · Nối Google Sheet & kiểm chứng online 22 địa điểm
 
 - **Google Sheet "WGo – Dữ liệu"** đã nối vào web (`npm run noi-sheet`). Dữ liệu đọc về khớp 100% từng ô với file gốc. Web trên mạng đã đọc từ Sheet.

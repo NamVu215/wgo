@@ -72,16 +72,12 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 3. Một dãy số hiện ra, ví dụ `16.48792, 107.58014`. Bấm vào để **copy**.
 4. Số **trước** dấu phẩy dán vào `vi_do`, số **sau** dán vào `kinh_do`.
 
-## 4. Đưa dữ liệu mẫu lên Google Sheets (làm một lần)
+## 4. Google Sheet đang dùng
 
-Có sẵn file **`WGo-du-lieu.xlsx`** (tạo từ các CSV mẫu), gồm 5 tab `dia-diem`, `mon`, `loai`, `tags`, `huong-dan`. Ô tiêu đề có ghi chú giải thích, một số cột có danh sách chọn sẵn, các ô để dạng văn bản để Sheets không tự đổi giờ, số điện thoại, ngày.
-
-1. Vào [sheets.new](https://sheets.new), đặt tên **WGo – Dữ liệu**.
-2. **Tệp → Nhập → Tải lên** → chọn `WGo-du-lieu.xlsx` → **Thay thế bảng tính** → **Nhập dữ liệu**.
-3. **Chia sẻ** → **Bất kỳ ai có đường liên kết** → **Người xem** → sao chép link.
-4. Nối vào web: `npm run noi-sheet -- "<link>"`, rồi `npm run kiem-tra`, rồi `npm run deploy`.
-
-> ⚠️ Không đổi tên 4 tab `dia-diem`, `mon`, `loai`, `tags` và dòng tiêu đề.
+- **[WGo – Dữ liệu](https://docs.google.com/spreadsheets/d/1ricr-8XcL58OSaPFGEcQccu2pV1QMT8fLpOOU7IWeGo/edit)**: nơi duy nhất chứa dữ liệu. **Sửa trực tiếp trên Sheet**, không nhập file đè lên nữa.
+- Web tự cập nhật 2 lần/ngày, hoặc bấm Run workflow (xem [07](07-huong-dan-chay-va-dua-len-mang.md), mục 5).
+- **Việc nhỏ nên làm một lần:** ô chọn của cột `kiem_chung` (cột **Z**) mới có `roi`, `chua`. Vào **Dữ liệu → Xác thực dữ liệu** → bấm quy tắc của cột Z → thêm mục `online` → **Xong**. Nếu không làm, ô có chữ `online` sẽ hiện tam giác đỏ nhỏ nhưng web vẫn đọc đúng.
+- File `WGo-du-lieu.xlsx` chỉ dùng cho lần tạo Sheet đầu tiên.
 
 ## 5. Quy trình góp ý (giai đoạn 3, ghi lại để không quên)
 
