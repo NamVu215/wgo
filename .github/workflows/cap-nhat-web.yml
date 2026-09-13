@@ -1,0 +1,54 @@
+# Tự cập nhật web WGo từ Google Sheet.
+# Chạy khi: đẩy code lên nhánh main · 2 lần mỗi ngày · bấm "Run workflow" trên GitHub.
+name: Cập nhật web
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 23 * * *' # 06:00 giờ Việt Nam
+    - cron: '0 10 * * *' # 17:00 giờ Việt Nam
+  workflow_dispatch:
+
+concurrency:
+  group: cap-nhat-web
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_ACCOUNT_ID: 8aba842b0834fac18b5a3c586957ffac
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ASTRO_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Cài thư viện
+        run: npm ci
+
+      - name: Kiểm thử tự động
+        run: npm test
+
+      - name: Kiểm tra dữ liệu từ Google Sheet
+        run: npm run kiem-tra -- --ci
+
+      - name: Build web
+        run: npm run build
+
+      - name: Đưa lên Cloudflare Pages
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler pages deploy dist --project-name wgo --branch main --commit-dirty=true
+
+      - name: Nhắc thêm mã Cloudflare
+        if: env.CLOUDFLARE_API_TOKEN == ''
+        run: echo "::warning::Chưa có secret CLOUDFLARE_API_TOKEN nên chưa đưa web lên. Xem docs/07, mục Tự động cập nhật."

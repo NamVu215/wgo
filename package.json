@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "test": "node --test tests/",
     "kiem-tra": "node scripts/kiem-tra-du-lieu.ts",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name wgo --branch main",
+    "deploy": "npm run kiem-tra -- --ci && npm run build && wrangler pages deploy dist --project-name wgo --branch main",
     "noi-sheet": "node scripts/noi-google-sheet.ts"
   },
   "engines": {
