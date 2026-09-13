@@ -5,12 +5,12 @@
 //   sheetId: the long id in https://docs.google.com/spreadsheets/d/<sheetId>/edit
 //   gid:     the number after "gid=" in the URL when each tab is open.
 export const DATA_SOURCE = {
-  sheetId: '',
+  sheetId: '1ricr-8XcL58OSaPFGEcQccu2pV1QMT8fLpOOU7IWeGo',
   gid: {
-    'dia-diem': '0',
-    mon: '',
-    loai: '',
-    tags: '',
+    'dia-diem': '742979991',
+    mon: '1842662037',
+    loai: '793024044',
+    tags: '1285618604',
   },
 };
 
