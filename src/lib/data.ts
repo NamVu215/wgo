@@ -131,7 +131,8 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       else links[key] = url;
     }
 
-    if (r.cap_nhat && !/^\d{4}-\d{2}-\d{2}$/.test(r.cap_nhat)) warn('cap_nhat nên ghi dạng YYYY-MM-DD');
+    const capNhat = normalizeDate(r.cap_nhat ?? '');
+    if (r.cap_nhat && !capNhat) warn('cap_nhat nên ghi dạng 2026-09-13 hoặc 13/09/2026');
 
     if (errors.length > 0) {
       errors.forEach((noiDung) => issues.push({ dong, id, muc: 'loi', noiDung }));
@@ -164,11 +165,19 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       anh: splitList(r.anh ?? '').filter((f) => /^[\w.-]+\.(jpe?g|png|webp|avif)$/i.test(f)),
       kiemChung: (r.kiem_chung ?? '').toLowerCase() === 'roi',
       nguon: r.nguon ?? '',
-      capNhat: r.cap_nhat ?? '',
+      capNhat: capNhat ?? '',
     });
   });
 
   return { places, issues };
+}
+
+// "2026-09-13" or "13/09/2026" → "2026-09-13"; null when unreadable.
+export function normalizeDate(raw: string): string | null {
+  const s = raw.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s);
+  return m ? `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}` : null;
 }
 
 export function directionsUrl(p: Pick<Place, 'lat' | 'lng'>): string {

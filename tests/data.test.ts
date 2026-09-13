@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { parseCsv } from '../src/lib/csv.ts';
-import { parsePlaces, parseRefs } from '../src/lib/data.ts';
+import { normalizeDate, parsePlaces, parseRefs } from '../src/lib/data.ts';
 import { formatPrice, normalize, parseDecimal, parseMoney } from '../src/lib/text.ts';
 
 const refs = parseRefs(
@@ -72,6 +72,12 @@ test('Vietnamese-locale numbers from Google Sheets', () => {
   assert.equal(places[0].giaTu, 30000);
   assert.equal(places[0].giaDen, 45000);
   assert.equal(places[0].wgoCham, 4.5);
+});
+
+test('dates typed the Vietnamese way', () => {
+  assert.equal(normalizeDate('2026-09-13'), '2026-09-13');
+  assert.equal(normalizeDate('3/9/2026'), '2026-09-03');
+  assert.equal(normalizeDate('tháng 9'), null);
 });
 
 test('text helpers', () => {
