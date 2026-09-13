@@ -1,0 +1,99 @@
+// Shared by pages (build time) and browser scripts. No Node-only imports here.
+import type { Hours } from './hours.ts';
+import type { Place } from './data.ts';
+import { CITY } from '../config.ts';
+
+export type ClientPlace = {
+  id: string;
+  ten: string;
+  loai: string;
+  mon: string[];
+  monNenGoi: string;
+  khuVuc: string;
+  hours: Hours;
+  giaTu: number | null;
+  giaDen: number | null;
+  wgoCham: number | null;
+  noiBat: boolean;
+  tags: string[];
+  lat: number;
+  lng: number;
+  anh: string | null;
+};
+
+export type Label = { id: string; ten: string };
+export type ClientData = { places: ClientPlace[]; dishes: Label[]; kinds: Label[] };
+
+export function toClientPlace(p: Place): ClientPlace {
+  return {
+    id: p.id, ten: p.ten, loai: p.loai, mon: p.mon, monNenGoi: p.monNenGoi, khuVuc: p.khuVuc,
+    hours: p.hours, giaTu: p.giaTu, giaDen: p.giaDen, wgoCham: p.wgoCham, noiBat: p.noiBat,
+    tags: p.tags, lat: p.lat, lng: p.lng, anh: p.anh[0] ?? null,
+  };
+}
+
+// Safe to drop inside <script type="application/json">.
+export function jsonForScript(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
+}
+
+export const placeUrl = (id: string) => `/${CITY.id}/${id}/`;
+export const photoUrl = (file: string) => `/anh/${CITY.id}/${file}`;
+export const directionsUrl = (p: { lat: number; lng: number }) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
+
+const DISH_ICONS: Record<string, string> = {
+  'bun-bo': 'bowl', 'bun-hen': 'bowl', 'banh-canh-nam-pho': 'bowl',
+  'com-hen': 'rice',
+  'banh-beo': 'cakes', 'banh-nam': 'cakes', 'banh-loc': 'cakes', 'banh-uot': 'cakes',
+  'banh-khoai': 'pancake', 'banh-xeo': 'pancake',
+  'nem-lui': 'skewer', 'bun-thit-nuong': 'skewer',
+  che: 'glass', 'ca-phe': 'coffee',
+};
+export const dishIcon = (id: string) => DISH_ICONS[id] ?? 'bowl';
+
+// One line under a place name: what to eat there.
+export function placeSubtitle(p: Pick<ClientPlace, 'mon' | 'loai'>, dishes: Label[], kinds: Label[], max = 3): string {
+  const names = p.mon.map((id) => dishes.find((d) => d.id === id)?.ten ?? id);
+  if (names.length === 0) return kinds.find((k) => k.id === p.loai)?.ten ?? '';
+  const shown = names.slice(0, max).join(' · ');
+  return names.length > max ? `${shown} +${names.length - max}` : shown;
+}
+
+export const ratingText = (r: number | null) => (r === null ? '' : `${String(r).replace('.', ',')}★`);
+
+// Home page "mood" chips.
+export type Mood = { id: string; label: string; word: string };
+export const MOODS: Mood[] = [
+  { id: 'an-no', label: 'Ăn no', word: 'ăn gì' },
+  { id: 'an-vat', label: 'Ăn vặt', word: 'ăn vặt gì' },
+  { id: 'nuoc', label: 'Chè & nước', word: 'uống gì' },
+  { id: 'cafe', label: 'Cafe', word: 'cafe đâu' },
+  { id: 'check-in', label: 'Check-in', word: 'đi đâu' },
+];
+
+export function matchesMood(p: Pick<ClientPlace, 'loai' | 'tags'>, mood: string): boolean {
+  switch (mood) {
+    case 'an-no': return p.loai === 'quan-an' && !p.tags.includes('an-vat');
+    case 'an-vat': return p.loai === 'an-vat' || p.tags.includes('an-vat');
+    case 'nuoc': return p.loai === 'quan-nuoc';
+    case 'cafe': return p.loai === 'cafe';
+    case 'check-in': return p.loai === 'check-in';
+    default: return true;
+  }
+}
+
+export type PriceBucket = { id: string; label: string; from: number; to: number };
+export const PRICE_BUCKETS: PriceBucket[] = [
+  { id: 'duoi-30', label: '< 30k', from: 0, to: 29_999 },
+  { id: '30-60', label: '30–60k', from: 30_000, to: 60_000 },
+  { id: '60-100', label: '60–100k', from: 60_001, to: 100_000 },
+  { id: 'tren-100', label: '> 100k', from: 100_001, to: Number.POSITIVE_INFINITY },
+];
+
+export function inPriceBucket(p: Pick<ClientPlace, 'giaTu' | 'giaDen'>, bucket: PriceBucket): boolean {
+  const lo = p.giaTu ?? p.giaDen;
+  const hi = p.giaDen ?? p.giaTu;
+  if (lo === null || hi === null) return false;
+  return lo <= bucket.to && bucket.from <= hi;
+}

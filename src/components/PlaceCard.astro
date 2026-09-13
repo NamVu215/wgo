@@ -1,0 +1,33 @@
+---
+import type { Place } from '../lib/data.ts';
+import { photoUrl, placeSubtitle, placeUrl, ratingText, type Label } from '../lib/view.ts';
+import { formatPrice } from '../lib/text.ts';
+
+interface Props {
+  place: Place;
+  dishes: Label[];
+  kinds: Label[];
+  hidden?: boolean;
+}
+
+const { place, dishes, kinds, hidden = false } = Astro.props;
+const price = formatPrice(place.giaTu, place.giaDen);
+const rating = ratingText(place.wgoCham);
+const extra = [price, place.khuVuc].filter(Boolean).join(' · ');
+---
+<li class="card" data-id={place.id} hidden={hidden}>
+  <div class="photo card__photo">
+    {place.anh[0] && <img src={photoUrl(place.anh[0])} alt="" loading="lazy" />}
+  </div>
+  <div class="card__body">
+    <div class="card__head">
+      <a class="card__name" href={placeUrl(place.id)}>{place.ten}</a>
+      {rating && <span class="card__rate">{rating}</span>}
+    </div>
+    <div class="card__line muted">{placeSubtitle(place, dishes, kinds)}</div>
+    <div class="card__line">
+      <span data-status={place.id} class="tone-unknown"></span>{extra && <span class="card__extra">{extra}</span>}
+    </div>
+  </div>
+  <slot />
+</li>

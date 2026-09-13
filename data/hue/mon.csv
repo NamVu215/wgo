@@ -1,0 +1,15 @@
+id,ten,nhom,buoi_hop,mo_ta_ngan,icon
+bun-bo,Bún bò Huế,mon-nuoc,sang,"Bún sợi to, nước dùng sả + mắm ruốc, giò heo, chả cua",🍜
+com-hen,Cơm hến,mon-kho,sang,"Cơm nguội trộn hến xào, tóp mỡ, ruốc, rau sống",🍚
+bun-hen,Bún hến,mon-nuoc,sang,Như cơm hến nhưng dùng bún,🍜
+banh-canh-nam-pho,Bánh canh Nam Phổ,mon-nuoc,chieu,"Sợi bánh canh bột gạo, nước dùng tôm cua sệt",🍲
+banh-beo,Bánh bèo,banh-hue,chieu,"Bánh bột gạo hấp trong chén, tôm chấy, tóp mỡ",🥟
+banh-nam,Bánh nậm,banh-hue,chieu,"Bánh bột gạo gói lá chuối, nhân tôm thịt",🥟
+banh-loc,Bánh bột lọc,banh-hue,chieu,"Bánh bột năng dai, nhân tôm thịt, có loại gói lá và loại trần",🥟
+banh-uot,Bánh ướt thịt nướng,banh-hue,chieu,Bánh ướt cuốn thịt nướng,🥟
+banh-khoai,Bánh khoái,banh-hue,toi,"Bánh đổ giòn nhân tôm thịt giá, chấm nước lèo gan",🥞
+banh-xeo,Bánh xèo,banh-hue,toi,Bánh đổ nhân tôm thịt,🥞
+nem-lui,Nem lụi,nuong,toi,"Thịt xiên sả nướng, cuốn bánh tráng, chấm nước lèo",🍢
+bun-thit-nuong,Bún thịt nướng,nuong,toi,Bún + thịt nướng + nước chấm,🍢
+che,Chè Huế,an-vat,chieu|toi,"Chè bột lọc heo quay, chè đậu ngự, chè thập cẩm…",🍧
+ca-phe,Cà phê,do-uong,ca-ngay,"Cà phê muối, cà phê phin",☕

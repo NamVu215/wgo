@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { SITE_URL } from '../config.ts';
+
+interface Props {
+  title: string;
+  description?: string;
+  nav?: 'goi-y' | 'kham-pha' | 'da-luu';
+}
+
+const { title, description = 'WGo – đi đâu, ăn gì ở Huế. Quán local, giờ mở cửa, chỉ đường.', nav } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
+const tabs = [
+  { id: 'goi-y', href: '/', label: 'Gợi ý', icon: 'sparkle' },
+  { id: 'kham-pha', href: '/kham-pha/', label: 'Khám phá', icon: 'search' },
+  { id: 'da-luu', href: '/da-luu/', label: 'Đã lưu', icon: 'heart' },
+] as const;
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="WGo" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="vi_VN" />
+    <meta name="theme-color" content="#F6F0E4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#15120E" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+    />
+    <script is:inline src="/theme-init.js"></script>
+  </head>
+  <body>
+    <slot />
+    {nav && (
+      <nav class="nav" aria-label="Điều hướng chính">
+        {tabs.map((tab) => (
+          <a href={tab.href} aria-current={tab.id === nav ? 'page' : undefined}>
+            <span><Icon name={tab.icon} size={18} />{tab.label}</span>
+          </a>
+        ))}
+      </nav>
+    )}
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

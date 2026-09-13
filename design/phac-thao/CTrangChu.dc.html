@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #0F8C7B; text-decoration: none; } a:hover { color: #0A6B5E; }
+    svg { display: block; }
+  </style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: {{t.land}}; color: {{t.text}}; font-family: 'Lexend', system-ui, -apple-system, sans-serif;">
+
+  <svg width="390" height="844" viewBox="0 0 390 844" style="position: absolute; left: 0; top: 0;">
+    <rect x="0" y="0" width="390" height="844" fill="{{t.land}}"></rect>
+    <rect x="-10" y="120" width="190" height="190" rx="6" fill="{{t.park}}" transform="rotate(-8 85 215)"></rect>
+    <path d="M-30 520 C 60 470, 120 450, 190 420 S 320 330, 430 300" fill="none" stroke="{{t.water}}" stroke-width="44" stroke-linecap="round"></path>
+    <ellipse cx="300" cy="330" rx="34" ry="13" fill="{{t.park}}" transform="rotate(-25 300 330)"></ellipse>
+    <g fill="none" stroke="{{t.road}}" stroke-width="7" stroke-linecap="round">
+      <path d="M-10 560 C 80 520, 150 500, 220 470 S 330 400, 420 370"></path>
+      <path d="M-10 340 L 400 250"></path>
+      <path d="M120 60 L 210 480"></path>
+      <path d="M250 40 L 300 460"></path>
+      <path d="M60 600 L 330 520"></path>
+      <path d="M160 470 L 230 844"></path>
+      <path d="M-10 700 L 400 610"></path>
+      <path d="M330 520 L 380 844"></path>
+    </g>
+    <g fill="none" stroke="{{t.road}}" stroke-width="11" stroke-linecap="round">
+      <path d="M205 395 L 218 470"></path>
+      <path d="M100 440 L 112 520"></path>
+    </g>
+  </svg>
+
+  <sc-for list="{{dots}}" as="d" hint-placeholder-count="4">
+    <div style="position: absolute; left: {{d.x}}px; top: {{d.y}}px; width: 14px; height: 14px; border-radius: 7px; background: {{t.closed}}; border: 2px solid {{t.surface}};"></div>
+  </sc-for>
+  <sc-for list="{{pins}}" as="p" hint-placeholder-count="4">
+    <div style="position: absolute; left: {{p.x}}px; top: {{p.y}}px; width: 34px; height: 34px; border-radius: 17px 17px 17px 4px; transform: rotate(-45deg); background: {{t.surface}}; border: 2px solid {{accent}}; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 12px; height: 12px; border-radius: 6px; background: {{accent}};"></div>
+    </div>
+  </sc-for>
+
+  <div style="position: absolute; left: 196px; top: 266px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+    <div style="height: 30px; padding: 0 10px; border-radius: 15px; background: {{accent}}; color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center; white-space: nowrap;">Quán Bà Đỏ</div>
+    <div style="width: 44px; height: 44px; border-radius: 22px 22px 22px 6px; transform: rotate(-45deg); background: {{accent}}; border: 3px solid {{t.surface}}; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 14px; height: 14px; border-radius: 7px; background: {{t.surface}};"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 148px; top: 540px; width: 46px; height: 46px; border-radius: 23px; background: rgba(59, 130, 246, 0.18); display: flex; align-items: center; justify-content: center;">
+    <div style="width: 16px; height: 16px; border-radius: 8px; background: #3B82F6; border: 3px solid #FFFFFF;"></div>
+  </div>
+
+  <div style="position: absolute; left: 16px; right: 16px; top: 12px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="height: 52px; border-radius: 18px; background: {{t.surface}}; box-shadow: 0 6px 20px rgba(10, 30, 25, 0.12); display: flex; align-items: center; gap: 10px; padding: 0 6px 0 16px;">
+      <div style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em;">W<span style="color: {{accent}}">Go</span></div>
+      <div style="width: 1px; height: 22px; background: {{t.line}};"></div>
+      <div style="flex-grow: 1; font-size: 15px; color: {{t.muted}};">Tìm ở Huế…</div>
+      <div style="width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"></path><circle cx="16" cy="7" r="2"></circle><circle cx="8" cy="17" r="2"></circle></svg>
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px; overflow: hidden; font-size: 14px; font-weight: 500;">
+      <div style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 22px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(10, 30, 25, 0.12);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+        Đang mở
+      </div>
+      <div style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 22px; background: {{t.surface}}; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(10, 30, 25, 0.10);">Bánh Huế</div>
+      <div style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 22px; background: {{t.surface}}; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(10, 30, 25, 0.10);">Chè</div>
+      <div style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 22px; background: {{t.surface}}; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(10, 30, 25, 0.10);">Cafe</div>
+      <div style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 22px; background: {{t.surface}}; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(10, 30, 25, 0.10);">Dưới 50k</div>
+    </div>
+  </div>
+
+  <div style="position: absolute; right: 16px; top: 430px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="width: 48px; height: 48px; border-radius: 16px; background: {{t.surface}}; box-shadow: 0 4px 14px rgba(10, 30, 25, 0.14); display: flex; align-items: center; justify-content: center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="9" cy="9" r="1.2" fill="currentColor"></circle><circle cx="15" cy="15" r="1.2" fill="currentColor"></circle><circle cx="15" cy="9" r="1.2" fill="currentColor"></circle><circle cx="9" cy="15" r="1.2" fill="currentColor"></circle></svg>
+    </div>
+    <div style="width: 48px; height: 48px; border-radius: 16px; background: {{t.surface}}; box-shadow: 0 4px 14px rgba(10, 30, 25, 0.14); color: #3B82F6; display: flex; align-items: center; justify-content: center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><circle cx="12" cy="12" r="8"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 318px; background: {{t.surface}}; border-radius: 28px 28px 0 0; box-shadow: 0 -8px 30px rgba(10, 30, 25, 0.12); padding: 10px 20px 0 20px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="align-self: center; width: 40px; height: 5px; border-radius: 3px; background: {{t.line}};"></div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between;">
+      <div style="font-size: 18px; font-weight: 600;">8 chỗ đang mở</div>
+      <div style="font-size: 13px; color: {{t.muted}};">quanh bạn · 15:00</div>
+    </div>
+
+    <div style="border: 1.5px solid {{accent}}; border-radius: 20px; padding: 12px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; gap: 12px;">
+        <div style="width: 72px; height: 72px; flex-shrink: 0; border-radius: 14px; background: repeating-linear-gradient(135deg, {{t.ph}} 0 8px, {{t.ph2}} 8px 16px);"></div>
+        <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+          <div style="font-size: 16px; font-weight: 600;">Quán Bà Đỏ</div>
+          <div style="font-size: 13px; color: {{t.muted}};">Bánh nậm · bèo · lọc · 10–60k</div>
+          <div style="font-size: 13px;"><span style="color: {{accent}}; font-weight: 600;">Mở tới 20:00</span> · 650 m · 4.6★</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <div style="flex-grow: 1; height: 46px; border-radius: 14px; border: 1px solid {{t.line}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500;">Chi tiết</div>
+        <div style="flex-grow: 1; height: 46px; border-radius: 14px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 600;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l16-7-7 16-2-7z"></path></svg>
+          Chỉ đường
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="2">
+        <div style="height: 52px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid {{t.line}};">
+          <div style="display: flex; flex-direction: column; gap: 1px;">
+            <div style="font-size: 15px; font-weight: 500;">{{r.name}}</div>
+            <div style="font-size: 12.5px; color: {{t.muted}};">{{r.meta}}</div>
+          </div>
+          <div style="font-size: 13px; color: {{t.muted}};">{{r.dist}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"accent":{"editor":"color","default":"#0F8C7B","options":["#0F8C7B","#7C4DDB","#E0572F","#2F6FDB"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.dark ?? false;
+    const accent = this.props.accent ?? '#0F8C7B';
+    const t = dark
+      ? { land: '#111816', park: '#16241E', water: '#1C3A3F', road: '#222D29', surface: '#1A2320', text: '#EAF1EE', muted: '#93A29C', line: '#2A3531', closed: '#56615D', ph: '#24302C', ph2: '#202A27' }
+      : { land: '#ECF0EE', park: '#DDE9E0', water: '#C3DEE1', road: '#FFFFFF', surface: '#FFFFFF', text: '#13201C', muted: '#62706B', line: '#E1E7E4', closed: '#AEB8B4', ph: '#E3EAE6', ph2: '#DAE3DE' };
+    const pins = [ { x: 84, y: 188 }, { x: 150, y: 250 }, { x: 250, y: 350 }, { x: 300, y: 216 }, { x: 60, y: 420 }, { x: 270, y: 470 } ];
+    const dots = [ { x: 116, y: 140 }, { x: 40, y: 250 }, { x: 230, y: 210 }, { x: 196, y: 500 }, { x: 330, y: 400 } ];
+    const rows = [
+      { name: 'Chè Hẻm', meta: 'Chè · mở tới 22:00', dist: '1,8 km' },
+      { name: 'Quán Thúy', meta: 'Bánh canh Nam Phổ · mở tới 20:00', dist: '1,1 km' }
+    ];
+    return { t, accent, pins, dots, rows };
+  }
+}
+</script>
+</body>
+</html>

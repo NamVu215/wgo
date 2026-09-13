@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import { loadSiteData } from '../lib/load.ts';
+import { jsonForScript, toClientPlace } from '../lib/view.ts';
+
+const data = await loadSiteData();
+const dishes = data.dishes.map(({ id, ten }) => ({ id, ten }));
+const kinds = data.kinds.map(({ id, ten }) => ({ id, ten }));
+const client = { places: data.places.map(toClientPlace), dishes, kinds };
+---
+<Base title="Đã lưu · WGo" nav="da-luu">
+  <main class="page">
+    <header>
+      <h1 class="display page-title">Đã lưu</h1>
+      <div class="muted" style="font-size:13.5px;margin-top:4px" id="saved-summary">Chỉ lưu trên điện thoại này</div>
+    </header>
+
+    <button class="btn btn--accent" type="button" id="pick-saved" style="width:100%;margin-top:16px" hidden>
+      <Icon name="dice" /> Bốc 1 chỗ đang mở trong đây
+    </button>
+
+    <ul class="cards" id="cards" style="margin-top:18px">
+      {data.places.map((place) => (
+        <PlaceCard place={place} dishes={dishes} kinds={kinds} hidden>
+          <button class="icon-btn card__action" type="button" data-save={place.id} aria-pressed="true" aria-label="Bỏ lưu">
+            <Icon name="heart" />
+          </button>
+        </PlaceCard>
+      ))}
+    </ul>
+
+    <div class="empty" id="empty" hidden>
+      <div class="empty__title">Chưa lưu chỗ nào.</div>
+      <p class="muted" style="margin:0">Bấm hình trái tim ở trang quán để lưu lại đây.</p>
+      <a class="btn" href="/kham-pha/">Đi khám phá</a>
+    </div>
+  </main>
+  <script type="application/json" id="wgo-data" set:html={jsonForScript(client)} />
+  <script>
+    import '../scripts/saved.ts';
+  </script>
+</Base>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: inherit; text-decoration: none; } a:hover { opacity: 0.75; }
+    svg { display: block; }
+  </style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: {{t.bg}}; color: {{t.text}}; font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px 0 20px;">
+    <div style="width: 44px; height: 44px; border-radius: 22px; border: 2px solid {{t.line}}; display: flex; align-items: center; justify-content: center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <div style="width: 44px; height: 44px; border-radius: 22px; border: 2px solid {{t.line}}; display: flex; align-items: center; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"></path><path d="M8 8l4-4 4 4"></path><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"></path></svg>
+      </div>
+      <div style="width: 44px; height: 44px; border-radius: 22px; border: 2px solid {{t.line}}; background: {{accent}}; color: #1A1612; display: flex; align-items: center; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"></path></svg>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 14px 20px 0 20px; height: 180px; position: relative; border: 2px solid {{t.line}}; border-radius: 24px; background: repeating-linear-gradient(135deg, {{t.ph}} 0 12px, {{t.ph2}} 12px 24px);">
+    <div style="position: absolute; right: 14px; bottom: 14px; transform: rotate(3deg); height: 30px; padding: 0 12px; border-radius: 8px; border: 2px solid {{t.line}}; background: {{t.surface}}; display: flex; align-items: center; font-size: 12.5px; font-weight: 600;">Chưa kiểm chứng</div>
+  </div>
+
+  <div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 4px;">
+    <div style="font-family: 'Bricolage Grotesque', 'Arial Rounded MT Bold', system-ui, sans-serif; font-size: 38px; font-weight: 800; line-height: 1.02; letter-spacing: -0.03em;">Bún bò Bà Nga</div>
+    <div style="font-size: 14px; color: {{t.muted}};">Quán ăn · Bún bò · Thành Nội</div>
+  </div>
+
+  <div style="margin: 14px 20px 0 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+    <div style="border: 2px solid {{t.line}}; border-radius: 16px; background: {{t.surface}}; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px;">
+      <div style="font-size: 12px; color: {{t.muted}};">Giờ bán</div>
+      <div style="font-family: 'Bricolage Grotesque', 'Arial Rounded MT Bold', system-ui, sans-serif; font-size: 20px; font-weight: 700;">18–23h</div>
+      <div style="font-size: 12px; font-weight: 600; color: {{t.ok}};">Đang mở</div>
+    </div>
+    <div style="border: 2px solid {{t.line}}; border-radius: 16px; background: {{t.surface}}; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px;">
+      <div style="font-size: 12px; color: {{t.muted}};">Giá</div>
+      <div style="font-family: 'Bricolage Grotesque', 'Arial Rounded MT Bold', system-ui, sans-serif; font-size: 20px; font-weight: 700;">30–45k</div>
+      <div style="font-size: 12px; color: {{t.muted}};">mỗi người</div>
+    </div>
+    <div style="border: 2px solid {{t.line}}; border-radius: 16px; background: {{accent}}; color: #1A1612; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px;">
+      <div style="font-size: 12px;">WGo chấm</div>
+      <div style="font-family: 'Bricolage Grotesque', 'Arial Rounded MT Bold', system-ui, sans-serif; font-size: 20px; font-weight: 700;">4.5★</div>
+      <div style="font-size: 12px;">ngon, cay</div>
+    </div>
+  </div>
+
+  <div style="margin: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: {{t.muted}};">NÊN GỌI</div>
+      <div style="font-size: 17px; font-weight: 600;">Bún bò cay</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: {{t.muted}};">MẸO</div>
+      <div style="font-size: 15px; line-height: 1.45;">Bún bò bán buổi tối. Hợp ăn khuya.</div>
+    </div>
+    <div style="display: flex; gap: 8px; font-size: 13px; font-weight: 600;">
+      <div style="height: 30px; padding: 0 12px; border-radius: 15px; border: 2px solid {{t.line}}; display: flex; align-items: center;">Local</div>
+      <div style="height: 30px; padding: 0 12px; border-radius: 15px; border: 2px solid {{t.line}}; display: flex; align-items: center;">Ăn khuya</div>
+    </div>
+    <div style="min-height: 44px; display: flex; align-items: center; gap: 10px; border-top: 2px solid {{t.soft}}; padding-top: 10px; font-size: 14.5px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+      <div style="flex-grow: 1;">62 Nguyễn Chí Diễu, Huế</div>
+      <div style="font-size: 13px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">Sao chép</div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 24px; height: 60px; border-radius: 30px; background: {{t.line}}; color: {{t.bg}}; box-shadow: 4px 4px 0 {{accent}}; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 17px; font-weight: 600;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l16-7-7 16-2-7z"></path></svg>
+    Chỉ đường bằng Google Maps
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"dark":{"editor":"boolean","default":false},"accent":{"editor":"color","default":"#F2B01E","options":["#F2B01E","#FF8A5B","#8FD14F","#B79CFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.dark ?? false;
+    const accent = this.props.accent ?? '#F2B01E';
+    const t = dark
+      ? { bg: '#15120E', surface: '#211D17', text: '#F6EFE2', muted: '#A89E8E', line: '#E9E1D2', soft: '#2E2920', ok: '#6FD39B', ph: '#2A251D', ph2: '#252019' }
+      : { bg: '#F6F0E4', surface: '#FFFDF8', text: '#1A1612', muted: '#6F665A', line: '#1A1612', soft: '#E3D9C6', ok: '#1E7F4F', ph: '#EBE2D1', ph2: '#E4DAC6' };
+    return { t, accent };
+  }
+}
+</script>
+</body>
+</html>

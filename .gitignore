@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+.env.*
+*.log
+
+# Bản vẽ đã đóng gói (tạo lại từ design/phac-thao)
+design/*.html
