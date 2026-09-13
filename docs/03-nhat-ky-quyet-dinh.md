@@ -4,6 +4,13 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-13 · Tự động cập nhật đã chạy thật
+
+- Chủ dự án đã lưu mã Cloudflare vào GitHub Secrets (`CLOUDFLARE_API_TOKEN`).
+- Đã chạy thử workflow `Cập nhật web` bằng tay (lần chạy 34759573656). Tất cả các bước đều đạt, kể cả **Đưa lên Cloudflare Pages**. Kiểm tra dữ liệu: 22 địa điểm hợp lệ, 0 lỗi, 0 cảnh báo.
+- Đã xem web thật: trang chủ mở bình thường, trang Khám phá có đủ 22 địa điểm. Riêng trang Tài Phú đã hiện đúng địa chỉ Điện Biên Phủ kèm nhãn "Đã đối chiếu online".
+- **Từ nay:** sửa Sheet xong thì web tự cập nhật lúc 06:00 và 17:00. Muốn cập nhật ngay thì vào GitHub → Actions → Cập nhật web → Run workflow.
+
 ### 2026-09-13 · Dữ liệu đã sửa vào Sheet, cài tự động cập nhật
 
 - **Sửa Sheet:** chủ dự án bật quyền chỉnh sửa qua link. Claude dùng Chrome chạy ẩn dán dữ liệu đã kiểm chứng vào tab `dia-diem`, rồi tải về so từng ô: **khớp 644/644 ô**. Tab `huong-dan` cũng được cập nhật theo quy trình mới. Web đã đưa lên với dữ liệu mới.
