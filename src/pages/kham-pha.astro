@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import { loadSiteData } from '../lib/load.ts';
-import { CITY } from '../config.ts';
+import { CITY, COMMUNITY } from '../config.ts';
+import { formLink } from '../lib/reviews.ts';
 import { BUOI } from '../lib/hours.ts';
 import { jsonForScript, PRICE_BUCKETS, toClientPlace } from '../lib/view.ts';
 
@@ -13,6 +14,7 @@ const kinds = data.kinds.map(({ id, ten }) => ({ id, ten }));
 const client = { places: data.places.map(toClientPlace), dishes, kinds };
 const usedDishes = dishes.filter((d) => data.places.some((p) => p.mon.includes(d.id)));
 const usedKinds = kinds.filter((k) => data.places.some((p) => p.loai === k.id));
+const suggestLink = formLink(COMMUNITY.gopYForm);
 const sorted = [...data.places].sort((a, b) => (b.wgoCham ?? 0) - (a.wgoCham ?? 0));
 ---
 <Base title={`Khám phá ${CITY.name} · WGo`} description={`Tìm quán ăn, quán nước, cafe, chỗ check-in ở ${CITY.name} theo món, giờ mở cửa và giá.`} nav="kham-pha">
@@ -62,6 +64,13 @@ const sorted = [...data.places].sort((a, b) => (b.wgoCham ?? 0) - (a.wgoCham ?? 
       <p class="muted" id="empty-hint" style="margin:0">Thử bỏ bớt bộ lọc.</p>
       <button class="btn" type="button" id="empty-reset">Bỏ hết bộ lọc</button>
     </div>
+
+    {suggestLink && (
+      <a class="suggest" href={suggestLink} target="_blank" rel="noopener">
+        <Icon name="plus" size={20} stroke={2.4} />
+        <span><strong>Biết quán ngon chưa có ở đây?</strong><br /><span class="muted">Gợi ý cho WGo, mình sẽ ghé kiểm tra.</span></span>
+      </a>
+    )}
   </main>
 
   <dialog class="sheet" id="filters" aria-labelledby="filters-title">

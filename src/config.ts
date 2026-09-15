@@ -11,7 +11,18 @@ export const DATA_SOURCE = {
     mon: '1842662037',
     loai: '793024044',
     tags: '1285618604',
+    // Community reviews approved by the owner. Empty until the Apps Script setup has run.
+    'danh-gia': '',
   },
+};
+
+// Community (docs/09). Links come from the Apps Script setup (apps-script/gop-y.gs).
+// __MA__ and __TEN__ are replaced with the place id and name. Empty link = button hidden.
+export const COMMUNITY = {
+  danhGiaForm: '',
+  gopYForm: '',
+  // A community score shows only after this many approved reviews.
+  minReviews: 3,
 };
 
 export const CITY = {

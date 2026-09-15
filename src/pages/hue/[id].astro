@@ -5,9 +5,10 @@ import { loadSiteData } from '../../lib/load.ts';
 import type { Place } from '../../lib/data.ts';
 import { daysOffText, hoursShort, hoursText } from '../../lib/hours.ts';
 import { formatDateVi, formatPrice } from '../../lib/text.ts';
-import { directionsUrl, jsonForScript, placeSubtitle, toClientPlace } from '../../lib/view.ts';
+import { directionsUrl, formatDistance, jsonForScript, nearbyPlaces, placeSubtitle, placeUrl, toClientPlace } from '../../lib/view.ts';
 import { photoUrl } from '../../lib/photos.ts';
-import { CITY } from '../../config.ts';
+import { averageText, formLink, summarize } from '../../lib/reviews.ts';
+import { CITY, COMMUNITY } from '../../config.ts';
 
 export async function getStaticPaths() {
   const data = await loadSiteData();
@@ -28,6 +29,11 @@ const dishes = placeSubtitle(place, data.dishes, data.kinds, 4);
 const sub = [kind, place.mon.length ? dishes : '', place.khuVuc].filter(Boolean).join(' · ');
 const offText = daysOffText(place.hours);
 const rating = place.wgoCham === null ? null : String(place.wgoCham).replace('.', ',');
+const community = summarize(data.reviews, place.id);
+const showScore = community.average !== null && community.count >= COMMUNITY.minReviews;
+const reviewLink = formLink(COMMUNITY.danhGiaForm, place);
+const reportLink = formLink(COMMUNITY.gopYForm, place);
+const nearby = nearbyPlaces(place, data.places);
 const description = [
   place.monNenGoi && `Nên gọi: ${place.monNenGoi}.`,
   place.hours.ranges.length ? `Giờ: ${hoursText(place.hours)}.` : '',
@@ -107,6 +113,41 @@ const description = [
       </div>
     )}
 
+    {(community.count > 0 || reviewLink) && (
+      <section class="community" aria-labelledby="community-title">
+        <div class="community__head">
+          <h2 class="label-caps" id="community-title" style="margin:0">Cộng đồng</h2>
+          {showScore ? (
+            <span class="community__score"><Icon name="star" size={16} stroke={2.2} /> {averageText(community.average!)} · {community.count} lượt</span>
+          ) : community.count > 0 ? (
+            <span class="muted community__note">Cần {COMMUNITY.minReviews - community.count} đánh giá nữa để hiện điểm</span>
+          ) : (
+            <span class="muted community__note">Chưa có đánh giá</span>
+          )}
+        </div>
+        {community.latest.length > 0 && (
+          <ul class="reviews">
+            {community.latest.map((r) => (
+              <li class="review">
+                <div class="review__meta">
+                  <strong>{r.ten || 'Ẩn danh'}</strong>
+                  <span class="review__stars" aria-label={`${r.sao} sao`}>{'★'.repeat(r.sao)}<span aria-hidden="true">{'★'.repeat(5 - r.sao)}</span></span>
+                  {r.ngay && <span class="muted">{formatDateVi(r.ngay)}</span>}
+                </div>
+                <p>{r.nhanXet}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+        {reviewLink && (
+          <a class="btn community__btn" href={reviewLink} target="_blank" rel="noopener">
+            <Icon name="star" size={18} /> Đánh giá quán này
+          </a>
+        )}
+        <p class="muted community__fine">Đánh giá của người dùng, WGo duyệt trước khi hiện. Tách riêng với điểm WGo chấm.</p>
+      </section>
+    )}
+
     <div class="info-rows">
       <div class="info-row">
         <Icon name="clock" />
@@ -156,6 +197,29 @@ const description = [
       )}
     </div>
 
+    {reportLink && (
+      <a class="report-link" href={reportLink} target="_blank" rel="noopener">
+        <Icon name="flag" size={16} /> Thông tin sai hoặc quán đã đóng? Báo cho WGo
+      </a>
+    )}
+
+    {nearby.length > 0 && (
+      <section class="nearby" aria-labelledby="nearby-title">
+        <h2 class="label-caps" id="nearby-title" style="margin:0">Gần đây có gì?</h2>
+        <ul class="nearby__list">
+          {nearby.map(({ place: p, km }) => (
+            <li>
+              <a class="nearby__item" href={placeUrl(p.id)}>
+                <span class="nearby__name">{p.ten}</span>
+                <span class="muted">{data.kinds.find((k) => k.id === p.loai)?.ten} · {formatDistance(km)}</span>
+                <span data-status={p.id} class="tone-unknown"></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <p class="source">
       {VERIFY_LABEL[place.kiemChung]}
       {place.nguon && ` · Nguồn: ${place.nguon}`}
@@ -170,6 +234,7 @@ const description = [
   </div>
 
   <script type="application/json" id="wgo-place" set:html={jsonForScript(toClientPlace(place))} />
+  <script type="application/json" id="wgo-nearby" set:html={jsonForScript(nearby.map(({ place: p }) => toClientPlace(p)))} />
   <script>
     import '../../scripts/place.ts';
   </script>

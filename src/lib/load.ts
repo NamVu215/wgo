@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { DATA_SOURCE, CITY } from '../config.ts';
 import { parsePlaces, parseRefs, type Issue, type Place, type Refs } from './data.ts';
 import { preparePhoto, writeUsedPhotos } from './photo-cache.ts';
+import { parseReviews, type Review } from './reviews.ts';
 
 type Tab = keyof typeof DATA_SOURCE.gid;
 
@@ -24,9 +25,13 @@ async function readTab(tab: Tab): Promise<string> {
   const folder = process.env.WGO_DU_LIEU;
   if (folder || !DATA_SOURCE.sheetId) {
     // cwd is the project root for `astro build` and npm scripts.
-    return readFile(join(folder ?? join(process.cwd(), 'data', CITY.id), `${tab}.csv`), 'utf8');
+    return readFile(join(folder ?? join(process.cwd(), 'data', CITY.id), `${tab}.csv`), 'utf8').catch((err) => {
+      if (tab === 'danh-gia') return '';
+      throw err;
+    });
   }
   const gid = DATA_SOURCE.gid[tab];
+  if (!gid && tab === 'danh-gia') return '';
   if (!gid) throw new Error(`Chưa điền gid cho tab "${tab}" trong src/config.ts`);
   const url = `https://docs.google.com/spreadsheets/d/${DATA_SOURCE.sheetId}/export?format=csv&gid=${gid}`;
   const res = await fetchWithRetry(url);
@@ -38,20 +43,22 @@ async function readTab(tab: Tab): Promise<string> {
   return res.text();
 }
 
-export type SiteData = Refs & { places: Place[]; issues: Issue[] };
+export type SiteData = Refs & { places: Place[]; reviews: Review[]; issues: Issue[] };
 
 let cached: Promise<SiteData> | undefined;
 
 export function loadSiteData(): Promise<SiteData> {
   cached ??= (async () => {
-    const [placesCsv, monCsv, loaiCsv, tagsCsv] = await Promise.all(
-      (['dia-diem', 'mon', 'loai', 'tags'] as const).map(readTab),
+    const [placesCsv, monCsv, loaiCsv, tagsCsv, reviewsCsv] = await Promise.all(
+      (['dia-diem', 'mon', 'loai', 'tags', 'danh-gia'] as const).map(readTab),
     );
     const refs = parseRefs(monCsv, loaiCsv, tagsCsv);
     const parsed = parsePlaces(placesCsv, refs);
     const issues = [...parsed.issues];
     const places = await withPhotos(parsed.places.filter((p) => p.thanhPho === CITY.id), issues);
-    return { ...refs, places, issues };
+    const { reviews, issues: reviewIssues } = parseReviews(reviewsCsv, new Set(places.map((p) => p.id)));
+    issues.push(...reviewIssues);
+    return { ...refs, places, reviews, issues };
   })();
   return cached;
 }

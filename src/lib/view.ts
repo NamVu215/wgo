@@ -120,3 +120,16 @@ export function formatDistance(km: number): string {
   if (km < 10) return `${km.toFixed(1).replace('.', ',')} km`;
   return `${Math.round(km)} km`;
 }
+
+// "Gần đây có gì?": other places within `radiusKm`, places of a different kind first
+// (after a meal: cafe, chè, check-in), then nearest.
+export function nearbyPlaces<T extends LatLng & { id: string; loai: string }>(
+  place: T, all: T[], radiusKm = 1, max = 4,
+): { place: T; km: number }[] {
+  return all
+    .filter((p) => p.id !== place.id)
+    .map((p) => ({ place: p, km: distanceKm(place, p) }))
+    .filter((x) => x.km <= radiusKm)
+    .sort((a, b) => Number(a.place.loai === place.loai) - Number(b.place.loai === place.loai) || a.km - b.km)
+    .slice(0, max);
+}

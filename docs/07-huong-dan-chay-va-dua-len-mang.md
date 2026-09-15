@@ -13,6 +13,8 @@ _Cập nhật: 2026-09-15 · Giai đoạn 2_
 | Font chữ | Tải về khi build, lưu cùng web | Không phụ thuộc Google Fonts, mất mạng vẫn đúng font |
 | Dùng khi mất mạng | **Service worker** (`sw.js`) | Lưu sẵn các trang trên điện thoại sau lần mở đầu tiên |
 | Ảnh quán | Link Google Drive trong Sheet → tự tải, thu nhỏ, đổi sang WebP khi build | Bạn chỉ dán link, web vẫn nhẹ |
+| Góp ý, đánh giá | Google Form + Apps Script (`apps-script/gop-y.gs`) | Bạn duyệt bằng một cú tick, không cần máy chủ |
+| Lượt ghé | Hàm nhỏ trên Cloudflare (`functions/`) + cơ sở dữ liệu **D1** `wgo-luot-xem` | Web tĩnh không tự đếm được. Miễn phí, không lưu thông tin người xem |
 | Lưu "Đã lưu", sáng/tối | Bộ nhớ trình duyệt của từng máy | Không cần tài khoản, không cần máy chủ |
 | Đưa lên mạng | **Cloudflare Pages** (https://wgo-auc.pages.dev) | Miễn phí, nhanh ở Việt Nam, cho phép chạy quảng cáo sau này |
 | Lưu mã nguồn | **GitHub** (https://github.com/NamVu215/wgo) | Lưu lại lịch sử mọi thay đổi |
@@ -24,6 +26,9 @@ WGo/
 ├─ data/hue/            ← dữ liệu mẫu (CSV)
 ├─ docs/                ← tài liệu dự án (bạn đang đọc)
 ├─ design/              ← bản vẽ giao diện
+├─ apps-script/         ← code Google Apps Script tạo Form góp ý, đánh giá (docs/09)
+├─ db/                  ← cấu trúc bảng đếm lượt ghé (D1)
+├─ functions/           ← hàm chạy trên Cloudflare: /api/luot-xem
 ├─ integrations/        ← phần chạy lúc build: tạo sw.js (offline), chép ảnh, chép thư viện bản đồ
 ├─ public/              ← icon, manifest (cài như app), luật bảo mật (_headers)
 │  └─ nen-ban-do/       ← nền bản đồ Huế đã tải sẵn (tạo bằng `npm run tai-ban-do`)
@@ -137,6 +142,8 @@ Không có mã này thì GitHub Actions vẫn chạy kiểm tra nhưng **không 
 | Lộ thông tin cá nhân người dùng | Không thu thập gì. "Đã lưu" và chế độ sáng/tối chỉ nằm trên máy người dùng |
 | Vị trí người dùng (gần tôi) | Chỉ hỏi quyền khi người dùng **tự bấm** "Gần tôi" / nút định vị. Vị trí chỉ dùng để tính khoảng cách **ngay trên điện thoại**, không gửi đi đâu, tự quên sau 10 phút hoặc khi đóng tab |
 | Web gọi sang dịch vụ khác, lộ lượt xem | Bản đồ, font chữ và ảnh đều lưu ngay trong WGo. Luật bảo mật chỉ cho tải từ chính WGo |
+| Bộ đếm lượt ghé | Chỉ lưu một con số mỗi ngày, không IP, không cookie. Chỉ nhận yêu cầu từ chính trang WGo |
+| Góp ý chứa thông tin cá nhân, nội dung xấu | Câu trả lời nằm ở Sheet riêng tư. Chỉ nội dung đã duyệt (không email, số điện thoại) mới sang Sheet công khai. Nội dung luôn hiện dạng chữ, không chạy như code hay công thức |
 | Lộ mật khẩu hay khóa bí mật trong code công khai | Code không chứa mật khẩu hay khóa nào. File `.env` bị loại khỏi Git |
 
 ## 7. Đã có trong giai đoạn 1

@@ -5,8 +5,9 @@ import { bindSaveButton, copyText, paintStatuses, readJson, share } from './comm
 import { locateIfAllowed } from './location.ts';
 
 const place = readJson<ClientPlace>('wgo-place');
+const nearby = readJson<ClientPlace[]>('wgo-nearby') ?? [];
 
-paintStatuses([place]);
+paintStatuses([place, ...nearby]);
 
 // "Rằm tới: Thứ Sáu 25/09" for places closed on lunar days.
 const lunarEl = document.getElementById('lunar-next');
@@ -28,7 +29,7 @@ locateIfAllowed().then((p) => {
   el.textContent = `Cách bạn khoảng ${formatDistance(distanceKm(p, place))}`;
   el.hidden = false;
 });
-setInterval(() => paintStatuses([place]), 60_000);
+setInterval(() => paintStatuses([place, ...nearby]), 60_000);
 
 bindSaveButton(document.getElementById('save') as HTMLButtonElement);
 

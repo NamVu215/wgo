@@ -4,6 +4,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const TABS = ['dia-diem', 'mon', 'loai', 'tags'] as const;
+// Created later by the community setup; connected when present.
+const OPTIONAL_TABS = ['danh-gia'] as const;
 
 const link = process.argv[2] ?? '';
 const id = /\/spreadsheets\/d\/([a-zA-Z0-9_-]{20,})/.exec(link)?.[1];
@@ -32,11 +34,12 @@ if (missing.length) {
 const configPath = join(process.cwd(), 'src', 'config.ts');
 let config = await readFile(configPath, 'utf8');
 config = config.replace(/sheetId: '[^']*'/, `sheetId: '${id}'`);
-for (const tab of TABS) {
+const found = [...TABS, ...OPTIONAL_TABS.filter((t) => gids[t])];
+for (const tab of found) {
   const key = tab.includes('-') ? `'${tab}'` : tab;
   config = config.replace(new RegExp(`${key}: '[^']*'`), `${key}: '${gids[tab]}'`);
 }
 await writeFile(configPath, config);
 console.log(`Đã nối Sheet ${id}`);
-for (const tab of TABS) console.log(`  ${tab.padEnd(9)} gid=${gids[tab]}`);
+for (const tab of found) console.log(`  ${tab.padEnd(9)} gid=${gids[tab]}`);
 console.log('Chạy "npm run kiem-tra" để kiểm tra dữ liệu đọc từ Sheet.');

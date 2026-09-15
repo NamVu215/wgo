@@ -1,5 +1,6 @@
 // Service worker registration, install prompt and offline notice. Loaded on every page.
 import { toast } from './common.ts';
+import './visits.ts';
 
 if ('serviceWorker' in navigator && !import.meta.env.DEV) {
   window.addEventListener('load', () => {

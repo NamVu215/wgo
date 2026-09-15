@@ -12,7 +12,7 @@ const errors = data.issues.filter((i) => i.muc === 'loi');
 const warnings = data.issues.filter((i) => i.muc === 'canh-bao');
 
 console.log(`\nWGo · kiểm tra dữ liệu`);
-console.log(`  ${data.places.length} địa điểm hợp lệ · ${data.dishes.length} món · ${data.kinds.length} loại · ${data.tags.length} tag`);
+console.log(`  ${data.places.length} địa điểm hợp lệ · ${data.dishes.length} món · ${data.kinds.length} loại · ${data.tags.length} tag · ${data.reviews.length} đánh giá cộng đồng`);
 console.log(`  ${errors.length} lỗi (dòng bị bỏ qua) · ${warnings.length} cảnh báo\n`);
 if (data.issues.length > 0) console.log(formatIssues(data.issues) + '\n');
 
@@ -22,7 +22,7 @@ if (process.env.GITHUB_STEP_SUMMARY) {
   const lines = [
     '## WGo · kiểm tra dữ liệu',
     '',
-    `- **${data.places.length}** địa điểm hợp lệ`,
+    `- **${data.places.length}** địa điểm hợp lệ · **${data.reviews.length}** đánh giá cộng đồng đã duyệt`,
     `- **${errors.length}** dòng lỗi (bị ẩn khỏi web) · **${warnings.length}** cảnh báo`,
     '',
   ];

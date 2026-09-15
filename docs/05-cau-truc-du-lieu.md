@@ -10,6 +10,7 @@ Dữ liệu WGo nằm trong **một file Google Sheets** gồm 4 trang tính (ta
 | `mon` | [mon.csv](../data/hue/mon.csv) | Danh sách **món** · 14 món đặc trưng Huế |
 | `loai` | [loai.csv](../data/hue/loai.csv) | **Loại địa điểm** · 6 loại |
 | `tags` | [tags.csv](../data/hue/tags.csv) | **Tag** dùng để lọc · 17 tag |
+| `danh-gia` | _(Apps Script tạo)_ | **Đánh giá cộng đồng đã duyệt**: `ma, quan, sao, nhan_xet, ten, ngay`. Không sửa tay, duyệt ở Sheet chờ duyệt ([09](09-cong-dong.md)) |
 
 > ⚠️ **Cập nhật 2026-09-13:** đã đối chiếu online cả 22 địa điểm, xem [08-kiem-chung-du-lieu.md](08-kiem-chung-du-lieu.md). Nội dung dưới đây là ghi chú ban đầu.
 >

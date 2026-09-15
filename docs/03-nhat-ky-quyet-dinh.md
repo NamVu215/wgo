@@ -4,6 +4,21 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-15 · Giai đoạn 3 – Cộng đồng (bắt đầu) + lượt ghé
+
+- **Chủ dự án chốt:** góp ý **không bắt đăng nhập** (spam nhiều thì bật sau) · người đánh giá **tự chọn hiện tên hoặc ẩn danh** · điểm cộng đồng hiện khi có **từ 3 đánh giá** · tạo Form bằng **Apps Script**.
+- **Đã làm:**
+  - `apps-script/gop-y.gs`: tạo 2 Form (Đánh giá quán, Góp ý), Sheet chờ duyệt **riêng tư**, tab `danh-gia` trong Sheet dữ liệu; tick "Duyệt ✅" thì đưa đánh giá lên, bỏ tick thì gỡ; gợi ý quán mới thành dòng nháp đang ẩn trong `dia-diem`.
+  - Web: khối **Cộng đồng** trên trang quán (điểm, số lượt, 5 nhận xét mới nhất, nút Đánh giá), link **Báo cho WGo**, ô **Gợi ý quán mới** ở Khám phá. Nút chỉ hiện khi đã có link Form.
+  - **"Gần đây có gì?"** trên trang quán: tối đa 4 chỗ trong 1 km, ưu tiên loại khác (ăn xong gợi ý cafe, chè, check-in).
+  - **Lượt ghé WGo** ở cuối trang chủ (yêu cầu thêm của chủ dự án).
+- **Quyết định về lượt ghé:** web tĩnh không tự đếm được, nên thêm **một hàm nhỏ trên Cloudflare Pages + cơ sở dữ liệu D1** (`wgo-luot-xem`, gắn vào dự án Pages với tên `DB`).
+  - Đây là "máy chủ" đầu tiên của WGo, nhưng rất nhỏ: chỉ cộng một con số mỗi ngày.
+  - Miễn phí tới khoảng 100.000 lượt/ngày. Không lưu IP hay thông tin người xem. Chỉ nhận yêu cầu gửi từ chính trang WGo.
+  - Đã cân nhắc rồi bỏ: Cloudflare Web Analytics (số chỉ cập nhật 2 lần/ngày, phải sửa quyền mã Cloudflare, khó cộng dồn từ đầu) và dịch vụ đếm của bên thứ ba (dễ bị chặn, lộ lượt xem).
+- **Nhắc lại góp ý cũ:** nên có khoảng 50 địa điểm chất lượng trước khi mời người ngoài đóng góp. Hiện có 22 địa điểm, chưa có WGo chấm và ảnh.
+- **Chờ chủ dự án:** chạy `caiDat` trong Apps Script và gửi đoạn "DÁN CHO CLAUDE" ([09, mục 3](09-cong-dong.md#3-cài-đặt-một-lần-khoảng-5-phút-nên-làm-trên-máy-tính)).
+
 ### 2026-09-15 · Giai đoạn 2 – Như app
 
 - **Đã làm:** bản đồ, gần tôi, cài lên màn hình (PWA), dùng khi mất mạng, ảnh quán, ngày nghỉ âm lịch. Chi tiết và cách thử: [07, mục 8](07-huong-dan-chay-va-dua-len-mang.md#8-đã-có-trong-giai-đoạn-2).
