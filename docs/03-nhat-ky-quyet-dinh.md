@@ -4,6 +4,15 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-16 · Quán sinh viên Thủ Đức (Hoàng Diệu 2, Làng Đại học)
+
+- **Chủ dự án muốn thêm quán ăn vặt, quán sinh viên hay ăn ở Thủ Đức**, ưu tiên Hoàng Diệu 2 và Làng Đại học.
+- **Dữ liệu:** 8 chỗ (5 quanh Hoàng Diệu 2, 3 ở Làng Đại học; 5 `online`, 3 `chua`), 7 món mới, 1 tag mới `sinh-vien` (Quán sinh viên). Nổi bật: Lẩu cá 44 (gần 30 năm) và Lẩu chay Hữu Duyên.
+- **Ghi vào Sheet:** chủ dự án đồng ý ("Ghi luôn"). Khớp **268/268 ô**, dòng cũ giữ nguyên. Thủ Đức nay có 20 chỗ.
+- **Loại bỏ có lý do:** Ốc Sam (Foody 4,9/10), Út Nguyên Quán (5,8/10), Kim Ngân Quán (nguồn quá cũ). Một bài viết về "quán Hoàng Diệu 2" là nội dung bịa.
+- **Kiểm tra lại dữ liệu cũ:** tọa độ Hủ tiếu Mai vẫn đúng, không sửa.
+- Chi tiết, nguồn: [13-quan-sinh-vien-thu-duc.md](13-quan-sinh-vien-thu-duc.md).
+
 ### 2026-09-16 · Quán nước, trà sữa · khu vực mới Phước Thái (Đồng Nai)
 
 - **Quán nước, trà sữa cho 4 khu vực:** 12 chỗ, 4 món nước mới. Chủ dự án đồng ý ghi Sheet ("Ghi luôn"): khớp **360/360 ô**, 65 dòng cũ giữ nguyên.
