@@ -1,6 +1,6 @@
 # 11 – TP. Hồ Chí Minh và Thủ Đức: 25 địa điểm đề xuất
 
-_Ngày: 2026-09-15 · Người làm: Claude (tra cứu online, **chưa ai đi tận nơi**)_
+_Ngày: 2026-09-15 · Người làm: Claude (tra cứu online, **chưa ai đi tận nơi**) · Đã thêm vào Google Sheet (dòng 41–65 tab `dia-diem`, dòng 23–30 tab `mon`, dòng 20–21 tab `tags`)_
 
 ## 1. Hai khu vực riêng
 

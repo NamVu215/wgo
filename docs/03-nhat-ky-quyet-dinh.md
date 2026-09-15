@@ -13,6 +13,8 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 - **Sửa lỗi bản đồ:** trước đây vùng bản đồ thấp mà các ghim trải rộng theo chiều ngang (như Thủ Đức) thì điện thoại cầm dọc không hiện đủ ghim lúc mở. Nay bản đồ luôn thu nhỏ vừa đủ thấy mọi ghim trước, rồi mới giới hạn vùng kéo. Vùng tải của Thủ Đức cũng được làm cao hơn.
 - **Sửa lỗi hiển thị:** ô Giờ/Giá ở trang quán bị cắt chữ khi dài (ví dụ "100–5…"). Nay chữ dài tự thu nhỏ lại.
 - **Dữ liệu đề xuất:** 25 địa điểm (TP.HCM 17, Thủ Đức 8; 21 `online`, 4 `chua`), 8 món, 2 tag mới (`michelin`, `view-song-sai-gon`).
+- **Ghi vào Sheet:** chủ dự án đồng ý ("ghi vào sheet luôn đi"). Claude chỉ **thêm dòng mới** ở cuối 3 tab, tải về đối chiếu: **khớp 752/752 ô**, 39 dòng cũ giữ nguyên, số điện thoại giữ số 0 ở đầu. Kiểm tra dữ liệu: 64 địa điểm, 0 lỗi, 0 cảnh báo. Đã bấm cập nhật web, kiểm tra trên web thật: đủ 4 khu vực, bản đồ TP.HCM 17 ghim, Thủ Đức 8/8 ghim trong màn hình.
+- **Chờ chủ dự án:** **đổi quyền link Sheet về "Người xem"** (vẫn đang để ai có link cũng sửa được); (không bắt buộc) thêm `ho-chi-minh`, `thu-duc` vào ô chọn cột `thanh_pho`.
 
 ### 2026-09-15 · Mở rộng: Vũng Tàu
 
