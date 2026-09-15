@@ -1,0 +1,48 @@
+---
+// Start page: sends the visitor to their last city, or lets them pick one.
+// Used by /, /kham-pha/ and /ban-do/ (links shared before WGo had several cities keep working).
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import { loadSiteData } from '../lib/load.ts';
+import { citiesWithPlaces, cityHref } from '../lib/cities.ts';
+import { jsonForScript } from '../lib/view.ts';
+
+interface Props {
+  page: '' | 'kham-pha' | 'ban-do';
+}
+
+const { page } = Astro.props;
+const data = await loadSiteData();
+const cities = citiesWithPlaces(data.places).map((c) => ({
+  id: c.id,
+  name: c.name,
+  count: data.places.filter((p) => p.thanhPho === c.id).length,
+}));
+---
+<Base title="WGo – Đi đâu, ăn gì" description="Giờ này ăn gì, uống gì, đi đâu. Quán local, giờ mở cửa, bản đồ, chỉ đường." nav={page === 'ban-do' ? 'ban-do' : page === 'kham-pha' ? 'kham-pha' : 'goi-y'}>
+  <main class="page">
+    <header class="topbar">
+      <span class="wordmark">WGo</span>
+    </header>
+    <noscript><style>#city-choice[hidden] { display: block !important; }</style></noscript>
+    <div id="city-choice" data-page={page} hidden>
+      <h1 class="display home-question">Bạn đang<br /><mark style="white-space:nowrap">ở đâu</mark>?</h1>
+      <p class="muted" style="margin:10px 0 0">Chọn thành phố. Lần sau WGo tự mở thành phố này.</p>
+      <ul class="city-list">
+        {cities.map((c) => (
+          <li>
+            <a class="city-card" href={cityHref(c.id, page)} data-city-link={c.id}>
+              <span class="city-card__name">{c.name}</span>
+              <span class="muted">{c.count} chỗ</span>
+              <Icon name="back" size={20} stroke={2.4} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+  <script type="application/json" id="wgo-cities" set:html={jsonForScript(cities.map((c) => c.id))} />
+  <script>
+    import '../scripts/city-choice.ts';
+  </script>
+</Base>

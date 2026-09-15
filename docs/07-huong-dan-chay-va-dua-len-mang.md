@@ -33,9 +33,9 @@ WGo/
 ├─ public/              ← icon, manifest (cài như app), luật bảo mật (_headers)
 │  └─ nen-ban-do/       ← nền bản đồ Huế đã tải sẵn (tạo bằng `npm run tai-ban-do`)
 ├─ src/
-│  ├─ config.ts         ← link Google Sheet, thành phố và vùng bản đồ
+│  ├─ config.ts         ← link Google Sheet, danh sách thành phố (CITIES), link Form góp ý
 │  ├─ lib/              ← xử lý dữ liệu, giờ mở cửa, âm lịch, khoảng cách, ảnh
-│  ├─ pages/            ← các trang: Gợi ý, Khám phá, Bản đồ, Đã lưu, trang từng quán
+│  ├─ pages/            ← trang chọn thành phố, Đã lưu; [thanhPho]/ = Gợi ý, Khám phá, Bản đồ, từng quán của mỗi thành phố
 │  ├─ scripts/          ← phần chạy trên trình duyệt (đổi quán, lọc, bản đồ, vị trí, cài app)
 │  └─ styles/           ← màu sắc, chữ, giao diện
 ├─ scripts/             ← lệnh kiểm tra dữ liệu, tải nền bản đồ
@@ -62,7 +62,7 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 | `npm run build` | Tạo bản web hoàn chỉnh vào thư mục `dist/` |
 | `npm run deploy` | **Build + đưa lên mạng** (https://wgo-auc.pages.dev) |
 | `npm run noi-sheet -- "<link>"` | Nối Google Sheet: tự tìm các tab và ghi vào `src/config.ts` |
-| `npm run tai-ban-do` | Tải lại nền bản đồ cho vùng `bounds` trong `src/config.ts` (khoảng 1–2 phút). Chỉ cần khi đổi vùng, thêm thành phố, hoặc muốn cập nhật đường xá mới |
+| `npm run tai-ban-do [-- vung-tau]` | Tải lại nền bản đồ cho mọi thành phố (hoặc chỉ thành phố ghi sau) theo `bounds` trong `src/config.ts`, mỗi thành phố khoảng 1–2 phút. Chỉ cần khi thêm thành phố, đổi vùng, hoặc cập nhật đường xá mới |
 
 ## 3. Web đang chạy ở đâu
 

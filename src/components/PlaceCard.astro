@@ -9,12 +9,13 @@ interface Props {
   dishes: Label[];
   kinds: Label[];
   hidden?: boolean;
+  cityName?: string;
 }
 
-const { place, dishes, kinds, hidden = false } = Astro.props;
+const { place, dishes, kinds, hidden = false, cityName } = Astro.props;
 const price = formatPrice(place.giaTu, place.giaDen);
 const rating = ratingText(place.wgoCham);
-const extra = [price, place.khuVuc].filter(Boolean).join(' · ');
+const extra = [price, cityName ?? place.khuVuc].filter(Boolean).join(' · ');
 ---
 <li class="card" data-id={place.id} hidden={hidden}>
   <div class="photo card__photo">
@@ -22,7 +23,7 @@ const extra = [price, place.khuVuc].filter(Boolean).join(' · ');
   </div>
   <div class="card__body">
     <div class="card__head">
-      <a class="card__name" href={placeUrl(place.id)}>{place.ten}</a>
+      <a class="card__name" href={placeUrl(place)}>{place.ten}</a>
       {rating && <span class="card__rate">{rating}</span>}
     </div>
     <div class="card__line muted">{placeSubtitle(place, dishes, kinds)}</div>

@@ -44,6 +44,8 @@ export type Issue = { dong: number; id: string; muc: 'loi' | 'canh-bao'; noiDung
 export type Refs = { dishes: Dish[]; kinds: Kind[]; tags: Tag[] };
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+// Page names inside a city (/hue/kham-pha/) can't be place ids.
+const RESERVED_IDS = new Set(['kham-pha', 'ban-do', 'da-luu']);
 // Rough bounding box of Vietnam, catches swapped or mistyped coordinates.
 const VN_BOUNDS = { latMin: 8, latMax: 23.5, lngMin: 102, lngMax: 110 };
 
@@ -87,6 +89,7 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
 
     if (!id) errors.push('thiếu id');
     else if (!SLUG_RE.test(id)) errors.push(`id "${id}" chỉ được dùng chữ thường không dấu, số và dấu -`);
+    else if (RESERVED_IDS.has(id)) errors.push(`id "${id}" trùng tên một trang của WGo, hãy đặt id khác`);
     else if (seen.has(id)) errors.push(`id "${id}" bị trùng`);
     seen.add(id);
 

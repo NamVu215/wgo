@@ -4,6 +4,22 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-15 · Mở rộng: Vũng Tàu
+
+- **Chủ dự án chọn Vũng Tàu** là thành phố thứ hai (trước Đà Nẵng như lộ trình cũ) và nhờ đề xuất luôn quán local.
+- **Web chạy nhiều thành phố:**
+  - Link theo thành phố: `/hue/…`, `/vung-tau/…` (trang chủ, Khám phá, Bản đồ, từng quán). Link quán Huế cũ giữ nguyên.
+  - Mở `wgo-auc.pages.dev` lần đầu: trang **"Bạn đang ở đâu?"** để chọn thành phố. Lần sau tự mở thành phố đã chọn. Nút tên thành phố ở đầu trang để đổi.
+  - Link cũ `/kham-pha/`, `/ban-do/` vẫn chạy (mở thành phố đã chọn, giữ bộ lọc).
+  - **Đã lưu** gộp mọi thành phố, thẻ quán ghi tên thành phố. "Bốc 1 chỗ" ưu tiên thành phố đang xem.
+  - Thành phố chỉ hiện trên web khi Sheet có ít nhất 1 địa điểm của thành phố đó. Dòng ghi `thanh_pho` chưa có trong WGo bị báo lỗi; tọa độ nằm ngoài thành phố bị cảnh báo.
+  - Nền bản đồ Vũng Tàu (bán đảo tới Long Hải) tải sẵn, 4,3 MB.
+- **Dữ liệu:** 17 địa điểm Vũng Tàu (14 `online`, 3 `chua`), 7 món, 1 tag. Chi tiết và nguồn: [10-vung-tau.md](10-vung-tau.md).
+- **Ghi vào Sheet:** chủ dự án mở quyền sửa và cho phép Claude tự thêm. Claude chỉ **thêm dòng mới** vào cuối tab `dia-diem`, `mon`, `tags` (không sửa dòng cũ), rồi tải về đối chiếu: **khớp 520/520 ô**, 22 dòng Huế giữ nguyên.
+- **Chờ chủ dự án:** (1) **đổi quyền link Sheet về "Người xem"**; (2) (không bắt buộc) thêm `vung-tau` vào ô chọn cột `thanh_pho`; (3) khi đi Vũng Tàu, xác nhận các mục ghi trong cột "Cần xác nhận" của file 10.
+- **Lưu ý Apps Script góp ý:** dòng nháp "Gợi ý quán mới" vẫn mặc định `thanh_pho = hue`. Khi điền nốt dòng nháp, sửa lại thành phố cho đúng.
+- **Nhắc lại góp ý cũ:** lộ trình khuyên có khoảng 50 địa điểm chất lượng ở một thành phố trước khi mở rộng. Hiện Huế 22, Vũng Tàu 17, chưa chỗ nào có WGo chấm hay ảnh.
+
 ### 2026-09-15 · Giai đoạn 3 – Cộng đồng (bắt đầu) + lượt ghé
 
 - **Chủ dự án chốt:** góp ý **không bắt đăng nhập** (spam nhiều thì bật sau) · người đánh giá **tự chọn hiện tên hoặc ẩn danh** · điểm cộng đồng hiện khi có **từ 3 đánh giá** · tạo Form bằng **Apps Script**.

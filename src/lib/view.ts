@@ -1,10 +1,10 @@
 // Shared by pages (build time) and browser scripts. No Node-only imports here.
 import type { Hours } from './hours.ts';
 import type { Place } from './data.ts';
-import { CITY } from '../config.ts';
 
 export type ClientPlace = {
   id: string;
+  thanhPho: string;
   ten: string;
   loai: string;
   mon: string[];
@@ -26,7 +26,7 @@ export type ClientData = { places: ClientPlace[]; dishes: Label[]; kinds: Label[
 
 export function toClientPlace(p: Place): ClientPlace {
   return {
-    id: p.id, ten: p.ten, loai: p.loai, mon: p.mon, monNenGoi: p.monNenGoi, khuVuc: p.khuVuc,
+    id: p.id, thanhPho: p.thanhPho, ten: p.ten, loai: p.loai, mon: p.mon, monNenGoi: p.monNenGoi, khuVuc: p.khuVuc,
     hours: p.hours, giaTu: p.giaTu, giaDen: p.giaDen, wgoCham: p.wgoCham, noiBat: p.noiBat,
     tags: p.tags, lat: p.lat, lng: p.lng, anh: p.anh[0] ?? null,
   };
@@ -37,7 +37,7 @@ export function jsonForScript(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c');
 }
 
-export const placeUrl = (id: string) => `/${CITY.id}/${id}/`;
+export const placeUrl = (p: { id: string; thanhPho: string }) => `/${p.thanhPho}/${p.id}/`;
 export const directionsUrl = (p: { lat: number; lng: number }) =>
   `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
 
@@ -48,6 +48,8 @@ const DISH_ICONS: Record<string, string> = {
   'banh-khoai': 'pancake', 'banh-xeo': 'pancake',
   'nem-lui': 'skewer', 'bun-thit-nuong': 'skewer',
   che: 'glass', 'ca-phe': 'coffee',
+  'banh-khot': 'pancake', 'mi-thay': 'bowl', 'hu-tieu-muc': 'bowl', 'banh-canh-ghe': 'bowl',
+  'lau-ca-duoi': 'fish', 'hai-san': 'fish', 'bong-lan-trung-muoi': 'cakes',
 };
 export const dishIcon = (id: string) => DISH_ICONS[id] ?? 'bowl';
 

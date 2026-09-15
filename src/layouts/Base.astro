@@ -2,22 +2,26 @@
 import '../styles/global.css';
 import { Font } from 'astro:assets';
 import Icon from '../components/Icon.astro';
-import { SITE_URL } from '../config.ts';
+import { SITE_URL, type City } from '../config.ts';
 
 interface Props {
   title: string;
   description?: string;
   nav?: 'goi-y' | 'kham-pha' | 'ban-do' | 'da-luu';
   image?: string | false;
+  // The city this page belongs to. Nav links stay inside it, and it becomes the visitor's current city.
+  city?: City;
 }
 
-const { title, description = 'WGo – đi đâu, ăn gì ở Huế. Quán local, giờ mở cửa, chỉ đường.', nav, image } = Astro.props;
+const { title, description = 'WGo – đi đâu, ăn gì. Quán local, giờ mở cửa, bản đồ, chỉ đường.', nav, image, city } = Astro.props;
+// Without a city (Đã lưu, 404), links go to /, /kham-pha/, /ban-do/, which open the visitor's last city.
+const base = city ? `/${city.id}/` : '/';
 const ogImage = new URL(image || '/icon-512.png', SITE_URL).toString();
 const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
 const tabs = [
-  { id: 'goi-y', href: '/', label: 'Gợi ý', icon: 'sparkle' },
-  { id: 'kham-pha', href: '/kham-pha/', label: 'Khám phá', icon: 'search' },
-  { id: 'ban-do', href: '/ban-do/', label: 'Bản đồ', icon: 'map' },
+  { id: 'goi-y', href: base, label: 'Gợi ý', icon: 'sparkle' },
+  { id: 'kham-pha', href: `${base}kham-pha/`, label: 'Khám phá', icon: 'search' },
+  { id: 'ban-do', href: `${base}ban-do/`, label: 'Bản đồ', icon: 'map' },
   { id: 'da-luu', href: '/da-luu/', label: 'Đã lưu', icon: 'heart' },
 ] as const;
 ---
@@ -48,7 +52,7 @@ const tabs = [
     <Font cssVariable="--font-be-vietnam" preload={[{ subset: 'vietnamese', weight: 400, style: 'normal' }]} />
     <script is:inline src="/theme-init.js"></script>
   </head>
-  <body>
+  <body data-city={city?.id}>
     <slot />
     {nav && (
       <nav class="nav" aria-label="Điều hướng chính">

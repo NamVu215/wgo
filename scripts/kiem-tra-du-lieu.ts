@@ -3,6 +3,7 @@
 // but the run fails if almost nothing is left, which protects the site from an emptied or vandalised Sheet.
 import { appendFileSync } from 'node:fs';
 import { loadSiteData, formatIssues } from '../src/lib/load.ts';
+import { CITIES } from '../src/config.ts';
 
 const ci = process.argv.includes('--ci');
 const MIN_PLACES = 5;
@@ -13,6 +14,8 @@ const warnings = data.issues.filter((i) => i.muc === 'canh-bao');
 
 console.log(`\nWGo · kiểm tra dữ liệu`);
 console.log(`  ${data.places.length} địa điểm hợp lệ · ${data.dishes.length} món · ${data.kinds.length} loại · ${data.tags.length} tag · ${data.reviews.length} đánh giá cộng đồng`);
+const perCity = CITIES.map((c) => `${c.name} ${data.places.filter((p) => p.thanhPho === c.id).length}`).join(' · ');
+console.log(`  Theo thành phố: ${perCity}`);
 console.log(`  ${errors.length} lỗi (dòng bị bỏ qua) · ${warnings.length} cảnh báo\n`);
 if (data.issues.length > 0) console.log(formatIssues(data.issues) + '\n');
 
@@ -22,7 +25,7 @@ if (process.env.GITHUB_STEP_SUMMARY) {
   const lines = [
     '## WGo · kiểm tra dữ liệu',
     '',
-    `- **${data.places.length}** địa điểm hợp lệ · **${data.reviews.length}** đánh giá cộng đồng đã duyệt`,
+    `- **${data.places.length}** địa điểm hợp lệ (${perCity}) · **${data.reviews.length}** đánh giá cộng đồng đã duyệt`,
     `- **${errors.length}** dòng lỗi (bị ẩn khỏi web) · **${warnings.length}** cảnh báo`,
     '',
   ];

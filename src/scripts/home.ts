@@ -60,7 +60,7 @@ function renderPick() {
 
   const status = getStatus(place.hours, now);
   const label = statusLabel(status, now);
-  const url = placeUrl(place.id);
+  const url = placeUrl(place);
 
   $<HTMLAnchorElement>('pick-name').textContent = place.ten;
   $<HTMLAnchorElement>('pick-name').href = url;
@@ -100,7 +100,7 @@ function renderEmpty() {
   const hint = $<HTMLAnchorElement>('pick-empty-hint');
   if (later) {
     hint.hidden = false;
-    hint.href = placeUrl(later.place.id);
+    hint.href = placeUrl(later.place);
     hint.textContent = `Sớm nhất: ${later.place.ten} (${statusLabel(later.status, now).text.replace('Đã đóng · ', '')})`;
   } else {
     hint.hidden = true;

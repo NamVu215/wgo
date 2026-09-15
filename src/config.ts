@@ -25,13 +25,18 @@ export const COMMUNITY = {
   minReviews: 3,
 };
 
-export const CITY = {
-  id: 'hue',
-  name: 'Huế',
-  // Map area [west, south, east, north]: the city plus the royal tombs to the south.
-  // After changing it, run `npm run tai-ban-do` to download the basemap again.
-  bounds: [107.48, 16.35, 107.7, 16.56] as [number, number, number, number],
-};
+export type City = { id: string; name: string; bounds: [number, number, number, number] };
+
+// Cities WGo covers. `id` is the value of the thanh_pho column and the start of every link
+// (/hue/…, /vung-tau/…). A city appears on the site once the Sheet has at least one place for it.
+// bounds = map area [west, south, east, north]. After adding a city or changing bounds,
+// run `npm run tai-ban-do -- <id>` to download its basemap.
+export const CITIES: City[] = [
+  // The city plus the royal tombs to the south.
+  { id: 'hue', name: 'Huế', bounds: [107.48, 16.35, 107.7, 16.56] },
+  // The peninsula (Bãi Trước, Bãi Sau, Núi Nhỏ, Núi Lớn) and the coast to Long Hải.
+  { id: 'vung-tau', name: 'Vũng Tàu', bounds: [107.04, 10.31, 107.28, 10.47] },
+];
 
 // Public address of the site, used for share previews. Change after the
 // Cloudflare Pages project is created if the name differs.

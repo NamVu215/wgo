@@ -33,12 +33,21 @@ list.querySelectorAll<HTMLButtonElement>('[data-save]').forEach((btn) => bindSav
 
 document.getElementById('pick-saved')?.addEventListener('click', () => {
   const now = vnNow();
-  const open = data.places.filter((p) => getSaved().includes(p.id) && getStatus(p.hours, now).kind === 'open');
+  const openSaved = data.places.filter((p) => getSaved().includes(p.id) && getStatus(p.hours, now).kind === 'open');
+  // Prefer the city the visitor is in right now.
+  let current = '';
+  try {
+    current = localStorage.getItem('wgo:thanh-pho') ?? '';
+  } catch {
+    // Pick from every city.
+  }
+  const here = openSaved.filter((p) => p.thanhPho === current);
+  const open = here.length ? here : openSaved;
   if (open.length === 0) {
     toast('Chưa có chỗ nào đang mở');
     return;
   }
-  location.href = placeUrl(open[Math.floor(Math.random() * open.length)].id);
+  location.href = placeUrl(open[Math.floor(Math.random() * open.length)]);
 });
 
 render();

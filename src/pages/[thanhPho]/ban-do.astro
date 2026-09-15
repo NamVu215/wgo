@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { loadSiteData } from '../../lib/load.ts';
+import { citiesWithPlaces, cityHref, type City } from '../../lib/cities.ts';
+import { jsonForScript, kindIcon, toClientPlace } from '../../lib/view.ts';
+
+export async function getStaticPaths() {
+  const data = await loadSiteData();
+  return citiesWithPlaces(data.places).map((city) => ({ params: { thanhPho: city.id }, props: { city } }));
+}
+
+const { city } = Astro.props as { city: City };
+const all = await loadSiteData();
+const data = { ...all, places: all.places.filter((p) => p.thanhPho === city.id) };
+
+const dishes = data.dishes.map(({ id, ten }) => ({ id, ten }));
+const kinds = data.kinds.map(({ id, ten }) => ({ id, ten }));
+const client = { places: data.places.map(toClientPlace), dishes, kinds };
+const usedKinds = kinds.filter((k) => data.places.some((p) => p.loai === k.id));
+const icons = [...new Set(usedKinds.map((k) => kindIcon(k.id)))];
+---
+<Base title={`Bản đồ ${city.name} · WGo`} description={`Bản đồ quán ăn, quán nước, cafe và chỗ check-in ở ${city.name}, xem chỗ nào đang mở và gần bạn.`} nav="ban-do" city={city}>
+  <main class="map-page">
+    <div class="map" id="map" role="region" aria-label={`Bản đồ các địa điểm ở ${city.name}`}>
+      <p class="map-loading" id="map-loading">Đang tải bản đồ…</p>
+    </div>
+
+    <div class="map-top">
+      <div class="chip-row" role="group" aria-label="Lọc trên bản đồ">
+        <button class="chip" type="button" id="map-open" aria-pressed="false">
+          <Icon name="check" size={16} stroke={2.4} /> Đang mở
+        </button>
+        {usedKinds.map((k) => (
+          <button class="chip" type="button" data-kind={k.id} aria-pressed="false">{k.ten}</button>
+        ))}
+      </div>
+    </div>
+
+    <button class="icon-btn icon-btn--filled map-locate" type="button" id="map-locate" aria-label="Vị trí của tôi">
+      <Icon name="locate" />
+    </button>
+
+    <article class="map-card" id="map-card" aria-live="polite" hidden>
+      <div class="map-card__head">
+        <a class="card__name" id="mc-name" href="/"></a>
+        <span class="card__rate" id="mc-rate"></span>
+      </div>
+      <div class="card__line muted" id="mc-sub"></div>
+      <div class="card__line"><span id="mc-status"></span><span class="card__dist" id="mc-dist"></span><span class="card__extra" id="mc-extra"></span></div>
+      <div class="map-card__actions">
+        <a class="btn btn--ink btn--grow" id="mc-go" href="/" target="_blank" rel="noopener"><Icon name="navigate" size={18} /> Chỉ đường</a>
+        <a class="btn" id="mc-view" href="/">Xem quán</a>
+        <button class="icon-btn" type="button" id="mc-save" data-save="" aria-pressed="false" aria-label="Lưu"><Icon name="heart" /></button>
+      </div>
+    </article>
+
+    <noscript><p class="page">Bản đồ cần bật JavaScript. Xem danh sách ở <a href={cityHref(city.id, 'kham-pha')}>Khám phá</a>.</p></noscript>
+  </main>
+
+  {icons.map((name) => (
+    <template data-icon={name}><Icon name={name as any} size={16} stroke={2.2} /></template>
+  ))}
+  <script type="application/json" id="wgo-data" set:html={jsonForScript(client)} />
+  <script type="application/json" id="wgo-city" set:html={jsonForScript({ id: city.id, bounds: city.bounds })} />
+  <script type="application/json" id="wgo-kind-icons" set:html={jsonForScript(Object.fromEntries(usedKinds.map((k) => [k.id, kindIcon(k.id)])))} />
+  <script>
+    import '../../scripts/map.ts';
+  </script>
+</Base>

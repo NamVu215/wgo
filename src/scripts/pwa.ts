@@ -10,6 +10,16 @@ if ('serviceWorker' in navigator && !import.meta.env.DEV) {
   });
 }
 
+// Remember the city the visitor is looking at (see src/scripts/city-choice.ts).
+const city = document.body.dataset.city;
+if (city) {
+  try {
+    localStorage.setItem('wgo:thanh-pho', city);
+  } catch {
+    // The start page will ask again.
+  }
+}
+
 window.addEventListener('offline', () => toast('Mất mạng · WGo vẫn dùng được'));
 window.addEventListener('online', () => toast('Có mạng lại rồi'));
 

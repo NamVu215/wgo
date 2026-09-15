@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { loadSiteData } from '../../lib/load.ts';
+import { citiesWithPlaces, cityHref, type City } from '../../lib/cities.ts';
+import { dishIcon, jsonForScript, MOODS, toClientPlace } from '../../lib/view.ts';
+
+export async function getStaticPaths() {
+  const data = await loadSiteData();
+  return citiesWithPlaces(data.places).map((city) => ({ params: { thanhPho: city.id }, props: { city } }));
+}
+
+const { city } = Astro.props as { city: City };
+const all = await loadSiteData();
+const data = { ...all, places: all.places.filter((p) => p.thanhPho === city.id) };
+const manyCities = citiesWithPlaces(all.places).length > 1;
+const client = {
+  places: data.places.map(toClientPlace),
+  dishes: data.dishes.map(({ id, ten }) => ({ id, ten })),
+  kinds: data.kinds.map(({ id, ten }) => ({ id, ten })),
+};
+const dishesWithPlaces = data.dishes.filter((d) => data.places.some((p) => p.mon.includes(d.id)));
+---
+<Base title={`WGo · ${city.name} – Giờ này ăn gì?`} description={`Giờ này ăn gì, uống gì, đi đâu ở ${city.name}. Quán local đang mở, giờ mở cửa, chỉ đường.`} nav="goi-y" city={city}>
+  <main class="page">
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="wordmark">WGo</span>
+        {manyCities ? (
+          <a class="pill" href="/?chon=1" aria-label={`Đang xem ${city.name}. Đổi thành phố`}>{city.name} <Icon name="chevron" size={14} stroke={2.4} /></a>
+        ) : (
+          <span class="pill">{city.name}</span>
+        )}
+      </div>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Đổi giao diện sáng/tối">
+        <span data-icon="moon"><Icon name="moon" /></span>
+        <span data-icon="sun" hidden><Icon name="sun" /></span>
+      </button>
+    </header>
+
+    <div class="home-date" id="home-date"></div>
+    <h1 class="display home-question">
+      <span id="home-when">Hôm nay</span><br /><mark id="home-word">ăn gì</mark> đây?
+    </h1>
+
+    <div class="chip-row home-moods" role="group" aria-label="Bạn đang muốn">
+      {MOODS.map((m, i) => (
+        <button class="chip" type="button" data-mood={m.id} aria-pressed={i === 0 ? 'true' : 'false'}>{m.label}</button>
+      ))}
+    </div>
+
+    <article class="pick" aria-live="polite">
+      <div class="pick__media" id="pick-media">
+        <a class="photo pick__photo" id="pick-photo" href={cityHref(city.id, 'kham-pha')} tabindex="-1" aria-hidden="true">
+          <img id="pick-img" alt="" hidden />
+        </a>
+        <span class="sticker sticker--accent" id="pick-sticker">WGo gợi ý</span>
+        <button class="icon-btn icon-btn--filled pick__save" id="pick-save" type="button" data-save="" aria-pressed="false" aria-label="Lưu">
+          <Icon name="heart" />
+        </button>
+      </div>
+      <div class="pick__body" id="pick-body">
+        <div class="pick__head">
+          <a class="pick__name" id="pick-name" href={cityHref(city.id, 'kham-pha')}>Đang tìm quán hợp giờ…</a>
+          <span class="pick__rate" id="pick-rate"></span>
+        </div>
+        <div class="pick__meta" id="pick-meta"></div>
+        <div class="pick__status" id="pick-status"></div>
+        <div class="pick__actions">
+          <a class="btn btn--ink btn--grow" id="pick-go" href={cityHref(city.id, 'kham-pha')} target="_blank" rel="noopener">
+            <Icon name="navigate" size={18} /> Đi luôn
+          </a>
+          <button class="btn" id="pick-next" type="button"><Icon name="shuffle" size={18} /> Đổi quán</button>
+        </div>
+      </div>
+      <div class="pick__empty" id="pick-empty" hidden>
+        <div class="pick__empty-title">Giờ này chưa có chỗ nào đang mở.</div>
+        <a class="link-btn" id="pick-empty-hint" href={cityHref(city.id, 'kham-pha')} hidden></a>
+        <a class="btn" href={cityHref(city.id, 'kham-pha')}>Xem tất cả ở Khám phá</a>
+      </div>
+    </article>
+
+    <button class="link-btn near-btn" type="button" id="near-me">
+      <Icon name="locate" size={16} /> <span id="near-text">Ưu tiên chỗ gần tôi</span>
+    </button>
+
+    <div class="section-head">
+      <h2 class="label-caps" style="margin:0">Thèm món gì?</h2>
+      <a href={cityHref(city.id, 'kham-pha')}>Tất cả</a>
+    </div>
+    <div class="dish-row">
+      {dishesWithPlaces.map((d) => (
+        <a class="dish" href={`${cityHref(city.id, 'kham-pha')}?mon=${d.id}`}>
+          <span class="dish__icon"><Icon name={dishIcon(d.id) as any} size={28} stroke={1.8} /></span>
+          <span class="dish__label">{d.ten}</span>
+        </a>
+      ))}
+    </div>
+
+    <aside class="install-card" id="install-card" hidden>
+      <img src="/icon-192.png" alt="" width="52" height="52" />
+      <div class="install-card__text">
+        <strong>Cài WGo lên màn hình</strong>
+        <span class="muted">Mở nhanh như app, mất mạng vẫn xem được.</span>
+      </div>
+      <div class="install-card__actions">
+        <button class="btn btn--ink" type="button" id="install-btn"><Icon name="download" size={18} /> Cài</button>
+        <button class="link-btn" type="button" id="install-later">Để sau</button>
+      </div>
+    </aside>
+
+    <p class="visits" id="luot-ghe" hidden></p>
+  </main>
+
+  <dialog class="sheet" id="install-guide" aria-labelledby="install-title">
+    <div class="sheet__inner">
+      <div class="sheet__handle"></div>
+      <h2 class="display" id="install-title" style="margin:0;font-size:28px">Cài WGo trên iPhone</h2>
+      <ol class="install-steps">
+        <li>Mở WGo bằng <strong>Safari</strong>.</li>
+        <li>Bấm nút <strong>Chia sẻ</strong> <Icon name="share" size={18} /> ở thanh dưới.</li>
+        <li>Chọn <strong>Thêm vào MH chính</strong> (Add to Home Screen).</li>
+        <li>Bấm <strong>Thêm</strong>. Biểu tượng WGo sẽ nằm trên màn hình.</li>
+      </ol>
+      <div class="sheet__footer">
+        <button class="btn btn--ink" type="button" data-close>Đã hiểu</button>
+      </div>
+    </div>
+  </dialog>
+  <script type="application/json" id="wgo-data" set:html={jsonForScript(client)} />
+  <script>
+    import '../../scripts/home.ts';
+  </script>
+</Base>

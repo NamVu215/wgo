@@ -60,7 +60,7 @@ Mở Sheet **WGo – Góp ý chờ duyệt (riêng tư)** trong Google Drive (l�
 
 **Tab "Góp ý chờ duyệt":**
 
-- **Gợi ý quán mới:** tick **Duyệt ✅** → script thêm một **dòng nháp đang ẩn** (`trang_thai = an`) vào cuối tab `dia-diem`, nội dung góp ý nằm trong ghi chú của ô tên. Bạn điền nốt tọa độ, giờ, loại… rồi đổi `trang_thai` thành `hien`.
+- **Gợi ý quán mới:** tick **Duyệt ✅** → script thêm một **dòng nháp đang ẩn** (cột `thanh_pho` mặc định `hue`, nhớ sửa nếu là quán Vũng Tàu) (`trang_thai = an`) vào cuối tab `dia-diem`, nội dung góp ý nằm trong ghi chú của ô tên. Bạn điền nốt tọa độ, giờ, loại… rồi đổi `trang_thai` thành `hien`.
 - **Thông tin sai / quán đóng cửa / góp ý khác:** tự sửa trong tab `dia-diem`, rồi tick **Duyệt ✅** để đánh dấu đã xử lý.
 
 > ⚠️ Không đổi tên câu hỏi trong Form, không đổi tên các tab và tiêu đề cột, vì script tìm cột theo tên.

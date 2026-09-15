@@ -33,7 +33,7 @@ function renderCard() {
   document.body.classList.toggle('map-has-card', Boolean(p));
   if (!p) return;
   const now = vnNow();
-  const url = placeUrl(p.id);
+  const url = placeUrl(p);
   $<HTMLAnchorElement>('mc-name').textContent = p.ten;
   $<HTMLAnchorElement>('mc-name').href = url;
   $<HTMLAnchorElement>('mc-view').href = url;

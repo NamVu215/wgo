@@ -28,7 +28,7 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 | `trang_thai` ✱ | Có hiện trên web không | `hien` / `an` (đóng cửa, tạm ẩn) | `hien` |
 | `noi_bat` | Hiện ở mục **"WGo gợi ý"** trên trang chủ | `co` hoặc để trống | `co` |
 | `ten` ✱ | Tên địa điểm | | `Bún bò Mệ Kéo` |
-| `thanh_pho` ✱ | Thành phố | `hue`, sau này `da-nang`, `nha-trang`… | `hue` |
+| `thanh_pho` ✱ | Thành phố | `hue` hoặc `vung-tau` (sau này `da-nang`, `nha-trang`…). Thành phố mới cần Claude thêm vào web trước | `vung-tau` |
 | `khu_vuc` | Khu vực quen gọi | chữ tự do | `Vỹ Dạ` |
 | `loai` ✱ | Loại địa điểm | một `id` trong tab `loai` | `quan-an` |
 | `mon` | Các món quán bán (để lọc) | `id` trong tab `mon`, nhiều món cách nhau bằng `\|` | `com-hen\|bun-hen` |
@@ -109,3 +109,10 @@ Web tự tải ảnh từ Google Drive, thu nhỏ và nén lại khi cập nhậ
 **Nên sửa ghi chú trong Sheet (một lần):** ô tiêu đề `anh` trong tab `dia-diem` đang ghi "Tên file ảnh (sẽ hướng dẫn sau)". Bấm chuột phải vào ô → **Chỉnh sửa ghi chú**, thay bằng:
 
 > Link Google Drive của ảnh (đã bật "Bất kỳ ai có đường liên kết"). Tối đa 4 ảnh, cách nhau bằng |. Ảnh đầu là ảnh chính.
+
+## 6. Thêm thành phố mới
+
+1. Nhắn Claude tên thành phố. Claude thêm vào danh sách `CITIES` trong `src/config.ts` (mã, tên, vùng bản đồ) và tải nền bản đồ (`npm run tai-ban-do -- <mã>`).
+2. Thêm địa điểm vào **cùng tab `dia-diem`**, cột `thanh_pho` ghi mã thành phố (ví dụ `vung-tau`). Món mới thêm vào tab `mon` như bình thường.
+3. Thành phố tự hiện trên web ở lần cập nhật sau, khi đã có ít nhất 1 địa điểm hợp lệ.
+4. `id` quán phải khác nhau **trên toàn bộ Sheet** (kể cả khác thành phố), và không được đặt là `kham-pha`, `ban-do`, `da-luu`.

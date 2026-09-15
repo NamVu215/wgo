@@ -1,7 +1,8 @@
 // Build-time data loading (Node only). Reads Google Sheets when configured, else local CSV.
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { DATA_SOURCE, CITY } from '../config.ts';
+import { DATA_SOURCE } from '../config.ts';
+import { checkCities } from './cities.ts';
 import { parsePlaces, parseRefs, type Issue, type Place, type Refs } from './data.ts';
 import { preparePhoto, writeUsedPhotos } from './photo-cache.ts';
 import { parseReviews, type Review } from './reviews.ts';
@@ -25,7 +26,7 @@ async function readTab(tab: Tab): Promise<string> {
   const folder = process.env.WGO_DU_LIEU;
   if (folder || !DATA_SOURCE.sheetId) {
     // cwd is the project root for `astro build` and npm scripts.
-    return readFile(join(folder ?? join(process.cwd(), 'data', CITY.id), `${tab}.csv`), 'utf8').catch((err) => {
+    return readFile(join(folder ?? join(process.cwd(), 'data', 'hue'), `${tab}.csv`), 'utf8').catch((err) => {
       if (tab === 'danh-gia') return '';
       throw err;
     });
@@ -55,7 +56,7 @@ export function loadSiteData(): Promise<SiteData> {
     const refs = parseRefs(monCsv, loaiCsv, tagsCsv);
     const parsed = parsePlaces(placesCsv, refs);
     const issues = [...parsed.issues];
-    const places = await withPhotos(parsed.places.filter((p) => p.thanhPho === CITY.id), issues);
+    const places = await withPhotos(checkCities(parsed.places, issues), issues);
     const { reviews, issues: reviewIssues } = parseReviews(reviewsCsv, new Set(places.map((p) => p.id)));
     issues.push(...reviewIssues);
     return { ...refs, places, reviews, issues };
