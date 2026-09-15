@@ -1,6 +1,6 @@
 # 05 – Cấu trúc dữ liệu & hướng dẫn Google Sheets
 
-_Cập nhật: 2026-09-13_
+_Cập nhật: 2026-09-15_
 
 Dữ liệu WGo nằm trong **một file Google Sheets** gồm 4 trang tính (tab). Bản mẫu đã được soạn sẵn trong thư mục [data/hue/](../data/hue/):
 
@@ -43,7 +43,7 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 | `meo` | Mẹo | nhiều mẹo cách nhau bằng dấu `.` | `Nên tới trước 7h` |
 | `tags` | Tag để lọc | `id` trong tab `tags`, cách nhau bằng `\|` | `local\|hen-ho` |
 | `dien_thoai`, `facebook`, `tiktok` | Liên hệ | | |
-| `anh` | Tên file ảnh | nhiều ảnh cách nhau bằng `\|` | `me-keo-1.jpg` |
+| `anh` | Ảnh quán (xem **mục 5**) | **link Google Drive** của ảnh, tối đa 4 ảnh, cách nhau bằng `\|`. Ảnh đầu tiên là ảnh chính | `https://drive.google.com/file/d/…/view?usp=sharing` |
 | `kiem_chung` | Mức kiểm chứng | `roi` (bạn đã đi thử) / `online` (đã đối chiếu nhiều nguồn) / `chua` | `online` |
 | `nguon` | Thông tin lấy từ đâu | | `vnexpress.net` |
 | `cap_nhat` | Ngày cập nhật gần nhất | `YYYY-MM-DD` | `2026-09-13` |
@@ -63,7 +63,7 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 
 - Luôn ghi giờ dạng **24h, 2 chữ số**: `06:00`, không ghi `6h` hay `6:00 sáng`.
 - Quán hay "bán tới khi hết" thì ghi giờ thường thấy, kèm mẹo trong cột `meo`.
-- Nghỉ theo âm lịch sẽ được xử lý ở **giai đoạn 2**. Trước đó web chỉ hiện dòng chữ nhắc.
+- **Nghỉ theo âm lịch** (`ram`, `mung-1`): web tự tính lịch âm, đúng ngày sẽ báo quán nghỉ. Tháng nhuận cũng tính.
 
 ## 3. Cách lấy tọa độ trên Google Maps
 
@@ -84,3 +84,27 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 - Một **file Google Sheets riêng**, **riêng tư**, tên **WGo – Chờ duyệt**, nhận câu trả lời từ Google Form.
 - Bạn kiểm tra, **copy các dòng hợp lệ** sang tab `dia-diem` của file chính (sau này có thể tự động bằng một ô tick).
 - **Không bao giờ** công khai file "Chờ duyệt" vì có thể chứa thông tin cá nhân của người gửi.
+
+## 5. Ảnh quán
+
+Web tự tải ảnh từ Google Drive, thu nhỏ và nén lại khi cập nhật (06:00, 17:00 hoặc khi bấm Run workflow). Bạn **không cần** tự thu nhỏ ảnh.
+
+**Cách thêm ảnh (làm được trên điện thoại):**
+
+1. Mở **Google Drive**, tạo một thư mục tên `WGo ảnh` (chỉ cần làm một lần).
+2. Tải ảnh quán lên thư mục đó.
+3. Chạm **⋮** cạnh ảnh → **Chia sẻ** → **Quyền truy cập chung** → chọn **Bất kỳ ai có đường liên kết** (Người xem).
+   Mẹo: chia sẻ **cả thư mục** như vậy một lần, mọi ảnh bỏ vào sau đều dùng được.
+4. Chạm **⋮** cạnh ảnh → **Sao chép đường liên kết**.
+5. Dán vào cột `anh` của quán. Nhiều ảnh thì cách nhau bằng dấu `|`.
+
+**Lưu ý:**
+
+- Chỉ dùng **ảnh bạn tự chụp** hoặc được chủ ảnh cho phép. Không lấy ảnh trên Foody, Facebook, Google Maps của người khác.
+- Link **Google Photos** không dùng được, hãy đưa ảnh lên Drive.
+- Ảnh lỗi (link sai, chưa chia sẻ) **không làm hỏng web**: quán vẫn hiện, chỉ thiếu ảnh, và có cảnh báo trong phần **Summary** của lần chạy trên GitHub, ví dụ: `dòng 16 (che-hem): ảnh: Google Drive không cho tải (HTTP 404). Kiểm tra link và bật "Bất kỳ ai có đường liên kết"`.
+- Nên chụp **dọc hoặc ngang đều được**; web cắt vừa khung. Ảnh món ăn hoặc mặt tiền quán là dễ nhận ra nhất.
+
+**Nên sửa ghi chú trong Sheet (một lần):** ô tiêu đề `anh` trong tab `dia-diem` đang ghi "Tên file ảnh (sẽ hướng dẫn sau)". Bấm chuột phải vào ô → **Chỉnh sửa ghi chú**, thay bằng:
+
+> Link Google Drive của ảnh (đã bật "Bất kỳ ai có đường liên kết"). Tối đa 4 ảnh, cách nhau bằng |. Ảnh đầu là ảnh chính.

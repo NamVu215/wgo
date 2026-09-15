@@ -1,7 +1,8 @@
 import { BUOI, getStatus, openDuring, vnNow, type Buoi } from '../lib/hours.ts';
-import { inPriceBucket, PRICE_BUCKETS, type ClientPlace } from '../lib/view.ts';
+import { distanceKm, inPriceBucket, PRICE_BUCKETS, type ClientPlace } from '../lib/view.ts';
 import { normalize } from '../lib/text.ts';
-import { paintStatuses, ratingValue, readData } from './common.ts';
+import { paintDistances, paintStatuses, ratingValue, readData, toast } from './common.ts';
+import { lastPosition, locate, locateIfAllowed, type Position } from './location.ts';
 
 const data = readData();
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -38,6 +39,7 @@ function writeUrl(f: Filters) {
 }
 
 let filters = readUrl();
+let position: Position | null = lastPosition();
 // Filter edits inside the sheet are drafts until "Xem kết quả".
 let draft: Filters = structuredClone(filters);
 
@@ -62,6 +64,10 @@ function sortPlaces(list: ClientPlace[], how: string): ClientPlace[] {
   const byName = (a: ClientPlace, b: ClientPlace) => a.ten.localeCompare(b.ten, 'vi');
   const copy = [...list];
   if (how === 'ten') return copy.sort(byName);
+  if (how === 'gan' && position) {
+    const from = position;
+    return copy.sort((a, b) => distanceKm(from, a) - distanceKm(from, b));
+  }
   if (how === 'gia') {
     const price = (p: ClientPlace) => p.giaTu ?? p.giaDen ?? Number.POSITIVE_INFINITY;
     return copy.sort((a, b) => price(a) - price(b) || byName(a, b));
@@ -83,6 +89,7 @@ function render() {
     if (li) list.appendChild(li);
   });
   paintStatuses(data.places, now);
+  paintDistances(data.places, position);
 
   $('result-count').textContent = `${shown.length} chỗ${filters.mo ? ' đang mở' : ''}`;
   $('empty').hidden = shown.length > 0;
@@ -211,8 +218,22 @@ $('search-form').addEventListener('submit', (e) => {
   $<HTMLInputElement>('q').blur();
 });
 
-$<HTMLSelectElement>('sort').addEventListener('change', (e) => {
-  filters = { ...filters, sap: (e.target as HTMLSelectElement).value };
+$<HTMLSelectElement>('sort').addEventListener('change', async (e) => {
+  const select = e.target as HTMLSelectElement;
+  if (select.value === 'gan' && !position) {
+    select.disabled = true;
+    toast('Đang lấy vị trí…');
+    try {
+      position = await locate();
+    } catch (err) {
+      toast((err as Error).message);
+      select.value = filters.sap;
+      return;
+    } finally {
+      select.disabled = false;
+    }
+  }
+  filters = { ...filters, sap: select.value };
   render();
 });
 
@@ -223,3 +244,10 @@ $('empty-reset').addEventListener('click', () => {
 
 render();
 setInterval(() => paintStatuses(data.places), 60_000);
+
+// Show distances without asking when the visitor already allowed location.
+locateIfAllowed().then((p) => {
+  if (p) position = p;
+  if (!position && filters.sap === 'gan') filters = { ...filters, sap: 'cham' };
+  render();
+});

@@ -1,5 +1,6 @@
 import { csvToRecords } from './csv.ts';
 import { parseHours, type Hours } from './hours.ts';
+import { MAX_PHOTOS, photoSource } from './photos.ts';
 import { parseDecimal, parseMoney, splitList } from './text.ts';
 
 export type Dish = { id: string; ten: string; nhom: string; icon: string };
@@ -8,6 +9,7 @@ export type Tag = { id: string; ten: string };
 
 export type Place = {
   id: string;
+  dong: number; // row in the sheet, for error messages
   noiBat: boolean;
   ten: string;
   thanhPho: string;
@@ -29,6 +31,7 @@ export type Place = {
   dienThoai: string;
   facebook: string;
   tiktok: string;
+  // Download links while parsing; photo ids once load.ts has processed them.
   anh: string[];
   // roi = WGo đã đi thử · online = đã đối chiếu nhiều nguồn trên mạng · chua = chưa kiểm chứng
   kiemChung: 'roi' | 'online' | 'chua';
@@ -132,6 +135,14 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       else links[key] = url;
     }
 
+    const anh: string[] = [];
+    for (const raw of splitList(r.anh ?? '')) {
+      const source = photoSource(raw);
+      if ('error' in source) warn(source.error);
+      else anh.push(source.download);
+    }
+    if (anh.length > MAX_PHOTOS) warn(`chỉ dùng ${MAX_PHOTOS} ảnh đầu tiên`);
+
     const kiemChungRaw = (r.kiem_chung ?? '').trim().toLowerCase();
     const kiemChung = kiemChungRaw === 'roi' || kiemChungRaw === 'online' ? kiemChungRaw : 'chua';
     if (kiemChungRaw && kiemChungRaw !== kiemChung) warn(`kiem_chung "${r.kiem_chung}" phải là roi, online hoặc chua`);
@@ -146,6 +157,7 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
 
     places.push({
       id,
+      dong,
       noiBat: (r.noi_bat ?? '').toLowerCase() === 'co',
       ten: r.ten,
       thanhPho: r.thanh_pho,
@@ -167,7 +179,7 @@ export function parsePlaces(csv: string, refs: Refs): { places: Place[]; issues:
       dienThoai: (r.dien_thoai ?? '').replace(/[^\d+]/g, ''),
       facebook: links.facebook,
       tiktok: links.tiktok,
-      anh: splitList(r.anh ?? '').filter((f) => /^[\w.-]+\.(jpe?g|png|webp|avif)$/i.test(f)),
+      anh: anh.slice(0, MAX_PHOTOS),
       kiemChung,
       nguon: r.nguon ?? '',
       capNhat: capNhat ?? '',

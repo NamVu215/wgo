@@ -1,6 +1,6 @@
 # 07 – Hướng dẫn chạy web & đưa lên mạng
 
-_Cập nhật: 2026-09-13 · Giai đoạn 1_
+_Cập nhật: 2026-09-15 · Giai đoạn 2_
 
 ## 1. Web được làm bằng gì (giải thích ngắn)
 
@@ -8,7 +8,11 @@ _Cập nhật: 2026-09-13 · Giai đoạn 1_
 |---|---|---|
 | Khung web | **Astro** | Tạo ra các trang HTML tĩnh: nhanh, miễn phí, mỗi quán có một link riêng mà Google tìm được |
 | Ngôn ngữ | TypeScript + CSS | TypeScript giúp bắt lỗi sớm |
-| Dữ liệu | Google Sheets (hiện tạm dùng file CSV mẫu trong `data/hue/`) | Bạn sửa dữ liệu như Excel, không đụng code |
+| Dữ liệu | Google Sheets | Bạn sửa dữ liệu như Excel, không đụng code |
+| Bản đồ | **MapLibre** + nền bản đồ Huế **lưu ngay trong web** (dữ liệu OpenStreetMap, đóng gói bởi Protomaps) | Miễn phí, không cần mã API, chạy được ở mọi nhà mạng Việt Nam, xem được khi mất mạng |
+| Font chữ | Tải về khi build, lưu cùng web | Không phụ thuộc Google Fonts, mất mạng vẫn đúng font |
+| Dùng khi mất mạng | **Service worker** (`sw.js`) | Lưu sẵn các trang trên điện thoại sau lần mở đầu tiên |
+| Ảnh quán | Link Google Drive trong Sheet → tự tải, thu nhỏ, đổi sang WebP khi build | Bạn chỉ dán link, web vẫn nhẹ |
 | Lưu "Đã lưu", sáng/tối | Bộ nhớ trình duyệt của từng máy | Không cần tài khoản, không cần máy chủ |
 | Đưa lên mạng | **Cloudflare Pages** (https://wgo-auc.pages.dev) | Miễn phí, nhanh ở Việt Nam, cho phép chạy quảng cáo sau này |
 | Lưu mã nguồn | **GitHub** (https://github.com/NamVu215/wgo) | Lưu lại lịch sử mọi thay đổi |
@@ -20,14 +24,16 @@ WGo/
 ├─ data/hue/            ← dữ liệu mẫu (CSV)
 ├─ docs/                ← tài liệu dự án (bạn đang đọc)
 ├─ design/              ← bản vẽ giao diện
-├─ public/              ← favicon, luật bảo mật (_headers), ảnh quán (anh/hue/…)
+├─ integrations/        ← phần chạy lúc build: tạo sw.js (offline), chép ảnh, chép thư viện bản đồ
+├─ public/              ← icon, manifest (cài như app), luật bảo mật (_headers)
+│  └─ nen-ban-do/       ← nền bản đồ Huế đã tải sẵn (tạo bằng `npm run tai-ban-do`)
 ├─ src/
-│  ├─ config.ts         ← chỗ điền link Google Sheet
-│  ├─ lib/              ← xử lý dữ liệu, giờ mở cửa, kiểm tra lỗi
-│  ├─ pages/            ← các trang: Gợi ý, Khám phá, Đã lưu, trang từng quán
-│  ├─ scripts/          ← phần chạy trên trình duyệt (đổi quán, lọc, lưu, chia sẻ)
+│  ├─ config.ts         ← link Google Sheet, thành phố và vùng bản đồ
+│  ├─ lib/              ← xử lý dữ liệu, giờ mở cửa, âm lịch, khoảng cách, ảnh
+│  ├─ pages/            ← các trang: Gợi ý, Khám phá, Bản đồ, Đã lưu, trang từng quán
+│  ├─ scripts/          ← phần chạy trên trình duyệt (đổi quán, lọc, bản đồ, vị trí, cài app)
 │  └─ styles/           ← màu sắc, chữ, giao diện
-├─ scripts/             ← lệnh kiểm tra dữ liệu
+├─ scripts/             ← lệnh kiểm tra dữ liệu, tải nền bản đồ
 └─ tests/               ← kiểm thử tự động
 ```
 
@@ -51,6 +57,7 @@ Mở trình duyệt vào **http://localhost:4321**. Bấm `Ctrl + C` trong Termi
 | `npm run build` | Tạo bản web hoàn chỉnh vào thư mục `dist/` |
 | `npm run deploy` | **Build + đưa lên mạng** (https://wgo-auc.pages.dev) |
 | `npm run noi-sheet -- "<link>"` | Nối Google Sheet: tự tìm các tab và ghi vào `src/config.ts` |
+| `npm run tai-ban-do` | Tải lại nền bản đồ cho vùng `bounds` trong `src/config.ts` (khoảng 1–2 phút). Chỉ cần khi đổi vùng, thêm thành phố, hoặc muốn cập nhật đường xá mới |
 
 ## 3. Web đang chạy ở đâu
 
@@ -127,7 +134,9 @@ Không có mã này thì GitHub Actions vẫn chạy kiểm tra nhưng **không 
 | Bị hack máy chủ, lộ cơ sở dữ liệu | Không có máy chủ riêng và không có cơ sở dữ liệu. Web chỉ là các file tĩnh trên Cloudflare |
 | Dữ liệu trong Sheet chứa mã độc (ví dụ link `javascript:`) | Mọi chữ đều được hiển thị dạng chữ thường, không chạy như code. Link Facebook/TikTok/Maps chỉ nhận `http(s)://` |
 | Web bị nhúng vào trang lừa đảo, bị chèn script lạ | File `public/_headers` bật chính sách bảo mật: chỉ chạy script của chính WGo, cấm nhúng vào trang khác |
-| Lộ thông tin cá nhân người dùng | Không thu thập gì. "Đã lưu" và chế độ sáng/tối chỉ nằm trên máy người dùng. Web không xin quyền vị trí ở giai đoạn 1 |
+| Lộ thông tin cá nhân người dùng | Không thu thập gì. "Đã lưu" và chế độ sáng/tối chỉ nằm trên máy người dùng |
+| Vị trí người dùng (gần tôi) | Chỉ hỏi quyền khi người dùng **tự bấm** "Gần tôi" / nút định vị. Vị trí chỉ dùng để tính khoảng cách **ngay trên điện thoại**, không gửi đi đâu, tự quên sau 10 phút hoặc khi đóng tab |
+| Web gọi sang dịch vụ khác, lộ lượt xem | Bản đồ, font chữ và ảnh đều lưu ngay trong WGo. Luật bảo mật chỉ cho tải từ chính WGo |
 | Lộ mật khẩu hay khóa bí mật trong code công khai | Code không chứa mật khẩu hay khóa nào. File `.env` bị loại khỏi Git |
 
 ## 7. Đã có trong giai đoạn 1
@@ -137,6 +146,29 @@ Không có mã này thì GitHub Actions vẫn chạy kiểm tra nhưng **không 
 - **Trang quán:** link riêng, giờ mở cửa và trạng thái đang mở/đã đóng theo **giờ Việt Nam** (kể cả quán bán qua nửa đêm, có ngày nghỉ), giá, WGo chấm, nên gọi, mẹo, tag, sao chép địa chỉ, gọi điện, **Chia sẻ** (Zalo/Messenger qua khung chia sẻ của điện thoại), **Lưu**, **Chỉ đường bằng Google Maps**.
 - **Đã lưu:** danh sách trên máy, quán đang đóng hiện mờ, nút **Bốc 1 chỗ đang mở trong đây**.
 - **Chế độ tối:** tự theo điện thoại, có nút đổi tay ở trang chủ.
-- **Kiểm tra dữ liệu** và **20 kiểm thử tự động**.
+- **Kiểm tra dữ liệu** và kiểm thử tự động.
 
-**Chưa có (theo lộ trình):** bản đồ, gần tôi (GPS), dùng khi mất mạng, cài lên màn hình như app, tính ngày âm lịch, ảnh quán thật, góp ý qua Google Form.
+## 8. Đã có trong giai đoạn 2
+
+- **Bản đồ** (tab thứ 3 ở thanh dưới): ghim vàng là chỗ **đang mở**, ghim trắng là đã đóng/chưa rõ giờ. Chạm ghim → thẻ quán có **Chỉ đường**, **Xem quán**, **Lưu**. Lọc nhanh **Đang mở** và theo loại. Nút định vị hiện chấm xanh chỗ bạn đứng. Trang quán có dòng **Xem trên bản đồ WGo**.
+- **Gần tôi:** Khám phá có cách xếp **Gần tôi nhất**; trang chủ có nút **Ưu tiên chỗ gần tôi** (ưu tiên chỗ trong 2 km, rồi 5 km). Khi đã cho phép vị trí, mọi thẻ quán hiện khoảng cách ("350 m", "1,2 km").
+- **Cài lên màn hình như app (PWA):** trang chủ có thẻ **Cài WGo lên màn hình**. Android/Chrome bấm **Cài**; iPhone hiện hướng dẫn **Chia sẻ → Thêm vào MH chính**.
+- **Dùng khi mất mạng:** sau lần mở đầu tiên có mạng, mọi trang (Gợi ý, Khám phá, Đã lưu, trang từng quán) mở được khi mất mạng. Nền bản đồ và ảnh được lưu **khi bạn đã xem qua** chỗ đó. Mất/có mạng lại, web hiện thông báo nhỏ.
+- **Ngày nghỉ âm lịch:** quán ghi `ram` hoặc `mung-1` ở cột `ngay_nghi` sẽ tự báo **"Nghỉ rằm · mở lại … ngày mai"** đúng ngày, và trang quán ghi ngày rằm/mùng 1 sắp tới. Lịch âm tính theo giờ Việt Nam, đã kiểm tra với Tết 2024–2027, Trung thu và các tháng nhuận.
+- **Ảnh quán:** dán link Google Drive vào cột `anh` (cách làm: [05, mục 5](05-cau-truc-du-lieu.md#5-ảnh-quán)). Trang quán có dải ảnh vuốt ngang, gửi link quán qua Zalo/Messenger sẽ hiện ảnh xem trước.
+- **Nút "hôm nay ăn gì?"** đã có từ giai đoạn 1 (Đổi quán, Bốc 1 chỗ đang mở).
+
+### Vì sao bản đồ lưu ngay trong web
+
+Khi làm, mình phát hiện mạng VNPT **không vào được** `openstreetmap.org` (nền bản đồ phổ biến nhất), còn CARTO và Stadia **bắt buộc đăng ký mã**. Vì vậy mình tải sẵn nền bản đồ vùng Huế (khoảng 5 MB) vào `public/nen-ban-do/`. Ưu điểm: không phụ thuộc bên nào, không giới hạn lượt xem, được dùng cả khi có quảng cáo, xem được khi mất mạng.
+
+Khi thêm thành phố mới: thêm vùng vào `src/config.ts` rồi chạy `npm run tai-ban-do` (mình sẽ làm phần này ở giai đoạn mở rộng).
+
+### Thử trên điện thoại
+
+1. Mở https://wgo-auc.pages.dev bằng **Chrome** (Android) hoặc **Safari** (iPhone).
+2. Vào tab **Bản đồ**, bấm nút định vị, **Cho phép** vị trí.
+3. Cài WGo lên màn hình (thẻ ở cuối trang chủ).
+4. Bật **chế độ máy bay**, mở WGo từ màn hình chính: các trang vẫn xem được.
+
+**Chưa có (theo lộ trình):** góp ý qua Google Form, đánh giá cộng đồng (giai đoạn 3); giờ mở cửa theo mùa; thêm thành phố, tiếng Anh (giai đoạn 4).

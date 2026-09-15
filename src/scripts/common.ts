@@ -1,6 +1,6 @@
 // Browser helpers shared by every page.
 import { getStatus, statusLabel, vnNow, hhmm, type Status, type VnNow } from '../lib/hours.ts';
-import type { ClientData, ClientPlace } from '../lib/view.ts';
+import { distanceKm, formatDistance, type ClientData, type ClientPlace, type LatLng } from '../lib/view.ts';
 
 export function readJson<T>(id: string): T {
   const el = document.getElementById(id);
@@ -147,6 +147,15 @@ export function paintStatuses(places: ClientPlace[], now: VnNow = vnNow()) {
     const { text, tone } = shortStatus(getStatus(place.hours, now), now);
     el.textContent = text;
     setTone(el, tone);
+  });
+}
+
+// Fills every <span data-distance="id"> on the page (empty when position is unknown).
+export function paintDistances(places: ClientPlace[], from: LatLng | null) {
+  const byId = new Map(places.map((p) => [p.id, p]));
+  document.querySelectorAll<HTMLElement>('[data-distance]').forEach((el) => {
+    const place = byId.get(el.dataset.distance ?? '');
+    el.textContent = place && from ? formatDistance(distanceKm(from, place)) : '';
   });
 }
 

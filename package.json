@@ -11,15 +11,21 @@
     "test": "node --test \"tests/*.test.ts\"",
     "kiem-tra": "node scripts/kiem-tra-du-lieu.ts",
     "deploy": "npm run kiem-tra -- --ci && npm run build && wrangler pages deploy dist --project-name wgo --branch main",
-    "noi-sheet": "node scripts/noi-google-sheet.ts"
+    "noi-sheet": "node scripts/noi-google-sheet.ts",
+    "tai-ban-do": "node scripts/tai-ban-do.ts"
   },
   "engines": {
     "node": ">=22.12.0"
   },
   "dependencies": {
-    "astro": "^7.3.2"
+    "@protomaps/basemaps": "^5.7.2",
+    "astro": "^7.3.2",
+    "maplibre-gl": "^6.9.1",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
+    "@types/node": "^24.13.4",
+    "pmtiles": "^4.5.0",
     "wrangler": "^4.131.1"
   }
 }

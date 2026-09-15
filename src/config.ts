@@ -14,7 +14,13 @@ export const DATA_SOURCE = {
   },
 };
 
-export const CITY = { id: 'hue', name: 'Huế' };
+export const CITY = {
+  id: 'hue',
+  name: 'Huế',
+  // Map area [west, south, east, north]: the city plus the royal tombs to the south.
+  // After changing it, run `npm run tai-ban-do` to download the basemap again.
+  bounds: [107.48, 16.35, 107.7, 16.56] as [number, number, number, number],
+};
 
 // Public address of the site, used for share previews. Change after the
 // Cloudflare Pages project is created if the name differs.

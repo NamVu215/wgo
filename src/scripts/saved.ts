@@ -1,6 +1,7 @@
 import { getStatus, vnNow } from '../lib/hours.ts';
 import { placeUrl } from '../lib/view.ts';
-import { bindSaveButton, getSaved, paintStatuses, readData, toast } from './common.ts';
+import { bindSaveButton, getSaved, paintDistances, paintStatuses, readData, toast } from './common.ts';
+import { locateIfAllowed } from './location.ts';
 
 const data = readData();
 const list = document.getElementById('cards') as HTMLElement;
@@ -42,3 +43,4 @@ document.getElementById('pick-saved')?.addEventListener('click', () => {
 
 render();
 setInterval(render, 60_000);
+locateIfAllowed().then((p) => paintDistances(data.places, p));

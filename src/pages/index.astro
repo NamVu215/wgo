@@ -68,6 +68,10 @@ const dishesWithPlaces = data.dishes.filter((d) => data.places.some((p) => p.mon
       </div>
     </article>
 
+    <button class="link-btn near-btn" type="button" id="near-me">
+      <Icon name="locate" size={16} /> <span id="near-text">Ưu tiên chỗ gần tôi</span>
+    </button>
+
     <div class="section-head">
       <h2 class="label-caps" style="margin:0">Thèm món gì?</h2>
       <a href="/kham-pha/">Tất cả</a>
@@ -80,7 +84,35 @@ const dishesWithPlaces = data.dishes.filter((d) => data.places.some((p) => p.mon
         </a>
       ))}
     </div>
+
+    <aside class="install-card" id="install-card" hidden>
+      <img src="/icon-192.png" alt="" width="52" height="52" />
+      <div class="install-card__text">
+        <strong>Cài WGo lên màn hình</strong>
+        <span class="muted">Mở nhanh như app, mất mạng vẫn xem được.</span>
+      </div>
+      <div class="install-card__actions">
+        <button class="btn btn--ink" type="button" id="install-btn"><Icon name="download" size={18} /> Cài</button>
+        <button class="link-btn" type="button" id="install-later">Để sau</button>
+      </div>
+    </aside>
   </main>
+
+  <dialog class="sheet" id="install-guide" aria-labelledby="install-title">
+    <div class="sheet__inner">
+      <div class="sheet__handle"></div>
+      <h2 class="display" id="install-title" style="margin:0;font-size:28px">Cài WGo trên iPhone</h2>
+      <ol class="install-steps">
+        <li>Mở WGo bằng <strong>Safari</strong>.</li>
+        <li>Bấm nút <strong>Chia sẻ</strong> <Icon name="share" size={18} /> ở thanh dưới.</li>
+        <li>Chọn <strong>Thêm vào MH chính</strong> (Add to Home Screen).</li>
+        <li>Bấm <strong>Thêm</strong>. Biểu tượng WGo sẽ nằm trên màn hình.</li>
+      </ol>
+      <div class="sheet__footer">
+        <button class="btn btn--ink" type="button" data-close>Đã hiểu</button>
+      </div>
+    </div>
+  </dialog>
   <script type="application/json" id="wgo-data" set:html={jsonForScript(client)} />
   <script>
     import '../scripts/home.ts';

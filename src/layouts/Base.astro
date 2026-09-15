@@ -1,19 +1,23 @@
 ---
 import '../styles/global.css';
+import { Font } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import { SITE_URL } from '../config.ts';
 
 interface Props {
   title: string;
   description?: string;
-  nav?: 'goi-y' | 'kham-pha' | 'da-luu';
+  nav?: 'goi-y' | 'kham-pha' | 'ban-do' | 'da-luu';
+  image?: string | false;
 }
 
-const { title, description = 'WGo – đi đâu, ăn gì ở Huế. Quán local, giờ mở cửa, chỉ đường.', nav } = Astro.props;
+const { title, description = 'WGo – đi đâu, ăn gì ở Huế. Quán local, giờ mở cửa, chỉ đường.', nav, image } = Astro.props;
+const ogImage = new URL(image || '/icon-512.png', SITE_URL).toString();
 const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
 const tabs = [
   { id: 'goi-y', href: '/', label: 'Gợi ý', icon: 'sparkle' },
   { id: 'kham-pha', href: '/kham-pha/', label: 'Khám phá', icon: 'search' },
+  { id: 'ban-do', href: '/ban-do/', label: 'Bản đồ', icon: 'map' },
   { id: 'da-luu', href: '/da-luu/', label: 'Đã lưu', icon: 'heart' },
 ] as const;
 ---
@@ -30,15 +34,18 @@ const tabs = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="vi_VN" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <meta name="theme-color" content="#F6F0E4" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#15120E" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
-    />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="WGo" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <Font cssVariable="--font-bricolage" preload={[{ subset: 'vietnamese', weight: 800, style: 'normal' }]} />
+    <Font cssVariable="--font-be-vietnam" preload={[{ subset: 'vietnamese', weight: 400, style: 'normal' }]} />
     <script is:inline src="/theme-init.js"></script>
   </head>
   <body>
@@ -53,5 +60,8 @@ const tabs = [
       </nav>
     )}
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+      import '../scripts/pwa.ts';
+    </script>
   </body>
 </html>

@@ -8,3 +8,8 @@ dist/
 
 # Bản vẽ đã đóng gói (tạo lại từ design/phac-thao)
 design/*.html
+
+# Tạo tự động khi build
+public/vendor/
+.cache/
+.wrangler/

@@ -1,6 +1,7 @@
 ---
 import type { Place } from '../lib/data.ts';
-import { photoUrl, placeSubtitle, placeUrl, ratingText, type Label } from '../lib/view.ts';
+import { placeSubtitle, placeUrl, ratingText, type Label } from '../lib/view.ts';
+import { photoUrl } from '../lib/photos.ts';
 import { formatPrice } from '../lib/text.ts';
 
 interface Props {
@@ -17,7 +18,7 @@ const extra = [price, place.khuVuc].filter(Boolean).join(' · ');
 ---
 <li class="card" data-id={place.id} hidden={hidden}>
   <div class="photo card__photo">
-    {place.anh[0] && <img src={photoUrl(place.anh[0])} alt="" loading="lazy" />}
+    {place.anh[0] && <img src={photoUrl(place.anh[0])} alt="" loading="lazy" decoding="async" width="78" height="78" />}
   </div>
   <div class="card__body">
     <div class="card__head">
@@ -26,7 +27,7 @@ const extra = [price, place.khuVuc].filter(Boolean).join(' · ');
     </div>
     <div class="card__line muted">{placeSubtitle(place, dishes, kinds)}</div>
     <div class="card__line">
-      <span data-status={place.id} class="tone-unknown"></span>{extra && <span class="card__extra">{extra}</span>}
+      <span data-status={place.id} class="tone-unknown"></span><span class="card__dist" data-distance={place.id}></span>{extra && <span class="card__extra">{extra}</span>}
     </div>
   </div>
   <slot />

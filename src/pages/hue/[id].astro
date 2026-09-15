@@ -5,7 +5,8 @@ import { loadSiteData } from '../../lib/load.ts';
 import type { Place } from '../../lib/data.ts';
 import { daysOffText, hoursShort, hoursText } from '../../lib/hours.ts';
 import { formatDateVi, formatPrice } from '../../lib/text.ts';
-import { directionsUrl, jsonForScript, photoUrl, placeSubtitle, toClientPlace } from '../../lib/view.ts';
+import { directionsUrl, jsonForScript, placeSubtitle, toClientPlace } from '../../lib/view.ts';
+import { photoUrl } from '../../lib/photos.ts';
 import { CITY } from '../../config.ts';
 
 export async function getStaticPaths() {
@@ -34,7 +35,7 @@ const description = [
   place.diaChi,
 ].filter(Boolean).join(' ');
 ---
-<Base title={`${place.ten} · ${CITY.name} · WGo`} description={description}>
+<Base title={`${place.ten} · ${CITY.name} · WGo`} description={description} image={place.anh[0] && photoUrl(place.anh[0], 'lon')}>
   <main class="page page--bare">
     <header class="topbar">
       <a class="icon-btn" href="/" id="back" aria-label="Quay lại"><Icon name="back" stroke={2.2} /></a>
@@ -45,7 +46,19 @@ const description = [
     </header>
 
     <div class="photo detail-photo">
-      {place.anh[0] && <img src={photoUrl(place.anh[0])} alt={`Ảnh ${place.ten}`} />}
+      {place.anh.length > 0 && (
+        <div class="gallery" tabindex="0" role="group" aria-label={`Ảnh ${place.ten}`}>
+          {place.anh.map((id, i) => (
+            <img
+              src={photoUrl(id, 'lon')}
+              alt={place.anh.length > 1 ? `Ảnh ${place.ten} (${i + 1}/${place.anh.length})` : `Ảnh ${place.ten}`}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          ))}
+        </div>
+      )}
+      {place.anh.length > 1 && <span class="gallery-count">{place.anh.length} ảnh · vuốt để xem</span>}
       {place.kiemChung !== 'roi' && <span class="sticker sticker--plain">{VERIFY_LABEL[place.kiemChung]}</span>}
     </div>
 
@@ -100,14 +113,19 @@ const description = [
         <div>
           {hoursText(place.hours)}
           {offText && <small>Nghỉ: {offText}</small>}
-          {place.hours.lunarOff.length > 0 && <small>WGo chưa tự tính ngày âm lịch, nên kiểm tra trước khi đi.</small>}
+          {place.hours.lunarOff.length > 0 && <small id="lunar-next" hidden></small>}
         </div>
       </div>
       <div class="info-row">
         <Icon name="pin" />
-        <div>{place.diaChi}</div>
+        <div>{place.diaChi}<small id="distance" hidden></small></div>
         <button class="link-btn" type="button" id="copy-address" data-address={place.diaChi}>Sao chép</button>
       </div>
+      <a class="info-row" href={`/ban-do/?id=${place.id}`}>
+        <Icon name="map" />
+        <div>Xem trên bản đồ WGo</div>
+        <span class="link-btn">Mở</span>
+      </a>
       {place.dienThoai && (
         <a class="info-row" href={`tel:${place.dienThoai}`}>
           <Icon name="phone" />

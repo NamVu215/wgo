@@ -1,0 +1,12 @@
+{
+  "build": "https://build.protomaps.com/20260914.pmtiles",
+  "bounds": [
+    107.48,
+    16.35,
+    107.7,
+    16.56
+  ],
+  "minzoom": 10,
+  "maxzoom": 15,
+  "tiles": 620
+}

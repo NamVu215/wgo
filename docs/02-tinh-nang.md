@@ -1,6 +1,8 @@
 # 02 – Danh sách tính năng WGo
 
-_Cập nhật lần cuối: 2026-09-13. Đây là bản nháp, sẽ chốt sau khi có câu trả lời trong [01-bo-cau-hoi.md](01-bo-cau-hoi.md)._
+_Cập nhật lần cuối: 2026-09-15._
+
+> **Trạng thái:** đã làm xong giai đoạn 1 (lõi) và giai đoạn 2 (bản đồ, gần tôi, "hôm nay ăn gì?", PWA, offline, ảnh, ngày nghỉ âm lịch). Chi tiết: [07, mục 7–8](07-huong-dan-chay-va-dua-len-mang.md#7-đã-có-trong-giai-đoạn-1). Bảng dưới là danh sách ban đầu.
 
 Ký hiệu: 🟢 dự kiến có trong bản đầu (MVP) · 🟡 nên có sớm · 🔵 tiềm năng về sau · ⚙️ cần backend hoặc dịch vụ ngoài
 

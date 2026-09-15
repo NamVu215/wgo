@@ -38,7 +38,6 @@ export function jsonForScript(value: unknown): string {
 }
 
 export const placeUrl = (id: string) => `/${CITY.id}/${id}/`;
-export const photoUrl = (file: string) => `/anh/${CITY.id}/${file}`;
 export const directionsUrl = (p: { lat: number; lng: number }) =>
   `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
 
@@ -51,6 +50,11 @@ const DISH_ICONS: Record<string, string> = {
   che: 'glass', 'ca-phe': 'coffee',
 };
 export const dishIcon = (id: string) => DISH_ICONS[id] ?? 'bowl';
+
+const KIND_ICONS: Record<string, string> = {
+  'quan-an': 'bowl', 'quan-nuoc': 'glass', cafe: 'coffee', 'an-vat': 'skewer', 'check-in': 'camera', bar: 'glass',
+};
+export const kindIcon = (id: string) => KIND_ICONS[id] ?? 'pin';
 
 // One line under a place name: what to eat there.
 export function placeSubtitle(p: Pick<ClientPlace, 'mon' | 'loai'>, dishes: Label[], kinds: Label[], max = 3): string {
@@ -96,4 +100,23 @@ export function inPriceBucket(p: Pick<ClientPlace, 'giaTu' | 'giaDen'>, bucket: 
   const hi = p.giaDen ?? p.giaTu;
   if (lo === null || hi === null) return false;
   return lo <= bucket.to && bucket.from <= hi;
+}
+
+// ---- Distance ----
+export type LatLng = { lat: number; lng: number };
+
+// Great-circle distance in kilometres.
+export function distanceKm(a: LatLng, b: LatLng): number {
+  const rad = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * rad;
+  const dLng = (b.lng - a.lng) * rad;
+  const s = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2;
+  return 12742 * Math.asin(Math.min(1, Math.sqrt(s)));
+}
+
+// "350 m", "1,2 km", "12 km"
+export function formatDistance(km: number): string {
+  if (km < 1) return `${Math.max(50, Math.round((km * 1000) / 50) * 50)} m`;
+  if (km < 10) return `${km.toFixed(1).replace('.', ',')} km`;
+  return `${Math.round(km)} km`;
 }

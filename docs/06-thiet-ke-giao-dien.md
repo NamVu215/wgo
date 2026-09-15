@@ -19,9 +19,17 @@ _Chốt ngày: 2026-09-13 · Bản vẽ: [xem online](https://claude.ai/code/art
 | 5 | **Đã lưu** | Danh sách quán đã bấm ♥ (lưu trên máy) · quán đã đóng hiện mờ + giờ mở lại · nút **"Bốc 1 chỗ đang mở trong đây"** |
 | 6 | **Chế độ tối** | Mọi màn hình đều có bản tối; nút mặt trăng/mặt trời ở trang chủ |
 
-**Thanh điều hướng dưới:** Gợi ý · Khám phá · Đã lưu. Giai đoạn 2 thêm **Bản đồ** thành 4 mục.
+**Thanh điều hướng dưới:** Gợi ý · Khám phá · **Bản đồ** · Đã lưu (4 mục từ giai đoạn 2; icon nằm trên chữ để vừa màn hình nhỏ).
 
-**Khác biệt so với sau này:** giai đoạn 1 chưa có GPS nên thẻ quán hiện **khu vực** (Thành Nội, Gia Hội…) thay cho khoảng cách.
+## 2b. Bổ sung giai đoạn 2 (2026-09-15)
+
+| Màn hình | Nội dung |
+|---|---|
+| **Bản đồ** | Bản đồ toàn màn hình, nền tông kem (tối: nâu đen) · hàng chip nổi phía trên: Đang mở + các loại · **ghim tròn viền đậm**: vàng + bóng lệch = đang mở, trắng mờ = đã đóng/chưa rõ giờ, đen viền vàng phóng to = đang chọn · icon trong ghim theo loại (bát, cốc, cafe, xiên, máy ảnh) · chạm ghim → **thẻ quán nổi** phía trên thanh dưới (tên, món, trạng thái · khoảng cách · giá · khu vực, nút Chỉ đường / Xem quán / ♥) · nút định vị tròn bên phải, chấm xanh là vị trí người dùng |
+| **Khoảng cách** | Khi đã có vị trí: thẻ quán hiện `trạng thái · 1,2 km · giá · khu vực`; trang chủ thêm khoảng cách đầu dòng mô tả |
+| **Trang chủ** | Nút chữ gạch chân "Ưu tiên chỗ gần tôi" dưới thẻ gợi ý · thẻ **Cài WGo lên màn hình** ở cuối trang (icon app, nút Cài, Để sau) · bảng hướng dẫn cài trên iPhone |
+| **Trang quán** | Khung ảnh cao 240px, **vuốt ngang** khi có nhiều ảnh, nhãn "3 ảnh · vuốt để xem" · dòng "Rằm tới: Thứ Sáu 25/09" dưới giờ mở cửa · "Cách bạn khoảng 1,1 km" dưới địa chỉ · dòng "Xem trên bản đồ WGo" |
+| **Icon app** | Nền vàng nghệ, nhãn trắng viền đen xoay −4° có bóng lệch, chữ **WGo** (Bricolage Grotesque 800) |
 
 ## 3. Quy chuẩn thiết kế (dùng khi code)
 

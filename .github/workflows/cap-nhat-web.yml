@@ -36,6 +36,14 @@ jobs:
       - name: Cài thư viện
         run: npm ci
 
+      # Ảnh quán đã tải và thu nhỏ ở lần chạy trước, để không phải tải lại.
+      - name: Lấy ảnh đã xử lý
+        uses: actions/cache@v6
+        with:
+          path: .cache/anh
+          key: anh-${{ github.run_id }}
+          restore-keys: anh-
+
       - name: Kiểm thử tự động
         run: npm test
 

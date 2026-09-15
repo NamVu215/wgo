@@ -4,6 +4,24 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-15 · Giai đoạn 2 – Như app
+
+- **Đã làm:** bản đồ, gần tôi, cài lên màn hình (PWA), dùng khi mất mạng, ảnh quán, ngày nghỉ âm lịch. Chi tiết và cách thử: [07, mục 8](07-huong-dan-chay-va-dua-len-mang.md#8-đã-có-trong-giai-đoạn-2).
+- **Nền bản đồ lưu ngay trong web** (MapLibre + dữ liệu OpenStreetMap đóng gói bởi Protomaps, vùng Huế khoảng 5 MB).
+  - **Lý do:** thử thật thì DNS của VNPT **không phân giải** `openstreetmap.org` (cả `tile.` và `www.`), nên bản đồ OSM thường sẽ trắng nền với nhiều người dùng Việt Nam. CARTO hiện đè chữ "API KEY REQUIRED" lên bản đồ, Stadia cần đăng ký tài khoản và chỉ miễn phí phi thương mại.
+  - Tự lưu thì miễn phí, không cần mã, không giới hạn lượt xem, **được dùng khi có quảng cáo**, và xem được offline.
+  - Cập nhật đường xá: `npm run tai-ban-do` (lấy bản Protomaps mới nhất).
+- **Font chữ tự lưu** (Astro Fonts) thay cho Google Fonts: offline vẫn đúng font, không gửi lượt xem cho Google, luật bảo mật chặt hơn (chỉ tải từ chính WGo).
+- **Offline:** lưu sẵn mọi trang và file giao diện (khoảng 1,9 MB trước nén) sau lần mở đầu. Trang luôn thử lấy bản mới trước; nếu mạng không trả lời trong 3,5 giây thì dùng bản đã lưu. Nền bản đồ và ảnh chỉ lưu **khi đã xem qua**, để lần đầu vào web không tốn 5 MB dữ liệu di động. Phiên bản offline chỉ đổi khi nội dung đổi, nên 2 lần cập nhật mỗi ngày không bắt điện thoại tải lại nếu Sheet không đổi.
+- **Ảnh quán qua Google Drive:** cột `anh` nhận link Drive. Lúc build web tự tải, xoay đúng chiều, thu nhỏ còn 480px và 1080px, đổi sang WebP. Ảnh lỗi chỉ là cảnh báo. GitHub Actions nhớ ảnh đã xử lý để không tải lại.
+- **Gần tôi:** chỉ hỏi quyền vị trí khi người dùng tự bấm. Vị trí không rời điện thoại, nhớ tối đa 10 phút trong tab. Trang chủ ưu tiên chỗ đang mở trong 2 km, rồi 5 km.
+- **Âm lịch:** tự tính theo thuật toán Hồ Ngọc Đức (múi giờ +7), kiểm thử với Tết 2024–2027, Trung thu 2024–2026, rằm tháng Giêng 2023, tháng 2 nhuận 2023 và tháng 6 nhuận 2025.
+- **Kiểm thử:** 34 kiểm thử tự động; đã chạy thử trên trình duyệt điện thoại giả lập: bản đồ sáng/tối, định vị, tắt hẳn máy chủ rồi mở lại các trang.
+- **Chờ chủ dự án:**
+  1. Thử trên điện thoại thật: cài app, cho phép vị trí, bật chế độ máy bay (07, mục 8).
+  2. Sửa ghi chú ô tiêu đề `anh` trong Sheet và bắt đầu thêm ảnh (05, mục 5).
+- **Đã thử rồi bỏ:** thư viện Leaflet với nền OpenStreetMap, rồi nền CARTO (lý do ở trên).
+
 ### 2026-09-13 · Tự động cập nhật đã chạy thật
 
 - Chủ dự án đã lưu mã Cloudflare vào GitHub Secrets (`CLOUDFLARE_API_TOKEN`).
