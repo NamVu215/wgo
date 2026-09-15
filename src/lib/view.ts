@@ -53,6 +53,7 @@ const DISH_ICONS: Record<string, string> = {
   'com-tam': 'rice', pho: 'bowl', 'banh-mi': 'bread', 'hu-tieu': 'bowl', oc: 'fish', 'bot-chien': 'pancake',
   'banh-canh-cua': 'bowl', 'lau-bo': 'bowl',
   'tra-sua': 'glass', 'nuoc-mia': 'glass', 'rau-ma': 'glass', 'nuoc-sam': 'glass',
+  'banh-bao': 'cakes', 'banh-cuon': 'cakes', 'tau-hu': 'bowl',
 };
 export const dishIcon = (id: string) => DISH_ICONS[id] ?? 'bowl';
 

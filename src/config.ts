@@ -42,6 +42,9 @@ export const CITIES: City[] = [
   // ho-chi-minh on purpose: it is far enough to be its own trip. Taller than the area itself so a
   // portrait phone can show all of it at once (its places spread ~14 km east–west).
   { id: 'thu-duc', name: 'Thủ Đức', bounds: [106.69, 10.69, 106.88, 10.96] },
+  // Xã Phước Thái (Đồng Nai, merged with Tân Hiệp and Phước Bình in 2025) along Quốc lộ 51,
+  // south of Long Thành airport. Taller than the commune for the same portrait-phone reason.
+  { id: 'phuoc-thai', name: 'Phước Thái', bounds: [106.99, 10.6, 107.15, 10.77] },
 ];
 
 // Public address of the site, used for share previews. Change after the

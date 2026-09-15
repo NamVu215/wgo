@@ -28,7 +28,7 @@ Cột có dấu ✱ là **bắt buộc**. Dòng thiếu cột bắt buộc sẽ 
 | `trang_thai` ✱ | Có hiện trên web không | `hien` / `an` (đóng cửa, tạm ẩn) | `hien` |
 | `noi_bat` | Hiện ở mục **"WGo gợi ý"** trên trang chủ | `co` hoặc để trống | `co` |
 | `ten` ✱ | Tên địa điểm | | `Bún bò Mệ Kéo` |
-| `thanh_pho` ✱ | Thành phố | `hue`, `vung-tau`, `ho-chi-minh` (nội thành TP.HCM) hoặc `thu-duc` (Quận 2, Quận 9, Thủ Đức cũ). Thành phố mới cần Claude thêm vào web trước | `vung-tau` |
+| `thanh_pho` ✱ | Thành phố | `hue`, `vung-tau`, `ho-chi-minh` (nội thành TP.HCM) , `thu-duc` (Quận 2, Quận 9, Thủ Đức cũ) hoặc `phuoc-thai` (xã Phước Thái, Đồng Nai). Thành phố mới cần Claude thêm vào web trước | `vung-tau` |
 | `khu_vuc` | Khu vực quen gọi | chữ tự do | `Vỹ Dạ` |
 | `loai` ✱ | Loại địa điểm | một `id` trong tab `loai` | `quan-an` |
 | `mon` | Các món quán bán (để lọc) | `id` trong tab `mon`, nhiều món cách nhau bằng `\|` | `com-hen\|bun-hen` |

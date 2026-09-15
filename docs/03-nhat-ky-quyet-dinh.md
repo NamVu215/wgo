@@ -4,6 +4,16 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-16 · Quán nước, trà sữa · khu vực mới Phước Thái (Đồng Nai)
+
+- **Quán nước, trà sữa cho 4 khu vực:** 12 chỗ, 4 món nước mới. Chủ dự án đồng ý ghi Sheet ("Ghi luôn"): khớp **360/360 ô**, 65 dòng cũ giữ nguyên.
+- **Chủ dự án muốn ưu tiên Thủ Đức, Vũng Tàu và thêm khu vực Phước Thái (Đồng Nai).**
+  - Phước Thái: mã `phuoc-thai`, vùng dọc Quốc lộ 51 phía nam sân bay Long Thành, nền bản đồ 1,7 MB.
+  - Nguồn online về Phước Thái rất ít, mới có 3 chỗ. Cần chủ dự án bổ sung quán mình biết.
+  - Thêm 3 chỗ Thủ Đức, 2 chỗ Vũng Tàu, 3 món mới.
+- **Loại bỏ có lý do:** tiệm bánh mì không tên (Vũng Tàu) từng làm 94 người ngộ độc; Ki-ốt Trà (Huế) bị đánh giá chất lượng thấp.
+- Chi tiết, nguồn: [12-quan-nuoc-phuoc-thai.md](12-quan-nuoc-phuoc-thai.md).
+
 ### 2026-09-15 · Mở rộng: TP. Hồ Chí Minh và Thủ Đức
 
 - **Chủ dự án chọn thêm TP. Hồ Chí Minh, và Thủ Đức là một khu vực riêng.** Trên web đây là 2 lựa chọn tách biệt (mã `ho-chi-minh` và `thu-duc`), mỗi nơi có trang chủ, Khám phá, Bản đồ riêng.
