@@ -4,6 +4,16 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-15 · Mở rộng: TP. Hồ Chí Minh và Thủ Đức
+
+- **Chủ dự án chọn thêm TP. Hồ Chí Minh, và Thủ Đức là một khu vực riêng.** Trên web đây là 2 lựa chọn tách biệt (mã `ho-chi-minh` và `thu-duc`), mỗi nơi có trang chủ, Khám phá, Bản đồ riêng.
+  - Lý do tách: Thủ Đức cách trung tâm 10–20 km, thường đi một chuyến riêng. Gộp chung thì bản đồ và "Gần tôi" dễ gợi ý chỗ quá xa.
+  - TP.HCM = các quận nội thành cũ. Thủ Đức = Quận 2, Quận 9, Thủ Đức cũ và Làng Đại học. Chi tiết: [11-tp-hcm-thu-duc.md](11-tp-hcm-thu-duc.md).
+- **Nền bản đồ:** TP.HCM 16,7 MB, Thủ Đức 15,2 MB (khu đô thị dày nên nặng hơn Huế, Vũng Tàu). Chỉ tải về máy khi người dùng mở trang Bản đồ.
+- **Sửa lỗi bản đồ:** trước đây vùng bản đồ thấp mà các ghim trải rộng theo chiều ngang (như Thủ Đức) thì điện thoại cầm dọc không hiện đủ ghim lúc mở. Nay bản đồ luôn thu nhỏ vừa đủ thấy mọi ghim trước, rồi mới giới hạn vùng kéo. Vùng tải của Thủ Đức cũng được làm cao hơn.
+- **Sửa lỗi hiển thị:** ô Giờ/Giá ở trang quán bị cắt chữ khi dài (ví dụ "100–5…"). Nay chữ dài tự thu nhỏ lại.
+- **Dữ liệu đề xuất:** 25 địa điểm (TP.HCM 17, Thủ Đức 8; 21 `online`, 4 `chua`), 8 món, 2 tag mới (`michelin`, `view-song-sai-gon`).
+
 ### 2026-09-15 · Mở rộng: Vũng Tàu
 
 - **Chủ dự án chọn Vũng Tàu** là thành phố thứ hai (trước Đà Nẵng như lộ trình cũ) và nhờ đề xuất luôn quán local.

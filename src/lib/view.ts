@@ -50,6 +50,8 @@ const DISH_ICONS: Record<string, string> = {
   che: 'glass', 'ca-phe': 'coffee',
   'banh-khot': 'pancake', 'mi-thay': 'bowl', 'hu-tieu-muc': 'bowl', 'banh-canh-ghe': 'bowl',
   'lau-ca-duoi': 'fish', 'hai-san': 'fish', 'bong-lan-trung-muoi': 'cakes',
+  'com-tam': 'rice', pho: 'bowl', 'banh-mi': 'bread', 'hu-tieu': 'bowl', oc: 'fish', 'bot-chien': 'pancake',
+  'banh-canh-cua': 'bowl', 'lau-bo': 'bowl',
 };
 export const dishIcon = (id: string) => DISH_ICONS[id] ?? 'bowl';
 

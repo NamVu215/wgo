@@ -67,7 +67,7 @@ Ký hiệu: 🟢 dự kiến có trong bản đầu (MVP) · 🟡 nên có sớm
 
 | Tính năng | Mức |
 |---|---|
-| Thêm Đà Nẵng, Nha Trang, Vũng Tàu, TP.HCM, Thủ Đức | 🔵 |
+| Thêm Đà Nẵng, Nha Trang (Vũng Tàu, TP.HCM, Thủ Đức đã có) | 🔵 |
 | Bộ sưu tập "Top 10 quán chè Huế", "Cafe view sông Hương"… | 🔵 |
 | Góc cho khách nước ngoài: cách gọi món, giá hợp lý, tránh bị "chặt chém" | 🔵 |
 | Đăng nhập, đánh giá cộng đồng | 🔵 ⚙️ |

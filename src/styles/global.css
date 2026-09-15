@@ -305,6 +305,8 @@ svg { display: block; flex-shrink: 0; }
 .tile--accent { background: var(--accent); color: var(--on-accent); }
 .tile__label { font-size: 12px; opacity: 0.8; }
 .tile__value { font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* "100–500k", "10–13:30…" no longer fit at 20px in a phone-width tile. */
+.tile__value--long { font-size: 15px; line-height: 1.6; }
 .tile__note { font-size: 12px; min-height: 17px; }
 .detail-block { margin-top: 16px; display: flex; flex-direction: column; gap: 2px; }
 .detail-block p { margin: 0; }

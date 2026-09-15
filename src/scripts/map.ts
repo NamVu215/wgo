@@ -192,7 +192,6 @@ async function start() {
       zoom: focus ? 16.5 : undefined,
       minZoom: 10.5,
       maxZoom: 19,
-      maxBounds: [west - pad, south - pad, east + pad, north + pad],
       attributionControl: { compact: false },
       dragRotate: false,
       pitchWithRotate: false,
@@ -216,6 +215,12 @@ async function start() {
       animate: false,
     });
   }
+  // Limit panning to the downloaded area, widened to the first view so it never cuts off pins.
+  const view = map.getBounds();
+  map.setMaxBounds([
+    [Math.min(west - pad, view.getWest()), Math.min(south - pad, view.getSouth())],
+    [Math.max(east + pad, view.getEast()), Math.max(north + pad, view.getNorth())],
+  ]);
 
   for (const p of data.places) {
     const el = document.createElement('button');

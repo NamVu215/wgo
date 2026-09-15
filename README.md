@@ -1,7 +1,7 @@
 # WGo
 
 Web gợi ý **ăn gì, uống gì, đi đâu** khi đi chơi ở Việt Nam, dựa trên kinh nghiệm thật của người đi.
-Đang có **Huế** và **Vũng Tàu**, sau đó mở rộng ra Đà Nẵng, Nha Trang, TP. Hồ Chí Minh và Thủ Đức.
+Đang có **Huế**, **Vũng Tàu**, **TP. Hồ Chí Minh** và **Thủ Đức**, sau đó mở rộng ra Đà Nẵng, Nha Trang.
 
 > Trạng thái: **Giai đoạn 3 – Cộng đồng** đang làm (góp ý, đánh giá qua Google Form, gần đây có gì, lượt ghé) · đã xong **Giai đoạn 2 – Như app** (bản đồ, gần tôi, cài lên màn hình, dùng khi mất mạng, ảnh quán, ngày nghỉ âm lịch) · đang chạy tại **https://wgo-auc.pages.dev** · dữ liệu đọc từ Google Sheet, tự cập nhật 06:00 và 17:00
 
@@ -33,5 +33,6 @@ Chi tiết (đưa lên GitHub, Cloudflare Pages, nối Google Sheets, bảo mậ
 | [docs/08-kiem-chung-du-lieu.md](docs/08-kiem-chung-du-lieu.md) | Kết quả kiểm chứng 22 địa điểm: đã sửa gì, còn cần xác nhận gì |
 | [docs/09-cong-dong.md](docs/09-cong-dong.md) | Góp ý, đánh giá cộng đồng (cài Apps Script, duyệt), lượt ghé WGo |
 | [docs/10-vung-tau.md](docs/10-vung-tau.md) | 17 địa điểm Vũng Tàu: nguồn, mức kiểm chứng, cần xác nhận gì |
+| [docs/11-tp-hcm-thu-duc.md](docs/11-tp-hcm-thu-duc.md) | TP. Hồ Chí Minh và Thủ Đức (2 khu vực riêng): 25 địa điểm, nguồn, cần xác nhận gì |
 | [data/hue/](data/hue/) | Dữ liệu mẫu cũ (CSV), nay chỉ dùng cho kiểm thử. Dữ liệu thật nằm trong Google Sheet |
 | [design/phac-thao/](design/phac-thao/) | Bản vẽ giao diện · [xem online](https://claude.ai/code/artifact/f79a492f-27d2-4d7e-8fcc-194da82b169d) |

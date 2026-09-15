@@ -36,6 +36,12 @@ export const CITIES: City[] = [
   { id: 'hue', name: 'Huế', bounds: [107.48, 16.35, 107.7, 16.56] },
   // The peninsula (Bãi Trước, Bãi Sau, Núi Nhỏ, Núi Lớn) and the coast to Long Hải.
   { id: 'vung-tau', name: 'Vũng Tàu', bounds: [107.04, 10.31, 107.28, 10.47] },
+  // The old inner districts: Quận 1, 3, 4, 5, 10, Phú Nhuận, Bình Thạnh, Tân Bình, Gò Vấp, Quận 7.
+  { id: 'ho-chi-minh', name: 'TP. Hồ Chí Minh', bounds: [106.6, 10.7, 106.76, 10.86] },
+  // The former Thủ Đức city (Quận 2, Quận 9, Thủ Đức) plus the university village. Kept separate from
+  // ho-chi-minh on purpose: it is far enough to be its own trip. Taller than the area itself so a
+  // portrait phone can show all of it at once (its places spread ~14 km east–west).
+  { id: 'thu-duc', name: 'Thủ Đức', bounds: [106.69, 10.69, 106.88, 10.96] },
 ];
 
 // Public address of the site, used for share previews. Change after the

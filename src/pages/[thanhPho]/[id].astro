@@ -77,12 +77,12 @@ const description = [
     <div class="tiles">
       <div class="tile">
         <span class="tile__label">Giờ bán</span>
-        <span class="tile__value">{hoursShort(place.hours)}</span>
+        <span class:list={['tile__value', hoursShort(place.hours).length > 6 && 'tile__value--long']}>{hoursShort(place.hours)}</span>
         <span class="tile__note" data-status={place.id}></span>
       </div>
       <div class="tile">
         <span class="tile__label">Giá</span>
-        <span class="tile__value">{price || '—'}</span>
+        <span class:list={['tile__value', price.length > 6 && 'tile__value--long']}>{price || '—'}</span>
         <span class="tile__note muted">{place.loai === 'check-in' ? 'vé người lớn' : 'mỗi người'}</span>
       </div>
       <div class="tile tile--accent">
