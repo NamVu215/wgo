@@ -33,8 +33,8 @@ Chi tiết (đưa lên GitHub, Cloudflare Pages, nối Google Sheets, bảo mậ
 | [docs/08-kiem-chung-du-lieu.md](docs/08-kiem-chung-du-lieu.md) | Kết quả kiểm chứng 22 địa điểm: đã sửa gì, còn cần xác nhận gì |
 | [docs/09-cong-dong.md](docs/09-cong-dong.md) | Góp ý, đánh giá cộng đồng (cài Apps Script, duyệt), lượt ghé WGo |
 | [docs/10-vung-tau.md](docs/10-vung-tau.md) | 17 địa điểm Vũng Tàu: nguồn, mức kiểm chứng, cần xác nhận gì |
-| [docs/12-quan-nuoc-phuoc-thai.md](docs/12-quan-nuoc-phuoc-thai.md) | Quán nước, trà sữa cả 4 khu vực; thêm Thủ Đức, Vũng Tàu; khu vực Phước Thái |
 | [docs/11-tp-hcm-thu-duc.md](docs/11-tp-hcm-thu-duc.md) | TP. Hồ Chí Minh và Thủ Đức (2 khu vực riêng): 25 địa điểm, nguồn, cần xác nhận gì |
+| [docs/12-quan-nuoc-phuoc-thai.md](docs/12-quan-nuoc-phuoc-thai.md) | Quán nước, trà sữa cả 4 khu vực; thêm Thủ Đức, Vũng Tàu; khu vực Phước Thái |
 | [docs/13-quan-sinh-vien-thu-duc.md](docs/13-quan-sinh-vien-thu-duc.md) | Quán sinh viên Thủ Đức: Hoàng Diệu 2, Làng Đại học (8 chỗ) |
 | [data/hue/](data/hue/) | Dữ liệu mẫu cũ (CSV), nay chỉ dùng cho kiểm thử. Dữ liệu thật nằm trong Google Sheet |
 | [design/phac-thao/](design/phac-thao/) | Bản vẽ giao diện · [xem online](https://claude.ai/code/artifact/f79a492f-27d2-4d7e-8fcc-194da82b169d) |

@@ -1,25 +1,86 @@
 {
   "pages": [
-    { "id": "page-b", "name": "WGo · Hướng B (đã chọn)" },
-    { "id": "page-cu", "name": "Phác thảo cũ A và C" }
+    {
+      "id": "page-b",
+      "name": "WGo · Hướng B (đã chọn)"
+    }
   ],
   "artboards": [
-    { "file": "Main.dc.html", "title": "1 · Trang chủ — Gợi ý", "page": "page-b", "x": 0, "y": 0, "w": 390, "h": 844 },
-    { "file": "KhamPha.dc.html", "title": "2 · Khám phá — tìm & lọc", "page": "page-b", "x": 470, "y": 0, "w": 390, "h": 844 },
-    { "file": "BoLoc.dc.html", "title": "3 · Bộ lọc", "page": "page-b", "x": 940, "y": 0, "w": 390, "h": 844 },
-    { "file": "ChiTiet.dc.html", "title": "4 · Chi tiết quán", "page": "page-b", "x": 1410, "y": 0, "w": 390, "h": 844 },
-    { "file": "DaLuu.dc.html", "title": "5 · Đã lưu", "page": "page-b", "x": 1880, "y": 0, "w": 390, "h": 844 },
-    { "file": "TrangChuToi.dc.html", "title": "6 · Trang chủ — chế độ tối", "page": "page-b", "x": 2350, "y": 0, "w": 390, "h": 844 },
-    { "file": "ATrangChu.dc.html", "title": "A · Quen tay — Trang chủ", "page": "page-cu", "x": 340, "y": 0, "w": 390, "h": 844 },
-    { "file": "AChiTiet.dc.html", "title": "A · Quen tay — Chi tiết quán", "page": "page-cu", "x": 810, "y": 0, "w": 390, "h": 844 },
-    { "file": "CTrangChu.dc.html", "title": "C · Bản đồ trước — Trang chủ", "page": "page-cu", "x": 340, "y": 1024, "w": 390, "h": 844 },
-    { "file": "CChiTiet.dc.html", "title": "C · Bản đồ trước — Chi tiết quán", "page": "page-cu", "x": 810, "y": 1024, "w": 390, "h": 844 }
+    {
+      "file": "Main.dc.html",
+      "title": "1 · Trang chủ — Gợi ý",
+      "page": "page-b",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "KhamPha.dc.html",
+      "title": "2 · Khám phá — tìm & lọc",
+      "page": "page-b",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "BoLoc.dc.html",
+      "title": "3 · Bộ lọc",
+      "page": "page-b",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "ChiTiet.dc.html",
+      "title": "4 · Chi tiết quán",
+      "page": "page-b",
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "DaLuu.dc.html",
+      "title": "5 · Đã lưu",
+      "page": "page-b",
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "TrangChuToi.dc.html",
+      "title": "6 · Trang chủ — chế độ tối",
+      "page": "page-b",
+      "x": 2350,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    }
   ],
   "annotations": [
-    { "id": "huong-b-tong-quan", "page": "page-b", "x": 0, "y": -250, "w": 860, "text": "WGo · Hướng B \"Hỏi nhanh\" — bộ màn hình giai đoạn 1\nLuồng: (1) mở web → thấy ngay MỘT quán hợp giờ, bấm \"Đổi quán\" nếu chưa ưng → (4) chi tiết → Chỉ đường.\nMuốn chọn món cụ thể: \"Thèm món gì?\" hoặc tab (2) Khám phá → (3) Bộ lọc.\nNút \"dark\" trên mỗi màn hình để xem chế độ tối. Số sao là số minh họa; tên, giờ, giá lấy từ dữ liệu mẫu." },
-    { "id": "huong-b-ghi-chu", "page": "page-b", "x": 940, "y": -250, "w": 700, "text": "Ghi chú giai đoạn\n· Giai đoạn 1 chưa có GPS nên hiện KHU VỰC thay cho khoảng cách.\n· Tab Bản đồ sẽ thêm ở giai đoạn 2 (thanh dưới thành 4 mục).\n· \"Đã lưu\" chỉ nằm trên điện thoại đang dùng, không đồng bộ." },
-    { "id": "cu-a", "page": "page-cu", "x": 0, "y": 0, "w": 300, "text": "A · QUEN TAY — không chọn, giữ để tham khảo." },
-    { "id": "cu-c", "page": "page-cu", "x": 0, "y": 1024, "w": 300, "text": "C · BẢN ĐỒ TRƯỚC — không chọn. Ý tưởng thẻ quán trên bản đồ có thể dùng cho tab Bản đồ ở giai đoạn 2." }
+    {
+      "id": "huong-b-tong-quan",
+      "page": "page-b",
+      "x": 0,
+      "y": -250,
+      "w": 860,
+      "text": "WGo · Hướng B \"Hỏi nhanh\" — bộ màn hình giai đoạn 1\nLuồng: (1) mở web → thấy ngay MỘT quán hợp giờ, bấm \"Đổi quán\" nếu chưa ưng → (4) chi tiết → Chỉ đường.\nMuốn chọn món cụ thể: \"Thèm món gì?\" hoặc tab (2) Khám phá → (3) Bộ lọc.\nNút \"dark\" trên mỗi màn hình để xem chế độ tối. Số sao là số minh họa; tên, giờ, giá lấy từ dữ liệu mẫu."
+    },
+    {
+      "id": "huong-b-ghi-chu",
+      "page": "page-b",
+      "x": 940,
+      "y": -250,
+      "w": 700,
+      "text": "Ghi chú giai đoạn\n· Giai đoạn 1 chưa có GPS nên hiện KHU VỰC thay cho khoảng cách.\n· Tab Bản đồ sẽ thêm ở giai đoạn 2 (thanh dưới thành 4 mục).\n· \"Đã lưu\" chỉ nằm trên điện thoại đang dùng, không đồng bộ."
+    }
   ],
-  "launch": { "view": "canvas", "page": "page-b" }
+  "launch": {
+    "view": "canvas",
+    "page": "page-b"
+  }
 }

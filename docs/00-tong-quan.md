@@ -31,6 +31,8 @@ _Cập nhật lần cuối: 2026-09-13_
 
 ## 4. Lộ trình dự kiến (sẽ chỉnh sau khi có câu trả lời)
 
+> **Cập nhật 2026-09-16:** lộ trình đã chỉnh ở [04](04-danh-gia-cau-tra-loi.md). Thực tế đã có Huế, Vũng Tàu, TP. Hồ Chí Minh, Thủ Đức, Phước Thái (làm trước Đà Nẵng). Việc đã làm từng ngày xem [03](03-nhat-ky-quyet-dinh.md). Bảng dưới là dự kiến ban đầu.
+
 | Giai đoạn | Mục tiêu | Kết quả |
 |---|---|---|
 | 0 | Hỏi – đáp, chốt yêu cầu | Các file `.md` này |

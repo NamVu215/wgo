@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "WGo – đi đâu, ăn gì ở Việt Nam. Bắt đầu với Huế.",
+  "description": "WGo – đi đâu, ăn gì ở Việt Nam: Huế, Vũng Tàu, TP. Hồ Chí Minh, Thủ Đức, Phước Thái.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

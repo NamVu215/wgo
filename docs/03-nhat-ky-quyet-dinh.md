@@ -4,6 +4,16 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 
 ---
 
+### 2026-09-16 · Dọn gọn kho mã
+
+- **Chủ dự án nhờ soát toàn bộ code, file, thư mục và xoá cái không cần.** Kết quả soát: code không có file bỏ quên hay hàm không dùng.
+- **Đã xoá (chủ dự án đồng ý):**
+  - `note.md` và 1 ảnh chụp màn hình cũ.
+  - Bản nháp giao diện hướng A và C (không chọn) trong `design/phac-thao/`. Bản vẽ online vẫn giữ nguyên.
+  - File tạm trên máy (khoảng 66 MB): `dist/`, `.astro/`, `.wrangler/`, `.cache/`, `design/wgo-huong-giao-dien.html`. Các file này tự tạo lại khi build hoặc chạy thử.
+- **Giữ lại:** `data/hue/` (bài test cần), `scripts/noi-google-sheet.ts` (dùng lại nếu phải tạo lại Sheet), nền bản đồ, Apps Script, bảng lượt xem.
+- **Chỉnh chữ cũ:** mô tả trong `package.json`, thứ tự bảng tài liệu trong README, ghi chú lộ trình ở [00](00-tong-quan.md).
+
 ### 2026-09-16 · Quán sinh viên Thủ Đức (Hoàng Diệu 2, Làng Đại học)
 
 - **Chủ dự án muốn thêm quán ăn vặt, quán sinh viên hay ăn ở Thủ Đức**, ưu tiên Hoàng Diệu 2 và Làng Đại học.
