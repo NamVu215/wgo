@@ -17,7 +17,7 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
   - Miễn phí tới khoảng 100.000 lượt/ngày. Không lưu IP hay thông tin người xem. Chỉ nhận yêu cầu gửi từ chính trang WGo.
   - Đã cân nhắc rồi bỏ: Cloudflare Web Analytics (số chỉ cập nhật 2 lần/ngày, phải sửa quyền mã Cloudflare, khó cộng dồn từ đầu) và dịch vụ đếm của bên thứ ba (dễ bị chặn, lộ lượt xem).
 - **Nhắc lại góp ý cũ:** nên có khoảng 50 địa điểm chất lượng trước khi mời người ngoài đóng góp. Hiện có 22 địa điểm, chưa có WGo chấm và ảnh.
-- **Chờ chủ dự án:** chạy `caiDat` trong Apps Script và gửi đoạn "DÁN CHO CLAUDE" ([09, mục 3](09-cong-dong.md#3-cài-đặt-một-lần-khoảng-5-phút-nên-làm-trên-máy-tính)).
+- **Đã nối (cùng ngày):** chủ dự án chạy `caiDat` thành công (lần đầu bị Canceled do chưa bấm hết bước cho phép quyền). Đã điền 2 link Form vào `src/config.ts`, nối tab `danh-gia` (gid 2011447134). Đã kiểm tra: 2 Form mở được không cần đăng nhập, tên quán điền sẵn đúng.
 
 ### 2026-09-15 · Giai đoạn 2 – Như app
 

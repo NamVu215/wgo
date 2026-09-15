@@ -12,15 +12,15 @@ export const DATA_SOURCE = {
     loai: '793024044',
     tags: '1285618604',
     // Community reviews approved by the owner. Empty until the Apps Script setup has run.
-    'danh-gia': '',
+    'danh-gia': '2011447134',
   },
 };
 
 // Community (docs/09). Links come from the Apps Script setup (apps-script/gop-y.gs).
 // __MA__ and __TEN__ are replaced with the place id and name. Empty link = button hidden.
 export const COMMUNITY = {
-  danhGiaForm: '',
-  gopYForm: '',
+  danhGiaForm: 'https://docs.google.com/forms/d/e/1FAIpQLScueAfG8QAfLyoSackKBkGw1AmO6U-hlxBna5DyJ8N4LJCu_A/viewform?usp=pp_url&entry.1935074018=__MA__&entry.647746806=__TEN__',
+  gopYForm: 'https://docs.google.com/forms/d/e/1FAIpQLScO4l3rJzby8_Mn5-nMVaAF8UdBwUeXukzV9BkevxCe0yzkjw/viewform?usp=pp_url&entry.469645940=__MA__&entry.1840336756=__TEN__',
   // A community score shows only after this many approved reviews.
   minReviews: 3,
 };
