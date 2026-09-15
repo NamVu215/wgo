@@ -10,7 +10,7 @@ Ghi lại mọi quyết định quan trọng: **ngày · quyết định · lý 
 - **Chủ dự án muốn ưu tiên Thủ Đức, Vũng Tàu và thêm khu vực Phước Thái (Đồng Nai).**
   - Phước Thái: mã `phuoc-thai`, vùng dọc Quốc lộ 51 phía nam sân bay Long Thành, nền bản đồ 1,7 MB.
   - Nguồn online về Phước Thái rất ít, mới có 3 chỗ. Cần chủ dự án bổ sung quán mình biết.
-  - Thêm 3 chỗ Thủ Đức, 2 chỗ Vũng Tàu, 3 món mới.
+  - Thêm 3 chỗ Thủ Đức, 2 chỗ Vũng Tàu, 3 món mới. Chủ dự án đồng ý ghi Sheet: khớp **242/242 ô**, 77 dòng cũ giữ nguyên. Web thật: đủ 5 khu vực.
 - **Loại bỏ có lý do:** tiệm bánh mì không tên (Vũng Tàu) từng làm 94 người ngộ độc; Ki-ốt Trà (Huế) bị đánh giá chất lượng thấp.
 - Chi tiết, nguồn: [12-quan-nuoc-phuoc-thai.md](12-quan-nuoc-phuoc-thai.md).
 

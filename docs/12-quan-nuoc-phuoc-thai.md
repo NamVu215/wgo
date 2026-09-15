@@ -27,6 +27,8 @@ Món mới ở tab `mon`: `tra-sua`, `nuoc-mia`, `rau-ma`, `nuoc-sam`.
 
 ## 2. Đợt 2 – Ưu tiên Thủ Đức, Vũng Tàu và khu vực mới Phước Thái (8 chỗ)
 
+_Đã thêm vào Sheet dòng 78–85 tab `dia-diem`, dòng 35–37 tab `mon` (khớp 242/242 ô)._
+
 ### Khu vực mới: Phước Thái (Đồng Nai)
 
 - Mã `phuoc-thai`. Là xã Phước Thái mới (từ 7/2025, gộp xã Phước Thái, Tân Hiệp, Phước Bình), nằm dọc Quốc lộ 51, phía nam sân bay Long Thành.
